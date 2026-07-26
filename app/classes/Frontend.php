@@ -9,7 +9,7 @@ include_once ($filepath.'/../helpers/Format.php');
  */
 class Frontend{
 	
-	private $table = "tbl_app_settings";
+	private $table = "APP_SETTINGS";
 	private $db;
 	private $fm;
 

@@ -9,7 +9,7 @@ include_once ($filepath.'/../helpers/Format.php');
  */
 class Roles{
 	
-	private $table = "tbl_roles";
+	private $table = "ROLES";
 	private $db;
 	private $fm;
 
@@ -173,7 +173,7 @@ class Roles{
 
 	// Select Permission list
 	public function selectPermissionItem($data){
-		$query = "SELECT * FROM $this->table where rolename = '$data'";
+		$query = "SELECT ROLENAME FROM USERS WHERE EMAIL = '$data'";
 		return $result = $this->db->select($query);
  
 

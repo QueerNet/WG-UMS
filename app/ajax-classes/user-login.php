@@ -8,7 +8,7 @@ $usr = new Users();
 
 // User Login Authotication
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $chkUserLogin = $usr->userLoginAuthotication($_POST);
+    $chkUserLogin = $usr->userLoginAuthentication($_POST);
 
 }
 

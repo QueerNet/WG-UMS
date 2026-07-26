@@ -3,15 +3,21 @@
 $filepath = realpath(dirname(__FILE__));
 include_once ($filepath.'/../lib/Database.php');
 include_once ($filepath.'/../helpers/Format.php');
+include_once ($filepath.'/../classes/sendEmail.php');
+
+use sendEmail\sendEmail;
+
+
+
 
 /**
  * Visitor Users Class
  */
 class Users{
 
-	private $apptable 		= "tbl_app_autho";
-	private $table 			= "tbl_users";
-	private $table_session 	= "tbl_online_user";
+	private $apptable       = "APP_AUTH";
+	private $table 		= "USERS";
+	private $table_session 	= "ONLINE";
 	private $db;
 	private $fm;
 
@@ -20,11 +26,7 @@ class Users{
 		$this->db = new Database();
 		$this->fm = new Format();
 	}
-
-
-
-
-
+    
    /**
 	 * Suppose, you are browsing in your localhost 
 	 * http://localhost/myproject/index.php?id=8
@@ -51,25 +53,22 @@ class Users{
 
 
 	// Users Login Method
-	public function userLoginAuthotication($data){
-		$email 		= $this->fm->validation($data['email']);
-		$password 	= $this->fm->validation($data['password']);
+	public function userLoginAuthentication($data){
+		$email_ 		= $this->fm->validation($data['email']);
+		$password_ 	= $this->fm->validation($data['password']);
 
-		$email 		= mysqli_real_escape_string($this->db->link, $email);
-		$password 	= mysqli_real_escape_string($this->db->link, $password);
+		$email 		= mysqli_real_escape_string($this->db->link, $email_);
+		$password 	= mysqli_real_escape_string($this->db->link, $password_);
 		
 
 		if (empty($email) OR empty($password)) {
-		       $msg = "<div id='flash-msg' class='alert alert-danger'><strong>Error ! </strong>Email or Password field must not be Empty!</div>";
-		       return $msg;
-		       exit();
-		       
+			$msg = "<div id='flash-msg' class='alert alert-danger'><strong>Error ! </strong>Email or Password field must not be Empty!</div>";
+			return $msg;		       
 		}elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 			$msg = '<div class="alert alert-danger" id="flash-msg"><strong>Error !</strong> Invalid email address !</div>';
 			return $msg;
-			 exit();
 		}else{
-			$query = "SELECT * FROM $this->table WHERE email = '$email'";
+			$query = "SELECT * FROM $this->table WHERE email = '$email';";
 			$result = $this->db->select($query);
 			if ($result != false) {
 				$value = $result->fetch_assoc();
@@ -93,36 +92,38 @@ class Users{
 							    }  
 						   }
 						$userid = $value['userid'];
-						$userOn = $this->userActive_ON($userid);
+						//$userOn = $this->userActive_ON($userid);
 						if ($value['status'] == '1') {
 							$msg = '<div class="alert alert-danger" id="flash-msg"><strong>Error !</strong>  Your Account is Disabled, conact with Author !</div>';
 							return $msg;
-							 exit();
 						}else{
 							Session::set("userLogin", true);
 							Session::set("login", true);
 							Session::set("userid", $value['userid']);
 							Session::set("userName", $value['name']);
 							Session::set("userEmail", $value['email']);
-							Session::set("profilePhoto", $value['profilePhoto']);
 							Session::set("rolename", $value['rolename']);
-							echo "<script>location.href='dashboard.php';</script>";
-							exit();
+							if ($value['rolename']=="sysadmin") {
+								echo "<script>location.href='dashboard.php';</script>";
+								exit();
+							} else {
+								echo "<script>location.href='userdash.php';</script>";
+								exit();
+							}
 						}
 					}
 					else {
-						$msg = '<div class="alert alert-danger" id="flash-msg"><strong>Error !</strong>  Your password did not Matched !</div>';
+						$msg = '<div class="alert alert-danger" id="flash-msg"><strong>Error!</strong>  Your password did not Match!</div>';
 						return $msg;
-						 exit();
 					}
 
 
 
 
 			}else{
-		       $msg = "<div id='flash-msg' class='alert alert-danger'><strong>Error ! </strong>Email or Password not Matched !</div>";
+		       $msg = "<div id='flash-msg' class='alert alert-danger'><strong>Error ! </strong>No user found for associated credentials...</div>";
 		       return $msg;
-		       exit();
+		       //exit();
 		       
 			}
 		}
@@ -144,18 +145,17 @@ class Users{
 
 	// newUserRegistration Method
 	public function newUserRegistration($data){
-		$name 				= $this->fm->validation($data['name']);
-		$email 				= $this->fm->validation($data['email']);
-		$password 			= $this->fm->validation($data['password']);
-		$confirm_password 	= $this->fm->validation($data['confirm_password']);
+		$name_ 				= $this->fm->validation($data['name']);
+		$email_ 				= $this->fm->validation($data['email']);
+		$password_ 			= $this->fm->validation($data['password']);
+		$confirm_password_               = $this->fm->validation($data['confirm_password']);
+                $create_date_                    = $this->fm->validation($data['create_date']);
 
-
-
-		$name 				= mysqli_real_escape_string($this->db->link, $name);
-		$email 				= mysqli_real_escape_string($this->db->link, $email);
-		$password 			= mysqli_real_escape_string($this->db->link, $password);
-		$confirm_password 	= mysqli_real_escape_string($this->db->link, $confirm_password);
-		
+		$name 				= mysqli_real_escape_string($this->db->link, $name_);
+		$email 				= mysqli_real_escape_string($this->db->link, $email_);
+		$password 			= mysqli_real_escape_string($this->db->link, $password_);
+		$confirm_password               = mysqli_real_escape_string($this->db->link, $confirm_password_);
+                $create_date                    = mysqli_real_escape_string($this->db->link, $create_date_);
 		
 
 
@@ -196,78 +196,36 @@ class Users{
 			    	$mailCheck = $this->db->select($checkUserEmail);
 			    	if ($mailCheck != false) {
 						$msg = '<div class="alert alert-danger" id="flash-msg">
-			    <strong>Error !</strong> Email already Used, Please use another Email. !</div>';
+			    <strong>Error !</strong> Email already used, Please use another Email. !</div>';
 						echo $msg;
 						exit();
 			    	}else{
+                                    $base_url   = $this->getBaseUrl();
+                                    // This is query for handle use registration permission
+                                    $onQuery = "SELECT * FROM $this->apptable";
+                                    $allowRegistration = $this->db->select($onQuery);
+                                    $value = $allowRegistration->fetch_assoc();
+                                    
+                                    if ($value['allow_email'] === '1') {
+                                        $msg = '<div class="alert alert-danger" id="flash-msg">
+                                        <strong>Error !</strong> New user Registration is closed by Author !</div>';
+                                        echo $msg;
+                                        exit();
+                                    }else{
+                                        // Has password 
+                                        $has_pass 	= password_hash($password, PASSWORD_DEFAULT);
+                                        $query = "INSERT INTO $this->table(name,  email, password, rolename, create_date) VALUES('$name', '$email', '$has_pass', 'Only user', '$create_date')";
+                                        $inserted_rows = $this->db->insert($query);
+                                        $to 		= $email;
+                                        $subject 	= 'Welcome to QLS!';
+                                        $message 	 = "Your name is : " . strip_tags($name) . "\r\n";
+                                        $message 	.= "Your E-mail is : " . strip_tags($email) . "\r\n";
+                                        $message 	.= "Your account was created at : " . $create_date . "\r\n";
+                                        $message 	.= "Message : Please visit our website to login ".$base_url." ";
 
-				    	// This is query for handle use registeration permission
-						$onQuery = "SELECT * FROM $this->apptable";
-						$allowRegistration = $this->db->select($onQuery);
-						$value = $allowRegistration->fetch_assoc();
-						if ($value['allow_email'] === '1') {
-
-							$msg = '<div class="alert alert-danger" id="flash-msg">
-				    <strong>Error !</strong> New user Registration is closed by Author !</div>';
-							echo $msg;
-							exit();
-						}else{
-
-
-							// Has password 
-					    	$has_pass 	= password_hash($password, PASSWORD_DEFAULT);
-					    	$query = "INSERT INTO $this->table(name,  email, password, rolename) VALUES('$name', '$email', '$has_pass', 'Only user')";
-				        	$inserted_rows = $this->db->insert($query);
-						    if ($inserted_rows) {
-								// Select Query for only author access
-								$query 	= "SELECT * FROM $this->table WHERE rolename = 'Author' LIMIT 1";
-								$author = $this->db->select($query);
-									$getAuthor 	= $author->fetch_assoc();
-									$author 	= $getAuthor['email'];
-
-								//User Registration thanks giving message
-								$base_url   = $this->getBaseUrl();
-								$Date 		= new DateTime();
-								$Date 		= date_format($Date, 'Y-m-d H:i:s');
-								$form 		= 'nababurdev@gmail.com';
-								$to 		= "$email, $author";
-								$subject = 'You have been registered Successfully.';
-								$headers = "From: " . strip_tags($form) . "\r\n";
-								$headers .= "Reply-To: ". strip_tags($form) . "\r\n";
-								$headers .= "CC: nababurdev@gmail.com\r\n";
-								$headers .= 'MIME-Version: 1.0';
-								$headers .= 'Content-type: text/html; charset=iso-8859-1';
-								$message  = "Your name is : " . strip_tags($name) . "\r\n";
-								$message .= "Your E-mail is : " . strip_tags($email) . "\r\n";
-								$message .= "Your Role is : User Only "."\r\n";
-								$message .= "Registration Date : " . strip_tags($Date) . "\r\n";
-								$message .= "Message : Please visit our website to login here ".$base_url." ";
-						        $sendmail 	= mail($to, $subject, $message);
-
-
-						        if ($sendmail) {
-								         $msg = ' <div class="alert alert-success " id="flash-msg">
-				    <strong>Success! </strong> You have Registered Successfully !</div>';
-						        echo $msg;
-						        }else{
-									$msg =   '<div class="alert alert-danger " id="flash-msg">
-				    <strong>Error !</strong> Something went wrong!</div>';
-						        echo $msg;
-						        }
-
-
-						    }else {
-						        $msg =   '<div class="alert alert-danger " id="flash-msg">
-				    <strong>Error !</strong> Something went wrong!</div>';
-						        echo $msg;
-						    }
-
-
-						}
-
-
-					
-
+                                        // Use our sendEmail function
+                                        sendEmail::sendEmail($name, $email, $subject, $message);
+                                    }
 				}
 		    }
 	}
@@ -279,52 +237,31 @@ class Users{
 
 	// createNewUserData Method 
 	public function createNewUserData($data, $file){
-		$name 				= $this->fm->validation($data['name']);
-		$phone 				= $this->fm->validation($data['phone']);
-		$address 			= $this->fm->validation($data['address']);
-		$information 		= $this->fm->validation($data['information']);
-		$email 				= $this->fm->validation($data['email']);
-		$city 				= $this->fm->validation($data['city']);
-		$country 			= $this->fm->validation($data['country']);
-		$password 			= $this->fm->validation($data['password']);
-		$confirm_password 	= $this->fm->validation($data['confirm_password']);
-		$rolename 			= $this->fm->validation($data['rolename']);
-		$status 			= $this->fm->validation($data['status']);
-		$create_date 		= $this->fm->validation($data['create_date']);
-		$gendar 			= $this->fm->validation($data['gendar']);
+		$name_ 				= $this->fm->validation($data['name']);
+		$email_ 				= $this->fm->validation($data['email']);
+		$password_ 			= $this->fm->validation($data['password']);
+		$confirm_password_ 	= $this->fm->validation($data['confirm_password']);
+		$rolename_ 			= $this->fm->validation($data['rolename']);
+		$status_ 			= $this->fm->validation($data['status']);
+		$create_date_ 		= $this->fm->validation($data['create_date']);
 
-		$name 				= mysqli_real_escape_string($this->db->link, $name);
-		$phone 				= mysqli_real_escape_string($this->db->link, $data['phone']);
-		$address 			= mysqli_real_escape_string($this->db->link, $address);
-		$information 		= mysqli_real_escape_string($this->db->link, $information);
-		$email 				= mysqli_real_escape_string($this->db->link, $email);
-		$city 				= mysqli_real_escape_string($this->db->link, $data['city']);
-		$country 			= mysqli_real_escape_string($this->db->link, $country);
-		$password 			= mysqli_real_escape_string($this->db->link, $password);
-		$confirm_password 	= mysqli_real_escape_string($this->db->link, $confirm_password);
-		$rolename 			= mysqli_real_escape_string($this->db->link, $rolename);
-		$status 			= mysqli_real_escape_string($this->db->link, $status);
-		$create_date 		= mysqli_real_escape_string($this->db->link, $create_date);
-		$gendar 			= mysqli_real_escape_string($this->db->link, $gendar);
+		$name 				= mysqli_real_escape_string($this->db->link, $name_);
+		$email 				= mysqli_real_escape_string($this->db->link, $email_);
+		$password 			= mysqli_real_escape_string($this->db->link, $password_);
+		$confirm_password 	= mysqli_real_escape_string($this->db->link, $confirm_password_);
+		$rolename 			= mysqli_real_escape_string($this->db->link, $rolename_);
+		$status 			= mysqli_real_escape_string($this->db->link, $status_);
+		$create_date 		= mysqli_real_escape_string($this->db->link, $create_date_);
 
 
-	    $permited  = array('jpg', 'jpeg', 'png', 'gif');
-	    $file_name = $file['profilePhoto']['name'];
-	    $file_size = $file['profilePhoto']['size'];
-	    $file_temp = $file['profilePhoto']['tmp_name'];
 
-	    $div = explode('.', $file_name);
-	    $file_ext = strtolower(end($div));
-	    $unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
-	    $uploaded_image = "app/uploads/userAvatar/".$unique_image;
 
-		if ($name == "" ||$phone == "" ||$address == "" ||$email == "" ||$city == "" ||$country == "" ||$password == ""||$confirm_password == ""||$rolename == ""||$status == ""||$create_date == "" ||$gendar == ""  ) {
+		if ($name == "" ||$email == "" ||$password == ""||$confirm_password == ""||$rolename == ""||$status == ""||$create_date == "" ) {
 	     
 	        $msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
 	    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 	    <strong>Error !</strong> Input fields must not be Empty!</div>';
 	        return $msg;
-		       exit();
 		}elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 			$msg = '<div class="alert alert-danger text-center alert-dismissible" id="flash-msg">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -342,16 +279,6 @@ class Users{
 	    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 	    <strong>Error !</strong> Password did not matched, please try agian and use same password two fields.</div>';
 	        return $msg;
-		    }elseif($file_size >1048567) {
-	        $msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-	    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-	    <strong>Error !</strong> Image Size should be less then 1MB!</div>';
-	        return $msg;
-		    } elseif (in_array($file_ext, $permited) === false) {
-		        $msg = '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-	    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-	    <strong>Error !</strong> You can upload only:-'.implode(', ', $permited).'</div>';
-		        return $msg;
 		    }else{
 			    	$checkUserEmail = "SELECT email FROM $this->table WHERE email = '$email' LIMIT 1";
 			    	$mailCheck = $this->db->select($checkUserEmail);
@@ -360,16 +287,24 @@ class Users{
 			    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 			    <strong>Error !</strong> Email already Exist, Please use another Email for create new User. !</div>';
 						return $msg;
-						exit();
+						//exit();
 			    	}else{
-			    	move_uploaded_file($file_temp, $uploaded_image);
+                                    
+                                    
+                                    // This is query for handle use registration permission
+                                    $onQuery = "SELECT * FROM $this->apptable";
+                                    $allowRegistration = $this->db->select($onQuery);
+                                    $value = $allowRegistration->fetch_assoc();
+                                    
+                                    
+			    	//move_uploaded_file($file_temp, $uploaded_image);
 			    	$has_pass 	= password_hash($password, PASSWORD_DEFAULT);
-			    	$query = "INSERT INTO $this->table(name,  phone, address, information,email,city,country, password,  profilePhoto, rolename,  status, gendar,  create_date) VALUES('$name', '$phone', '$address','$information', '$email','$city','$country', '$has_pass', '$uploaded_image','$rolename', '$status', '$gendar', '$create_date')";
+			    	$query = "INSERT INTO $this->table(name, email, password, rolename,  status, create_date) VALUES('$name', '$email', '$has_pass', '$rolename', '$status', '$create_date')";
 		        	$inserted_rows = $this->db->insert($query);
 
 				    if ($inserted_rows) {
 						// Select Query for only author access
-						$query 	= "SELECT * FROM $this->table WHERE rolename = 'Author' LIMIT 1";
+						$query 	= "SELECT * FROM $this->table WHERE rolename = 'sysadmin' LIMIT 1";
 						$author = $this->db->select($query);
 							$getAuthor 	= $author->fetch_assoc();
 							$author 	= $getAuthor['email'];
@@ -377,16 +312,7 @@ class Users{
 						if (Session::get('userName') == TRUE && Session::get('rolename') == TRUE) {
 							//User Registration thanks giving message
 							$base_url   = $this->getBaseUrl();
-							$Date 		= new DateTime();
-							$Date 		= date_format($Date, 'Y-m-d H:i:s');
-							$form = 'nababurdev@gmail.com';
-							$to 		= "$email, $author";
 							$subject = 'You have been registered Successfully.';
-							$headers = "From: " . strip_tags($form) . "\r\n";
-							$headers .= "Reply-To: ". strip_tags($form) . "\r\n";
-							$headers .= "CC: nababurdev@gmail.com\r\n";
-							$headers .= 'MIME-Version: 1.0';
-							$headers .= 'Content-type: text/html; charset=iso-8859-1';
 							$message  	 = "Account user information: ". "\r\n";
 							$message  	.= "User name is: " . strip_tags($name) . "\r\n";
 							$message 	.= "User E-mail is: " . strip_tags($email) . "\r\n";
@@ -394,49 +320,22 @@ class Users{
 							$message  	.= "Admin information: ". "\r\n";
 							$message 	.= "Account creator  : " . Session::get('userName') . "\r\n";
 							$message 	.= "Account creator Role : " . Session::get('rolename') . "\r\n";
-							$message 	.= "Account Registration Date : " . strip_tags($Date) . "\r\n";
+							$message 	.= "Account Registration Date : " . strip_tags($create_date) . "\r\n";
 							$message 	.= "Message : Please visit our website to login ".$base_url." ";
-							$sendmail 	= mail($to, $subject, $message);
+							sendEmail::sendEmail($name, $email, $subject, $message);
 
 						}else{
 							//User Registration thanks giving message
 							$base_url   = $this->getBaseUrl();
-							$Date 		= new DateTime();
-							$Date 		= date_format($Date, 'Y-m-d H:i:s');
-							$form = 'nababurdev@gmail.com';
-							$to 		= "$email";
 							$subject = 'You have been registered Successfully.';
-							$headers = "From: " . strip_tags($form) . "\r\n";
-							$headers .= "Reply-To: ". strip_tags($form) . "\r\n";
-							$headers .= "CC: nababurdev@gmail.com\r\n";
-							$headers .= 'MIME-Version: 1.0';
-							$headers .= 'Content-type: text/html; charset=iso-8859-1';
 							$message  	 = "Account user information: ". "\r\n";
 							$message  	.= "Your name is: " . strip_tags($name) . "\r\n";
 							$message 	.= "Your E-mail is: " . strip_tags($email) . "\r\n";
 							$message 	.= "Your Role is: " . strip_tags($rolename) . "\r\n";
-							$message 	.= "Account Registration Date : " . strip_tags($Date) . "\r\n";
+							$message 	.= "Account Registration Date : " . strip_tags($create_date) . "\r\n";
 							$message 	.= "Message : Please visit our website to login ".$base_url." ";
-							$sendmail 	= mail($to, $subject, $message);
+							sendEmail::sendEmail($name, $email, $subject, $message);
 						}
-
-
-
-
-				        if ($sendmail) {
-					        $msg = ' <div class="alert alert-success alert-dismissible" id="flash-msg">
-			    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			    <strong>Success! </strong> New User Created Successfully !</div>';
-					        return $msg;
-				        }else{
-					        $msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-			    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			    <strong>Error !</strong> New User not Created, Something went wrong!</div>';
-					        return $msg;
-				        }
-
-
-
 				    }else {
 				        $msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
 		    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -454,50 +353,28 @@ class Users{
 	// User Inserted Method BY Id 
 	public function updateUserById($data, $file, $id){
 		$id = preg_replace('/[^a-zA-Z0-9-]/', '', $id);
-		$name 				= $this->fm->validation($data['name']);
-		$phone 				= $this->fm->validation($data['phone']);
-		$address 			= $this->fm->validation($data['address']);
-		$information 		= $this->fm->validation($data['information']);
-		$email 				= $this->fm->validation($data['email']);
-		$city 				= $this->fm->validation($data['city']);
-		$country 			= $this->fm->validation($data['country']);
-		$rolename 			= $this->fm->validation($data['rolename']);
-		$status 			= $this->fm->validation($data['status']);
-		$create_date 		= $this->fm->validation($data['create_date']);
-		$gendar	 			= $this->fm->validation($data['gendar']);
+		$name_ 				= $this->fm->validation($data['name']);
+		$email_ 				= $this->fm->validation($data['email']);
+		$rolename_ 			= $this->fm->validation($data['rolename']);
+		$status_ 			= $this->fm->validation($data['status']);
+		$create_date_ 		= $this->fm->validation($data['create_date']);
 
 
 
-		$name 				= mysqli_real_escape_string($this->db->link, $name);
-		$phone 				= mysqli_real_escape_string($this->db->link, $phone);
-		$address 			= mysqli_real_escape_string($this->db->link, $address);
-		$information 		= mysqli_real_escape_string($this->db->link, $information);
-		$email 				= mysqli_real_escape_string($this->db->link, $email);
-		$city 				= mysqli_real_escape_string($this->db->link, $city);
-		$country 			= mysqli_real_escape_string($this->db->link, $country);
-		$rolename 			= mysqli_real_escape_string($this->db->link, $rolename);
-		$status 			= mysqli_real_escape_string($this->db->link, $status);
-		$create_date 		= mysqli_real_escape_string($this->db->link, $create_date);
-		$gendar 			= mysqli_real_escape_string($this->db->link, $gendar);
+		$name 				= mysqli_real_escape_string($this->db->link, $name_);
+		$email 				= mysqli_real_escape_string($this->db->link, $email_);
+		$rolename 			= mysqli_real_escape_string($this->db->link, $rolename_);
+		$status 			= mysqli_real_escape_string($this->db->link, $status_);
+		$create_date 		= mysqli_real_escape_string($this->db->link, $create_date_);
 
 	
-	    $permited  = array('jpg', 'jpeg', 'png', 'gif');
-	    $file_name = $file['profilePhoto']['name'];
-	    $file_size = $file['profilePhoto']['size'];
-	    $file_temp = $file['profilePhoto']['tmp_name'];
 
-	    $div = explode('.', $file_name);
-	    $file_ext = strtolower(end($div));
-	    $unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
-	    $uploaded_image = "app/uploads/userAvatar/".$unique_image;
-
-		if ($name == "" ||$phone == "" ||$address == "" ||$email == "" ||$city == "" ||$country == "" ||$rolename == ""||$status == ""|| $create_date == ""  || $gendar == ""  ) {
+		if ($name == "" ||$email == "" ||$rolename == ""||$status == ""|| $create_date == ""  ) {
 	     
 	        $msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
 	    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 	    <strong>Error !</strong> Input fields must not be Empty!</div>';
 	        return $msg;
-		       exit();
 		}elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 			$msg = '<div class="alert alert-danger text-center alert-dismissible" id="flash-msg">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -508,51 +385,14 @@ class Users{
 				
 				if (!empty($file_name)) {
 
-				    if($file_size >1048567) {
-				        $msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-				    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-				    <strong>Error !</strong> Image Size should be less then 1MB!</div>';
-				        return $msg;
-					    } elseif (in_array($file_ext, $permited) === false) {
-					        $msg = '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-				    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-				    <strong>Error !</strong> You can upload only:-'.implode(', ', $permited).'</div>';
-					        return $msg;
-					    }else{
-
-
-
-							// Move Uploaded file
-					    	move_uploaded_file($file_temp, $uploaded_image);
-
-					    	// Unlink Image 
-							$unlinkQuery = "SELECT * FROM $this->table WHERE userid = '$id' ";
-							$unlink_img = $this->db->select($unlinkQuery);
-
-							if ($unlink_img) {
-								while ($delimg  = $unlink_img->fetch_assoc()) {
-									$delink = $delimg['profilePhoto'];
-									if(is_file($delink)){
-
-								        unlink($delink);
-									}
-								}
-							}
 
 					    	// Update query
 					    	$query = "UPDATE $this->table
 					    			SET  
 					    			name 	= '$name',
-					    			phone 			= '$phone',
-					    			address 		= '$address',
-					    			information 	= '$information',
 					    			email 			= '$email',
-					    			city 			= '$city',
-					    			country 		= '$country',
-					    			profilePhoto 	= '$uploaded_image',
 					    			rolename 		= '$rolename',
 					    			status 			= '$status',
-					    			gendar 			= '$gendar',
 					    			create_date 	= '$create_date'
 
 					    			WHERE userid = '$id'
@@ -567,7 +407,7 @@ class Users{
 								$name 	= $value['name'];
 
 								// Select Query for only author access
-								$query 	= "SELECT * FROM $this->table WHERE rolename = 'Author' LIMIT 1";
+								$query 	= "SELECT * FROM $this->table WHERE rolename = 'sysadmin' LIMIT 1";
 								$author = $this->db->select($query);
 									$getAuthor 	= $author->fetch_assoc();
 									$author 	= $getAuthor['email'];
@@ -579,12 +419,12 @@ class Users{
 									$base_url   = $this->getBaseUrl();
 									$Date 		= new DateTime();
 									$Date 		= date_format($Date, 'Y-m-d H:i:s');
-									$form 		= 'nababurdev@gmail.com';
+									$form 		= 'mj.qls@tuta.io';
 									$to 		= "$email, $author";
 									$subject 	= 'Profile update notification';
 									$headers 	= "From: " . strip_tags($form) . "\r\n";
 									$headers 	.= "Reply-To: ". strip_tags($form) . "\r\n";
-									$headers 	.= "CC: nababurdev@gmail.com\r\n";
+									$headers 	.= "CC: mj.qls@tuta.io\r\n";
 									$headers 	.= 'MIME-Version: 1.0';
 									$headers 	.= 'Content-type: text/html; charset=iso-8859-1';
 									$message  	 = "Account user information: ". "\r\n";
@@ -597,19 +437,19 @@ class Users{
 									$message 	.= "Account Registration Date : " . strip_tags($Date) . "\r\n";
 									$message 	.= "Message : Please visit our website to login ".$base_url." ";
 									
-									$sendmail 	= mail($to, $subject, $message);
+									sendEmail::sendEmail($name, $email, $subject, $message);
 
-								}else{
+
 									//User Registration thanks giving message
 									$base_url   = $this->getBaseUrl();
 									$Date 		= new DateTime();
 									$Date 		= date_format($Date, 'Y-m-d H:i:s');
-									$form 		= 'nababurdev@gmail.com';
+									$form 		= 'mj.qls@tuta.io';
 									$to 		= "$email";
 									$subject 	= 'Profile update notification';
 									$headers = "From: " . strip_tags($form) . "\r\n";
 									$headers .= "Reply-To: ". strip_tags($form) . "\r\n";
-									$headers .= "CC: nababurdev@gmail.com\r\n";
+									$headers .= "CC: mj.qls@tuta.io\r\n";
 									$headers .= 'MIME-Version: 1.0';
 									$headers .= 'Content-type: text/html; charset=iso-8859-1';
 									$message  	 = "Account user information: ". "\r\n";
@@ -619,45 +459,17 @@ class Users{
 									$message 	.= "Profile update Date : " . strip_tags($Date) . "\r\n";
 									$message 	.= "Message : Hey, ". strip_tags($name) ." Recently you have update your profile.";
 									$message 	.= "Message : Please visit our website to login ".$base_url." ";
-									$sendmail 	= mail($to, $subject, $message);
+									sendEmail::sendEmail($name, $email, $subject, $message);
 								}
 
-
-
-
-						        if ($sendmail) {
-							        $msg = ' <div class="alert alert-success alert-dismissible" id="flash-msg">
-					    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					    <strong>Success! </strong> User Data Updated Successfully !</div>';
-							        return $msg;
-						        }else{
-							        $msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-					    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					    <strong>Error !</strong> User not Updated!</div>';
-							        return $msg;
-						        }
-
-
-						    }else {
-						        $msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-				    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-				    <strong>Error !</strong> User not Updated!</div>';
-						        return $msg;
-						    }
 					    }}else{
 					    	
 					    	$query = "UPDATE $this->table
 					    			SET  
 					    			name 	= '$name',
-					    			phone 			= '$phone',
-					    			address 		= '$address',
-					    			information 	= '$information',
 					    			email 			= '$email',
-					    			city 			= '$city',
-					    			country 		= '$country',
 					    			rolename 		= '$rolename',
 					    			status 			= '$status',
-					    			gendar 			= '$gendar',
 					    			create_date 	= '$create_date'
 					    			WHERE userid = '$id'
 					    	";
@@ -671,7 +483,7 @@ class Users{
 
 
 								// Select Query for only author access
-								$query 	= "SELECT * FROM $this->table WHERE rolename = 'Author' LIMIT 1";
+								$query 	= "SELECT * FROM $this->table WHERE rolename = 'sysadmin' LIMIT 1";
 								$author = $this->db->select($query);
 									$getAuthor 	= $author->fetch_assoc();
 									$author 	= $getAuthor['email'];
@@ -683,12 +495,12 @@ class Users{
 									$base_url   = $this->getBaseUrl();
 									$Date 		= new DateTime();
 									$Date 		= date_format($Date, 'Y-m-d H:i:s');
-									$form 		= 'nababurdev@gmail.com';
+									$form 		= 'mj.qls@tuta.io';
 									$to 		= "$email, $author";
 									$subject 	= 'Profile update notification';
 									$headers 	= "From: " . strip_tags($form) . "\r\n";
 									$headers 	.= "Reply-To: ". strip_tags($form) . "\r\n";
-									$headers 	.= "CC: nababurdev@gmail.com\r\n";
+									$headers 	.= "CC: mj.qls@tuta.io\r\n";
 									$headers 	.= 'MIME-Version: 1.0';
 									$headers 	.= 'Content-type: text/html; charset=iso-8859-1';
 									$message  	 = "Account user information: ". "\r\n";
@@ -700,19 +512,19 @@ class Users{
 									$message 	.= "Profile updater Role : " . Session::get('rolename') . "\r\n";
 									$message 	.= "Profile update Date : " . strip_tags($Date) . "\r\n";
 									$message 	.= "Message : Please visit our website to login ".$base_url." ";
-									$sendmail 	= mail($to, $subject, $message);
+									sendEmail::sendEmail($name, $email, $subject, $message);
 
-								}else{
+								} else {
 									//User Registration thanks giving message
 									$base_url   = $this->getBaseUrl();
 									$Date 		= new DateTime();
 									$Date 		= date_format($Date, 'Y-m-d H:i:s');
-									$form 		= 'nababurdev@gmail.com';
+									$form 		= 'mj.qls@tuta.io';
 									$to 		= "$email";
 									$subject 	= 'Profile update notification';
 									$headers 	= "From: " . strip_tags($form) . "\r\n";
 									$headers 	.= "Reply-To: ". strip_tags($form) . "\r\n";
-									$headers 	.= "CC: nababurdev@gmail.com\r\n";
+									$headers 	.= "CC: mj.qls@tuta.io\r\n";
 									$headers 	.= 'MIME-Version: 1.0';
 									$headers 	.= 'Content-type: text/html; charset=iso-8859-1';
 									$message  	 = "Account user information: ". "\r\n";
@@ -722,23 +534,9 @@ class Users{
 									$message 	.= "Profile update Date : " . strip_tags($Date) . "\r\n";
 									$message 	.= "Message : Hey, ". strip_tags($name) ." Recently you have update your profile.";
 									$message 	.= "Message : Please visit our website to login ".$base_url." ";
-									$sendmail 	= mail($to, $subject, $message);
+									sendEmail::sendEmail($name, $email, $subject, $message);
 								}
-
-
-						        if ($sendmail) {
-							        $msg = ' <div class="alert alert-success alert-dismissible" id="flash-msg">
-					    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					    <strong>Success! </strong> User Data Updated Successfully !</div>';
-							        return $msg;
-						        }else{
-							        $msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-					    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					    <strong>Error !</strong> User not Updated!</div>';
-							        return $msg;
-						        }
-
-						    }else {
+						    } else {
 						        $msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
 				    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 				    <strong>Error !</strong> User Data not Updated!</div>';
@@ -762,25 +560,12 @@ class Users{
 		$name 	= $value['name'];
 
 		// Select Query for only author access
-		$query 	= "SELECT * FROM $this->table WHERE rolename = 'Author' LIMIT 1";
+		$query 	= "SELECT * FROM $this->table WHERE rolename = 'sysadmin' LIMIT 1";
 		$author = $this->db->select($query);
 		$getAuthor 	= $author->fetch_assoc();
 		$author 	= $getAuthor['email'];
 
 
-    	// Unlink Image 
-		$unlinkQuery = "SELECT * FROM $this->table WHERE userid = '$id' ";
-		$unlink_img = $this->db->select($unlinkQuery);
-
-		if ($unlink_img) {
-			while ($delimg  = $unlink_img->fetch_assoc()) {
-				$delink = $delimg['profilePhoto'];
-				if(is_file($delink)){
-
-			        unlink($delink);
-				}
-			}
-		}
 
 		$query = "DELETE FROM $this->table WHERE userid = '$id'";
 		$delete_row = $this->db->delete($query);
@@ -790,14 +575,7 @@ class Users{
 			$base_url   = $this->getBaseUrl();
 			$Date 		= new DateTime();
 			$Date 		= date_format($Date, 'Y-m-d H:i:s');
-			$form 		= 'nababurdev@gmail.com';
-			$to 		= "$author";
-			$subject 	= 'User account was Delete.';
-			$headers 	= "From: " . strip_tags($form) . "\r\n";
-			$headers 	.= "Reply-To: ". strip_tags($form) . "\r\n";
-			$headers 	.= "CC: nababurdev@gmail.com\r\n";
-			$headers 	.= 'MIME-Version: 1.0';
-			$headers 	.= 'Content-type: text/html; charset=iso-8859-1';
+			$subject 	= 'User account was deleted.';
 			$message  	 = "Account user information: ". "\r\n";
 			$message  	.= "User name was: " . strip_tags($name) . "\r\n";
 			$message 	.= "User E-mail was: " . strip_tags($email) . "\r\n";
@@ -807,33 +585,13 @@ class Users{
 			$message 	.= "Role was : " . Session::get('rolename') . "\r\n";
 			$message 	.= "Account Deleted Time : " . strip_tags($Date) . "\r\n";
 			$message 	.= "Message : Please visit our website to login ".$base_url." ";
-			// $message 	.= "Message : Sad news ! We are sorry if you have any Question contact with Author.";
-	        $sendmail 	= mail($to, $subject, $message);
-
-	        if ($sendmail) {
-			        $msg = ' <div class="alert alert-success alert-dismissible" id="flash-msg">
-	    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		        <strong>Success! </strong> User Account Deleted Successfully !</div>';
-		        return  $msg;
-		        exit();
-	        }else{
-				$msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					<strong>Error !</strong> Something went wrong...</div>';
-				return $msg;
-		       exit();
-	        }
-
-
-
-
-		}else{
+			$message 	.= "Message : If you believe this to be in error, reach out to the system administrator.";
+	        sendEmail::sendEmail($name, $email, $subject, $message);
+		} else {
 			$msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
 				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 				<strong>Error !</strong> Something went wrong...</div>';
-			return $msg;
-	       exit();
-	       
+			return $msg;	       
 		}
 	}
 
@@ -892,7 +650,7 @@ class Users{
 			$email 	= $value['email'];
 			$name 	= $value['name'];
 			// Select Query for only author access
-			$query 	= "SELECT * FROM $this->table WHERE rolename = 'Author' LIMIT 1";
+			$query 	= "SELECT * FROM $this->table WHERE rolename = 'sysadmin' LIMIT 1";
 			$author = $this->db->select($query);
 				$getAuthor 	= $author->fetch_assoc();
 				$author 	= $getAuthor['email'];
@@ -901,12 +659,12 @@ class Users{
 			$base_url   = $this->getBaseUrl();
 			$Date 		= new DateTime();
 			$Date 		= date_format($Date, 'Y-m-d H:i:s');
-			$form 		= 'nababurdev@gmail.com';
+			$form 		= 'mj.qls@tuta.io';
 			$to 		= "$author";
 			$subject 	= 'User account was Disable';
 			$headers 	= "From: " . strip_tags($form) . "\r\n";
 			$headers 	.= "Reply-To: ". strip_tags($form) . "\r\n";
-			$headers 	.= "CC: nababurdev@gmail.com\r\n";
+			$headers 	.= "CC: mj.qls@tuta.io\r\n";
 			$headers 	.= 'MIME-Version: 1.0';
 			$headers 	.= 'Content-type: text/html; charset=iso-8859-1';
 			$message  	 = "Account user information: ". "\r\n";
@@ -921,27 +679,12 @@ class Users{
 			$message 	.= "Message : Please visit our website to login ".$base_url." ";
 			
 
-	        $sendmail 	= mail($to, $subject, $message);
-	        if ($sendmail) {
-			        $msg = '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-	    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		        <strong>Success! </strong> User Account is Disabled !</div>';
-		        return  $msg;
-		        exit();
-	        }else{
-				$msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					<strong>Error !</strong> Something went wrong...</div>';
-				return $msg;
-		       exit();
-	        }
-
+	        sendEmail::sendEmail($name, $email, $subject, $message);
 	 	}else{
 			$msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
 				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 				<strong>Error !</strong> Something went wrong...</div>';
 			return $msg;
-	       exit();
 	 	}
 	}
 
@@ -965,7 +708,7 @@ class Users{
 			$name 	= $value['name'];
 
 			// Select Query for only author access
-			$query 	= "SELECT * FROM $this->table WHERE rolename = 'Author' LIMIT 1";
+			$query 	= "SELECT * FROM $this->table WHERE rolename = 'sysadmin' LIMIT 1";
 			$author = $this->db->select($query);
 				$getAuthor 	= $author->fetch_assoc();
 				$author 	= $getAuthor['email'];
@@ -975,12 +718,12 @@ class Users{
 			$base_url   = $this->getBaseUrl();
 			$Date 		= new DateTime();
 			$Date 		= date_format($Date, 'Y-m-d H:i:s');
-			$form 		= 'nababurdev@gmail.com';
+			$form 		= 'mj.qls@tuta.io';
 			$to 		= "$author";
 			$subject 	= 'User account Activated';
 			$headers 	= "From: " . strip_tags($form) . "\r\n";
 			$headers 	.= "Reply-To: ". strip_tags($form) . "\r\n";
-			$headers 	.= "CC: nababurdev@gmail.com\r\n";
+			$headers 	.= "CC: mj.qls@tuta.io\r\n";
 			$headers 	.= 'MIME-Version: 1.0';
 			$headers 	.= 'Content-type: text/html; charset=iso-8859-1';
 			$message  	 = "Account user information: ". "\r\n";
@@ -994,29 +737,12 @@ class Users{
 			$message 	.= "Account Activated Time : " . strip_tags($Date) . "\r\n";
 			$message 	.= "Message : Please visit our website to login ".$base_url." ";
 			
-	        $sendmail 	= mail($to, $subject, $message);
-
-	        if ($sendmail) {
-			        $msg = ' <div class="alert alert-success alert-dismissible" id="flash-msg">
-		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		        <strong>Success! </strong> User Account is Activate Successfully !</div>';
-		        return  $msg;
-		        exit();
-	        }else{
-				$msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					<strong>Error !</strong> Something went wrong...</div>';
-				return $msg;
-		       exit();
-	        }
-
-
+	        sendEmail::sendEmail($name, $email, $subject, $message);
 	 	}else{
 			$msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
 				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 				<strong>Error !</strong> Something went wrong...</div>';
 			return $msg;
-	       exit();
 	 	}
 	}
 
@@ -1057,7 +783,7 @@ class Users{
 
 	// Select All Author Query
 	public function selectAuthorFrom(){
-		$query = "SELECT rolename FROM $this->table WHERE rolename ='Author' ";
+		$query = "SELECT rolename FROM $this->table WHERE rolename ='sysadmin' ";
 		$result = $this->db->select($query);
 		return $result; 
 	}
@@ -1081,7 +807,7 @@ class Users{
 		return $result; 
 	}
 
-	// Generat Custom New Password
+	// Generate Custom New Password
 	public function randomPasswordGenerator() {
 	    $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
 	    $pass = array(); //remember to declare $pass as an array
@@ -1143,34 +869,17 @@ class Users{
 		        if ($update_pass) {
 
 			        //User Request Password changed thanks giving message
-					$base_url   = $this->getBaseUrl();
-					$Date 		= new DateTime();
-					$Date 		= date_format($Date, 'Y-m-d H:i:s');
-					$form 		= 'nababurdev@gmail.com';
-					$to 		= "$email";
-					$subject 	= 'Request to change your Password.';
-					$headers 	= "From: " . strip_tags($form) . "\r\n";
-					$headers 	.= "Reply-To: ". strip_tags($form) . "\r\n";
-					$headers 	.= "CC: nababurdev@gmail.com\r\n";
-					$headers 	.= 'MIME-Version: 1.0';
-					$headers 	.= 'Content-type: text/html; charset=iso-8859-1';
-					$message 	 = "Your name is : " . strip_tags($name) . "\r\n";
-					$message 	.= "Your E-mail is : " . strip_tags($email) . "\r\n";
-					$message 	.= "Your New generate password is  : " . strip_tags($newpass) . "\r\n";
-					$message 	.= "Password changed Date : " . strip_tags($Date) . "\r\n";
-					$message 	.= "Message : Please visit our website to login ".$base_url." ";
-			        $sendmail 	= mail($to, $subject, $message);
-			        if ($sendmail) {
-					        $msg = ' <div class="alert alert-success " id="flash-msg">
-			    <strong>Success! </strong> Please check your Email for new password !</div>';
-					        echo $msg;
-			        }else{
-						$msg = '<div class="alert alert-danger " id="flash-msg">
-			    <strong>Error !</strong> Email not sent !</div>';
-						echo  $msg;
-			        }
-
-
+                                $base_url   = $this->getBaseUrl();
+                                $Date 		= new DateTime();
+                                $Date 		= date_format($Date, 'Y-m-d H:i:s');
+                                $subject        = 'Request to change your Password.';
+                                $message  	 = "Account user information: ". "\r\n";
+                                $message 	 = "Your name is : " . strip_tags($name) . "\r\n";
+                                $message 	.= "Your E-mail is : " . strip_tags($email) . "\r\n";
+                                $message 	.= "Your New generate password is  : " . strip_tags($newpass) . "\r\n";
+                                $message 	.= "Password changed Date : " . strip_tags($Date) . "\r\n";
+                                $message 	.= "Message : Please visit our website to login ".$base_url." ";
+                                sendEmail::sendEmail($name, $email, $subject, $message);
 		        }
 			}else{
 				$msg = '<div class="alert alert-danger " id="flash-msg">
@@ -1193,13 +902,9 @@ class Users{
 		$result 		= $this->db->select($query)->fetch_assoc();
 
 		$name 			= $result['name'];
-		$phone 			= $result['phone'];
-		$profilePhoto 	= $result['profilePhoto'];
 		$rolename 		= $result['rolename'];
-		$gendar 		= $result['gendar'];
-		$country 		= $result['country'];
 
-		if (empty($phone) || empty($profilePhoto) || empty($rolename) || empty($gendar)|| empty($country)) {
+		if (empty($rolename)) {
 			 $msg 	= '<div class="alert alert-danger animated fadeInUp bg-danger text-white alert-dismissible">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
     <strong>In-complete Profile !</strong> Hey ( '.$name.' ) Please before Complete your profile, then browse Dashboard. ! <a href="editprofile.php?edituser='.$userid.'"><span class="badge badge-lg badge-dark text-white">Go to profile </span></a> </div>';

@@ -1,5 +1,5 @@
 <?php include 'app/inc/header.php'; ?>
-
+<?php Session::requireAdmin($access); ?>
 
 <?php 
   
@@ -97,14 +97,14 @@ if (isset($delrole) && is_numeric($delrole) && isset($_GET['remove']) == 'remove
                                  <td class="text-center pt-3">
                                     <a class="btn btn-info"
                                        href="editrole.php?roleid=<?php echo $result['roleid']; ?>">Edit Role</a>
-                                    <?php if ($result['rolename'] == "Author") { ?>
-                                    <?php if ( isset($access) == '$access' ) { ?>
+                                    <?php if ($result['rolename'] == "sysadmin") { ?>
+                                    <?php if (  $access  ) { ?>
                                     <a class="btn btn-danger" onclick="return confirm('You can not Remove account !')"
                                        href="#">&nbspNo Action&nbsp</a>
                                     <?php } ?>
                                     <?php }else{ ?>
 
-                                    <?php if ( isset($edit) == '$edit' ) { ?>
+                                    <?php if (  $edit ) { ?>
                                     <a class="btn btn-danger" onclick="return confirm('Are you sure to Delete ?')"
                                        href="?remove=removeid&&delrole=<?php echo $result['roleid']; ?>">Delete Role</a>
                                     <?php } ?>
@@ -143,17 +143,7 @@ if (isset($delrole) && is_numeric($delrole) && isset($_GET['remove']) == 'remove
             <div class="col-md-12">
                <div class="card ">
                   <div class="card-body footer-p">
-                     <p>Design and developed by Nababur rahaman send a thanks giving mail or do you want any support :)
-                        <a href="mailto:nababurdev@gmail.com">nababurdev@gmail.com</a>
-                     </p>
-                     <p>Do you want to develop any php or laravel or wordpress project ? send a mail:) <a
-                           href="mailto:nababurdev@gmail.com">nababurdev@gmail.com</a> </p>
-                     <p>CEO of GridTemaplate: <a target="_blank"
-                           href="https://www.gridtemplate.com/">https://www.gridtemplate.com/</a>
-                     </p>
-                     <p>Connect with Github: <a target="_blank"
-                           href="https://github.com/nababur">https://github.com/nababur</a>
-                     </p>
+
 
                   </div>
                </div>

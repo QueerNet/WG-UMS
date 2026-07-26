@@ -68,7 +68,7 @@ $('#nav-toggle').on('click', function(){
         $('#preview-thumb').fadeIn(650);
 
 
-      }
+      };
       reader.readAsDataURL(input.files[0]);
     }
   }
@@ -89,7 +89,7 @@ $('#nav-toggle').on('click', function(){
         $('#preview-favicon').fadeIn(650);
 
         
-      }
+      };
       reader.readAsDataURL(input.files[0]);
     }
   }
@@ -109,7 +109,7 @@ $('#nav-toggle').on('click', function(){
         $('#preview-thumb').fadeIn(650);
 
         
-      }
+      };
       reader.readAsDataURL(input.files[0]);
     }
   }
@@ -212,7 +212,7 @@ $(document).ready(function(){
         var id_autho = $('#id_autho').val();
         var allow_email = $('#hidden_email').val();
         var dataString = 'allow_email='+allow_email+'&id_autho='+id_autho;
-        if (dataString != '') {
+        if (dataString !== '') {
             $.ajax({
                 url:"app/ajax-classes/email-allow.php",
                 type:"POST",
@@ -232,7 +232,7 @@ $(document).ready(function(){
         var id_autho = $('#id_autho').val();
         var fb_autho = $('#hidden_facebook').val();
         var dataString = 'fb_autho='+fb_autho+'&id_autho='+id_autho;
-        if (dataString != '') {
+        if (dataString !== '') {
             $.ajax({
                 url:"app/ajax-classes/facebook-allow.php",
                 type:"POST",
@@ -254,7 +254,7 @@ $(document).ready(function(){
         var id_autho = $('#id_autho').val();
         var tw_autho = $('#hidden_twitter').val();
         var dataString = 'tw_autho='+tw_autho+'&id_autho='+id_autho;
-        if (dataString != '') {
+        if (dataString !== '') {
             $.ajax({
                 url:"app/ajax-classes/twitter-allow.php",
                 type:"POST",
@@ -277,7 +277,7 @@ $(document).ready(function(){
         var id_autho = $('#id_autho').val();
         var gle_autho = $('#hidden_google').val();
         var dataString = 'gle_autho='+gle_autho+'&id_autho='+id_autho;
-        if (dataString != '') {
+        if (dataString !== '') {
             $.ajax({
                 url:"app/ajax-classes/google-allow.php",
                 type:"POST",
@@ -299,7 +299,7 @@ $(document).ready(function(){
         var id_autho = $('#id_autho').val();
         var git_autho = $('#hidden_github').val();
         var dataString = 'git_autho='+git_autho+'&id_autho='+id_autho;
-        if (dataString != '') {
+        if (dataString !== '') {
             $.ajax({
                 url:"app/ajax-classes/github-allow.php",
                 type:"POST",
@@ -384,10 +384,11 @@ $(document).ready(function(){
           var email               = $("#email").val();
           var password            = $("#password").val();
           var confirm_password    = $("#confirm_password").val();
+          var create_date = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
-          var dataString  = 'name='+name+'&email='+email+'&password='+password+'&confirm_password='+confirm_password;
+          var dataString  = 'name='+name+'&email='+email+'&password='+password+'&confirm_password='+confirm_password+'&create_date='+create_date;
 
-          if (dataString != '') {
+          if (dataString !== '') {
             // Email login Authotication
               $.ajax({
                   url:"app/ajax-classes/register-user.php",
@@ -422,7 +423,7 @@ $(document).ready(function(){
 
             var dataString  = 'email='+email;
 
-            if (dataString != '') {
+            if (dataString !== '') {
               // Email login Authotication
                 $.ajax({
                     url:"app/ajax-classes/reset-password.php",
@@ -492,7 +493,7 @@ $(document).ready(function(){
       theToggle.onclick = function() {
          toggleClass(this, 'on');
          return false;
-      }
+      };
 
 
 

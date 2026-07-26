@@ -6,7 +6,7 @@ $usr = new Users();
 
 
 
-// User Login Authotication
+// User Login Authentication
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $resetPass = $usr->userResetPassword($_POST);
 

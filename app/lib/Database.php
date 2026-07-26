@@ -6,10 +6,6 @@ include_once ($filepath.'/../config/config.php');
 
 
 Class Database{
-   public $host   = DB_HOST;
-   public $user   = DB_USER;
-   public $pass   = DB_PASS;
-   public $dbname = DB_NAME;
    
    
    public $link;
@@ -20,7 +16,7 @@ Class Database{
    }
    
   private function connectDB(){
-     $this->link = new mysqli($this->host, $this->user, $this->pass, $this->dbname);
+     $this->link = new mysqli(constant('DB_HOST'), constant('DB_USER'), constant('DB_PASS'), constant('DB_NAME'));
      if(!$this->link){
        $this->error ="Connection fail".$this->link->connect_error;
       return false;

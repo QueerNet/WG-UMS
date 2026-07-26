@@ -37,23 +37,11 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
 
-      <?php 
-
-        $header_contents = $fr->selectfrontendpart();
-        if ($header_contents) {
-          while ($result = $header_contents->fetch_assoc()) {
-          
-
-       ?>
       <!--====== Title ======-->
-      <title><?php  if (isset($result['title'])) {
-        echo $result['title'];
-      } ?></title>
+      <title>Reset Password</title>
     <!--====== Favicon Icon ======-->
-    <link rel="shortcut icon" href="<?php  if (isset($result['favicon'])) {
-        echo $result['favicon'];
-      } else{ echo "assets/images/icons/favicon.png";}?>" type="image/png">
-      <?php }} ?>
+    <link rel="shortcut icon" href="assets/images/icons/favicon.png" type="image/png">
+
 
 
     <!--====== Google Fonts ======-->
@@ -98,33 +86,14 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
         <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
         <!--LOGO-->
         <div class="login-text">
-      <?php 
 
-        $header_contents = $fr->selectfrontendpart();
-        if ($header_contents) {
-          while ($result = $header_contents->fetch_assoc()) {
-          
-
-       ?>
       <!--====== Title ======-->
-      <h3 class="text-center"><?php  if (isset($result['front_name'])) {
-        $front_name = $result['front_name'];
-        if (isset($front_name)) {
-           $words=str_word_count($front_name, 1);
-        echo "<span class='benzi'>$words[0]</span>".' '.$words[1].' '.$words[2].' '.$words[3].' '.$words[4];
-        }
-        
-
-      } ?></h3>
+      <h3 class="text-center">Reset Password</h3>
     <!--====== Favicon Icon ======-->
 
 
 
-      <?php }} else{?>
 
-            <h3 class="text-center">
-                <span class="benzi">BENZI</span> -  Login/User Management </h3>
-      <?php } ?>
         </div>
         <div class="box">
             <!--FORGOT PASSWPRD FORM-->

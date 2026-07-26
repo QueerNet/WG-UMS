@@ -1,4 +1,5 @@
 <?php include 'app/inc/header.php'; ?>
+<?php Session::requireAdmin($access); ?>
 
 <?php 
 
@@ -174,17 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
          <div class="col-md-12">
             <div class="card ">
                <div class="card-body footer-p">
-                  <p>Design and developed by Nababur rahaman send a thanks giving mail or do you want any support :)
-                     <a href="mailto:nababurdev@gmail.com">nababurdev@gmail.com</a>
-                  </p>
-                  <p>Do you want to develop any php or laravel or wordpress project ? send a mail:) <a
-                        href="mailto:nababurdev@gmail.com">nababurdev@gmail.com</a> </p>
-                  <p>CEO of GridTemaplate: <a target="_blank"
-                        href="https://www.gridtemplate.com/">https://www.gridtemplate.com/</a>
-                  </p>
-                  <p>Connect with Github: <a target="_blank"
-                        href="https://github.com/nababur">https://github.com/nababur</a>
-                  </p>
+
 
                </div>
             </div>

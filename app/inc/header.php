@@ -1,5 +1,5 @@
 <?php
-
+ob_start();
 $filepath = realpath(dirname(__FILE__));
 include ($filepath.'/../lib/Session.php');
 Session::init();
@@ -40,40 +40,43 @@ $userid = Session::get('userid');
 $rolename =  Session::get("rolename");
  ?>
 <?php 
-    
-      $ChkPermission = $rol->selectPermissionItem($rolename);
+   
+   $ROLE = $rol->selectPermissionItem($userEmail)->fetch_assoc();
 
-        if ($ChkPermission) {
-            while ($selecRole = $ChkPermission->fetch_assoc()) {
-                
-             $list = explode(',', $selecRole['permission_items']);    
-                foreach($list as $key => $value) {
-                   if ($value == 'Access') {
-                       $access = "Access";
-                   }
-                   elseif ($value == 'Create') {
-                       $create = "Create";
-                   }
-                   elseif ($value == 'Show') {
-                       $show = "Show";
-                   }
-                   elseif ($value == 'Edit') {
-                       $edit = "Edit";
-                   }
-                   elseif ($value == 'Delete') {
-                       $delete = "Delete";
-                   }
-                   elseif ($value == 'Ban/Active user') {
-                       $banactive = "Ban/Active user";
-                   }
-                   elseif ($value == 'User only') {
-                       $useronly = "User only";
-                   }
-                }
-        }
+      if (isset($ROLE)) {
 
-
-            }
+         switch ($ROLE['ROLENAME']) {
+            case 'Only user':
+               $access = FALSE;
+               $create = FALSE;
+               $show = FALSE;
+               $edit = FALSE;
+               $delete = FALSE;
+               $banactive = FALSE;
+               $useronly = TRUE;
+               $sysadmin = FALSE;
+               break;
+            case 'sysadmin':
+               $access = TRUE;
+               $create = TRUE;
+               $show = TRUE;
+               $edit = TRUE;
+               $delete = TRUE;
+               $banactive = TRUE;
+               $useronly = FALSE;
+               $sysadmin = TRUE;
+               break;
+            default:
+               $access = FALSE;
+               $create = FALSE;
+               $show = FALSE;
+               $edit = FALSE;
+               $delete = FALSE;
+               $banactive = FALSE;
+               $useronly = TRUE;
+               $sysadmin = FALSE;
+         }
+      }
 
 ?>
 
@@ -101,12 +104,11 @@ $rolename =  Session::get("rolename");
         echo $result['title'];
       } ?></title>
    <!--====== Favicon Icon ======-->
-   <link rel="shortcut icon" href="<?php  if (isset($result['favicon'])) {
-        echo $result['favicon'];
-      } else{ echo "assets/images/icons/favicon.png";}?>" type="image/png">
+   <link rel="shortcut icon" href=assets/images/icons/favicon.png" type="image/png">
    <?php }} ?>
 
-
+    <!-- dataTables.bootstrap4.min css-->
+    <link href="assets/css/dataTables.bootstrap4.min.css" rel="stylesheet" media="screen">
 
 
    <!--====== Google Fonts ======-->
@@ -124,10 +126,6 @@ $rolename =  Session::get("rolename");
 
    <!-- Icofont Icons css-->
    <link rel="stylesheet" href="assets/icofont/icofont.min.css">
-
-
-   <!-- dataTables.bootstrap4.min css-->
-   <link href="assets/css/dataTables.bootstrap4.min.css" rel="stylesheet" media="screen">
 
    <!-- Chart.min css-->
    <link href="assets/css/Chart.min.css" rel="stylesheet" media="screen">
@@ -197,7 +195,7 @@ $rolename =  Session::get("rolename");
               echo $result['app_name'];
             } else{?>
                      </span>
-                     <span>Benzi - Admin Panel</span>
+                     <span>Admin Panel</span>
                      <?php }} }?>
 
                   </a>
@@ -222,7 +220,7 @@ $rolename =  Session::get("rolename");
                        if(file_exists($profilePhoto)){ ?>
                               <img width="70" src="<?php echo $profilePhoto; ?>" alt="">
                               <?php }else{?>
-                              <img width="70" align='middle' src="app/uploads/userAvatar/dev.jpg" alt="your image"
+                              <img width="70" align='middle' src="app/uploads/userAvatar/User.png" alt="your image"
                                  title='' />
                               <?php } ?>
                            </span>
@@ -241,7 +239,7 @@ $rolename =  Session::get("rolename");
                   </div>
                </div>
 
-               <div class="collapse navbar-collapse pr-3" id="#">
+               <!--<div class="collapse navbar-collapse pr-3" id="#">-->
 
 
 
@@ -258,7 +256,7 @@ $rolename =  Session::get("rolename");
                        if(file_exists($profilePhoto)){ ?>
                               <img width="70" src="<?php echo $profilePhoto; ?>" alt="">
                               <?php }else{?>
-                              <img width="70" align='middle' src="app/uploads/userAvatar/dev.jpg" alt="your image"
+                              <img width="70" align='middle' src="app/uploads/userAvatar/User.png" alt="your image"
                                  title='' />
                               <?php } ?>
 

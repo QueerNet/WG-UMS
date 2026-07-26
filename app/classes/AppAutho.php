@@ -9,7 +9,7 @@ include_once ($filepath.'/../helpers/Format.php');
  */
 class AppAutho{
 	
-	private $table = "tbl_app_autho";
+	private $table = "APP_AUTH";
 	private $db;
 	private $fm;
 

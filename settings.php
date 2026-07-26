@@ -1,5 +1,5 @@
 <?php include 'app/inc/header.php'; ?>
-
+<?php Session::requireAdmin($access); ?>
 
 
 <!--====== Start Main Wrapper Section======-->
@@ -53,8 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['app-update'])) {
                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#app-setting">App Settings</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#authotication" role="tab"
-                           aria-controls="profile" aria-selected="false">Auth Authoticaion</a>
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#placeholder" role="tab"
+                           aria-controls="profile" aria-selected="false">Placeholder tab</a>
                      </li>
                   </ul>
                   <div class="tab-content" id="myTabContent">
@@ -168,98 +168,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['app-update'])) {
                      </div>
 
 
-                     <div class="tab-pane fade" id="authotication" role="tabpanel" aria-labelledby="profile-tab">
+                     <div class="tab-pane fade" id="placeholder" role="tabpanel" aria-labelledby="profile-tab">
                         <?php 
                                     $getAppid = $apa->selectOnlyAppId();
                                     if ( $getAppid) {
                                         while ($getApp =  $getAppid->fetch_assoc()) {
                                         
                                 ?>
-                        <form id="allow_authotication" action="" method="POST">
+                        <form id="placeholder" action="" method="POST">
 
                            <div class="form-group email-user row">
                               <div class="col-md-3 text-right">Allow Registration - E-Mail</div>
                               <div class="col-md-4">
+                                 <!--
                                  <div class="checkbox">
 
                                     <div id="switch-btn">
                                        <label class="switch">
-                                          <input type="checkbox" name="allow_email" id="allow_email" <?php if ($getApp['allow_email'] == '1') {
-                                               echo 'checked="checked"';
-                                              } ?>>
+                                          <input type="checkbox" name="allow_email" id="allow_email" <?php //if ($getApp['allow_email'] == '1') {
+                                               //echo 'checked="checked"';
+                                              //} ?>>
                                           <span class="slider round"></span>
                                        </label>
                                     </div>
 
                                     <input type="hidden" name="hidden_email" id="hidden_email"
-                                       value="<?php echo $getApp['allow_email']; ?>" />
+                                       value="<?php //echo $getApp['allow_email']; ?>" />
 
                                  </div>
+                                 -->
 
-
                               </div>
                            </div>
-                           <div class="form-group row">
-                              <div class="col-md-3 text-right">Allow Login from - Facebook</div>
-                              <div class="col-md-4">
-                                 <div id="switch-btn">
-                                    <label class="switch">
-                                       <input type="checkbox" name="fb_autho" id="fb_autho" <?php if ($getApp['fb_autho'] == '1') {
-                                               echo 'checked="checked"';
-                                              } ?>>
-                                       <span class="slider round"></span>
-                                    </label>
-                                 </div>
-                                 <input type="hidden" name="hidden_facebook" id="hidden_facebook"
-                                    value="<?php echo $getApp['fb_autho']; ?>" />
-                              </div>
-                           </div>
-                           <div class="form-group row">
-                              <div class="col-md-3 text-right">Allow Login from - Twitter</div>
-                              <div class="col-md-4">
-                                 <div id="switch-btn">
-                                    <label class="switch">
-                                       <input type="checkbox" name="tw_autho" id="tw_autho" <?php if ($getApp['tw_autho'] == '1') {
-                                               echo 'checked="checked"';
-                                              } ?>>
-                                       <span class="slider round"></span>
-                                    </label>
-                                 </div>
-                                 <input type="hidden" name="hidden_twitter" id="hidden_twitter"
-                                    value="<?php echo $getApp['tw_autho']; ?>" />
-                              </div>
-                           </div>
-                           <div class="form-group row">
-                              <div class="col-md-3 text-right">Allow Login from - Google</div>
-                              <div class="col-md-4">
-                                 <div id="switch-btn">
-                                    <label class="switch">
-                                       <input type="checkbox" name="gle_autho" id="gle_autho" <?php if ($getApp['gle_autho'] == '1') {
-                                               echo 'checked="checked"';
-                                              } ?>>
-                                       <span class="slider round"></span>
-                                    </label>
-                                 </div>
-                                 <input type="hidden" name="hidden_google" id="hidden_google"
-                                    value="<?php echo $getApp['gle_autho']; ?>" />
-                              </div>
-                           </div>
-
-                           <div class="form-group row">
-                              <div class="col-md-3 text-right">Allow Login from - Github</div>
-                              <div class="col-md-4">
-                                 <div id="switch-btn">
-                                    <label class="switch">
-                                       <input type="checkbox" name="git_autho" id="git_autho" <?php if ($getApp['git_autho'] == '1') {
-                                               echo 'checked="checked"';
-                                              } ?>>
-                                       <span class="slider round"></span>
-                                    </label>
-                                 </div>
-                                 <input type="hidden" name="hidden_github" id="hidden_github"
-                                    value="<?php echo $getApp['git_autho']; ?>" />
-                              </div>
-                           </div>
+                           
 
                            <div class="form-group pt-2 row">
                               <div class="col-md-2"></div>
@@ -295,17 +236,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['app-update'])) {
          <div class="col-md-12">
             <div class="card ">
                <div class="card-body footer-p">
-                  <p>Design and developed by Nababur rahaman send a thanks giving mail or do you want any support :)
-                     <a href="mailto:nababurdev@gmail.com">nababurdev@gmail.com</a>
-                  </p>
-                  <p>Do you want to develop any php or laravel or wordpress project ? send a mail:) <a
-                        href="mailto:nababurdev@gmail.com">nababurdev@gmail.com</a> </p>
-                  <p>CEO of GridTemaplate: <a target="_blank"
-                        href="https://www.gridtemplate.com/">https://www.gridtemplate.com/</a>
-                  </p>
-                  <p>Connect with Github: <a target="_blank"
-                        href="https://github.com/nababur">https://github.com/nababur</a>
-                  </p>
+
 
                </div>
             </div>

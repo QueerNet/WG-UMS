@@ -9,7 +9,7 @@ include_once ($filepath.'/../helpers/Format.php');
  */
 class Permissions{
 	
-	private $table = "tbl_permissions";
+	private $table = "PERMISSIONS";
 	private $db;
 	private $fm;
 

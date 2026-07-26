@@ -3,13 +3,17 @@
 $filepath = realpath(dirname(__FILE__));
 include_once ($filepath.'/../lib/Database.php');
 include_once ($filepath.'/../helpers/Format.php');
+include_once ($filepath.'/../helpers/Format.php');
+include_once ($filepath.'/../classes/sendEmail.php');
+
+use sendEmail\sendEmail;
 
 /**
  * Changepassword Class
  */
 class Changepassword{
 	
-	private $table = "tbl_users";
+	private $table = "USERS";
 	private $db;
 	private $fm;
 
@@ -88,25 +92,19 @@ class Changepassword{
 						//User Password changed thanks giving message
 						$Date 		= new DateTime();
 						$Date 		= date_format($Date, 'Y-m-d H:i:s');
-						$email 				= $value['email'];
+						$email 		= $value['email'];
 						$name 		= $value['name'];
-						$form 		= 'nababurdev@gmail.com';
-						$to 		= "$email";
+						$to 		= $email;
 						$subject 	= 'You have been changed your password Successfully.';
-						$headers 	= "From: " . strip_tags($form) . "\r\n";
-						$headers 	.= "Reply-To: ". strip_tags($form) . "\r\n";
-						$headers 	.= "CC: nababurdev@gmail.com\r\n";
-						$headers 	.= 'MIME-Version: 1.0';
-						$headers 	.= 'Content-type: text/html; charset=iso-8859-1';
-
-
 						$message  	= "Your name is : " . strip_tags($name) . "\r\n";
 						$message 	.= "Your E-mail is : " . strip_tags($email) . "\r\n";
 						$message 	.= "Your New generate password is: " . strip_tags($new_password) . "\r\n";
 						$message 	.= "Password changed date is: " . strip_tags($Date) . "\r\n";
 						$message 	.= "Message : Please visit our website to login.";
-				        $sendmail 	= mail($to, $subject, $message);
-				        if ($sendmail) {
+
+						$sent = sendEmail::sendEmail($name, $email, $subject, $message);
+
+				        if ($sent) {
 					        $msg = ' <div class="alert alert-success alert-dismissible" id="flash-msg">
 			    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 			    <strong>Wow ! </strong> Your Password has been Successfully Changed !</div>';

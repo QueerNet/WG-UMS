@@ -110,15 +110,7 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 
        ?>
             <!--====== Title ======-->
-            <h3 class="text-center"><?php  if (isset($result['front_name'])) {
-        $front_name = $result['front_name'];
-        if (isset($front_name)) {
-           $words=str_word_count($front_name, 1);
-        echo "<span class='benzi'>$words[0]</span>".' '.$words[1].' '.$words[2].' '.$words[3].' '.$words[4];
-        }
-        
-
-      } ?></h3>
+            <h3 class="text-center">Register</h3>
             <!--====== Favicon Icon ======-->
 
 
@@ -170,11 +162,6 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
                               placeholder="Confirm Password">
                            <i class="icofont-unlock"></i>
                         </span>
-                     </div>
-                     <div class="form-group">
-                        <div class="checkbox-custom checkbox-primary">
-                           <a href="#">Pleaes check before Terms and Conditions...</a>
-                        </div>
                      </div>
                      <div class="form-group">
                         <button class="btn theme-primary-btn btn-primary btn-block" type="submit"

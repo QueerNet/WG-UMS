@@ -53,7 +53,7 @@ if(isset($_GET['enid'])){
          <div class="create-item">
 
 
-            <?php if ( isset($create) == '$create') { ?>
+            <?php if ( $create ) { ?>
             <a href="adduser.php" class="theme-primary-btn btn btn-primary"><i class="material-icons">add</i>Create
                user</a>
             <?php } ?>
@@ -113,75 +113,49 @@ if(isset($_GET['enid'])){
                                     $userlist = $usr->selectAllUsers();
                                     if ($userlist) {
                                         $i = 0;
-                                        while ($result = $userlist->fetch_assoc()) {
+                                        foreach ($userlist as $userentry) {
                                             $i++;
                                           
 
                                  ?>
                               <tr
-                                 <?php if ( Session::get("userid") == $result['userid']) {echo "class='alert-info'";} ?>>
+                                 <?php if ( Session::get("userid") == $userentry['userid']) {echo "class='alert-info'";} ?>>
 
 
-                                 <td class="pt-4" <?php if ($result['status'] == '1') { ?> style='color:red' <?php } ?>>
+                                 <td class="pt-4" <?php if ($userentry['status'] == '1') { ?> style='color:red' <?php } ?>>
                                     <?php echo $i; ?>
 
                                  </td>
 
+                                 <!--User icon section-->
+                                <td>
+                                   <div id="status-online">
+                                      <img id="avatar-css" width="50" height="50" align='middle'
+                                         src="app/uploads/userAvatar/User.png" alt="User" title='Online' />
 
-                                 <?php 
+                                      <?php if ($userentry['lastactivity'] == 1) { ?>
+                                      <div class="online-icon"> </div>
 
-                                       $avatar =  $result['profilePhoto'];
-                                      
-                                       if(is_file($avatar)){ ?>
+                                      <?php  }else { ?>
 
-                                 <td>
-                                    <div id="status-online">
-                                       <img id="avatar-css" width="50" height="50" align='middle'
-                                          src="<?php echo $avatar; ?>" alt="your image" title='Online' />
-                                       <?php if ($result['lastactivity'] == 1) { ?>
-                                       <div class="online-icon"> </div>
-                                       <?php  }else { ?>
-                                       <div class="offline-icon"> </div>
+                                      <div class="offline-icon"> </div>
 
-                                       <?php } ?>
-
-                                    </div>
+                                      <?php } ?>
+                                   </div>
+                                </td>
+                                <!--User icon end-->
 
 
 
-                                 </td>
-                                 <?php }else{?>
-
-
-                                 <td>
-                                    <div id="status-online">
-                                       <img id="avatar-css" width="50" height="50" align='middle'
-                                          src="app/uploads/userAvatar/dev.jpg" alt="your image" title='Offline' />
-                                       <?php if ($result['lastactivity'] == 1) { ?>
-                                       <div class="online-icon"> </div>
-                                       <?php  }else { ?>
-                                       <div class="offline-icon"> </div>
-
-                                       <?php } ?>
-
-                                    </div>
-
-
-
-                                 </td>
-                                 <?php } ?>
-
-
-
-                                 <td class="pt-4"><?php echo $result['name']; ?></td>
-                                 <td class="pt-4"><?php echo $result['email']; ?></td>
+                                 <td class="pt-4"><?php echo $userentry['name']; ?></td>
+                                 <td class="pt-4"><?php echo $userentry['email']; ?></td>
                                  <td class="pt-4"><span
-                                       class="badge badge-lg badge-secondary text-white"><?php echo $result['rolename']; ?></span>
+                                       class="badge badge-lg badge-secondary text-white"><?php echo $userentry['rolename']; ?></span>
                                  </td>
                                  <td class="pt-4">
-                                    <?php if ($result['status'] == '0') {?>
+                                    <?php if ($userentry['status'] == '0') {?>
                                     <span class="badge badge-lg badge-success text-white">Active</span>
-                                    <?php }elseif($result['status'] == '1'){  ?>
+                                    <?php }elseif($userentry['status'] == '1'){  ?>
                                     <span class="badge badge-lg badge-warning text-white">Deactive</span>
                                     <?php } ?>
 
@@ -195,46 +169,46 @@ if(isset($_GET['enid'])){
 
 
 
-                                    <?php if ( isset($show) == '$show' || isset($useronly) == '$useronly' ) { ?>
+                                    <?php if ( $show || $useronly ) { ?>
                                     <a class="btn btn-secondary"
-                                       href="viewuser.php?viewuser=<?php echo $result['userid']; ?>">&nbspView
+                                       href="viewuser.php?viewuser=<?php echo $userentry['userid']; ?>">&nbspView
                                        user&nbsp</a>
                                     <?php } ?>
 
 
-                                    <?php if ($result['rolename'] == "Author") { ?>
-                                    <?php if ( isset($access) == '$access' ) { ?>
+                                    <?php if ($userentry['rolename'] == "sysadmin") { ?>
+                                    <?php if ( $access ) { ?>
                                     <a class="btn btn-info
             
-            " href="editprofile.php?edituser=<?php echo $result['userid']; ?>">&nbspEdit&nbsp</a>
+            " href="editprofile.php?edituser=<?php echo $userentry['userid']; ?>">&nbspEdit&nbsp</a>
                                     <?php } ?>
                                     <?php }else{ ?>
 
-                                    <?php if ( isset($edit) == '$edit' ) { ?>
+                                    <?php if ( $edit ) { ?>
                                     <a class="btn btn-info
           
-          " href="editprofile.php?edituser=<?php echo $result['userid']; ?>">&nbspEdit&nbsp</a>
+          " href="editprofile.php?edituser=<?php echo $userentry['userid']; ?>">&nbspEdit&nbsp</a>
                                     <?php } ?>
 
                                     <?php } ?>
 
 
 
-                                    <?php if ( Session::get("userid") == $result['userid']  || $result['rolename'] == "Author") { ?>
+                                    <?php if ( Session::get("userid") == $userentry['userid']  || $userentry['rolename'] == "sysadmin") { ?>
 
 
                                     <?php }else{?>
 
-                                    <?php if ( isset($banactive) == '$banactive') { ?>
+                                    <?php if ( $banactive ) { ?>
                                     <?php 
-            if ($result['status'] == '0') {?>
+            if ($userentry['status'] == '0') {?>
                                     <a class="btn btn-warning text-white"
                                        onclick="return confirm('Are you sure to Deactive ?')"
-                                       href="?disid=<?php echo $result['userid']; ?>">&nbspDeactive&nbsp</a>
+                                       href="?disid=<?php echo $userentry['userid']; ?>">&nbspDeactive&nbsp</a>
                                     <?php } else{?>
                                     <a class="btn btn-warning text-white"
                                        onclick="return confirm('Are you sure to Active ?')"
-                                       href="?enid=<?php echo $result['userid']; ?>">&nbspActive&nbsp</a>
+                                       href="?enid=<?php echo $userentry['userid']; ?>">&nbspActive&nbsp</a>
                                     <?php } }?>
 
                                     <?php }?>
@@ -242,9 +216,9 @@ if(isset($_GET['enid'])){
 
 
 
-                                    <?php if ( Session::get("userid") == $result['userid'] || $result['rolename'] == "Author") { ?>
+                                    <?php if ( Session::get("userid") == $userentry['userid'] || $userentry['rolename'] == "sysadmin") { ?>
 
-                                    <?php if ( isset($delete) == '$delete') { ?>
+                                    <?php if ( $delete ) { ?>
                                     <a class="btn btn-danger" onclick="return confirm('You can not Remove account !')"
                                        href="#">&nbspNo Action&nbsp</a>
                                     <?php } ?>
@@ -252,10 +226,10 @@ if(isset($_GET['enid'])){
                                     <?php }else{?>
 
 
-                                    <?php if ( isset($delete) == '$delete') { ?>
+                                    <?php if ( $delete ) { ?>
                                     <a class="btn btn-danger"
                                        onclick="return confirm('Are you sure to Delete account ?')"
-                                       href="?remove=removeid&&delid=<?php echo $result['userid']; ?>">&nbspDelete&nbsp</a>
+                                       href="?remove=removeid&&delid=<?php echo $userentry['userid']; ?>">&nbspDelete&nbsp</a>
                                     <?php } ?>
                                     <?php }?>
 
@@ -291,29 +265,10 @@ if(isset($_GET['enid'])){
 
 
 
+         <!-- Section below
          <div class="row mt-3">
-
-            <div class="col-md-12">
-               <div class="card ">
-                  <div class="card-body footer-p">
-                     <p>Design and developed by Nababur rahaman send a thanks giving mail or do you want any support :)
-                        <a href="mailto:nababurdev@gmail.com">nababurdev@gmail.com</a>
-                     </p>
-                     <p>Do you want to develop any php or laravel or wordpress project ? send a mail:) <a
-                           href="mailto:nababurdev@gmail.com">nababurdev@gmail.com</a> </p>
-                     <p>CEO of GridTemaplate: <a target="_blank"
-                           href="https://www.gridtemplate.com/">https://www.gridtemplate.com/</a>
-                     </p>
-                     <p>Connect with Github: <a target="_blank"
-                           href="https://github.com/nababur">https://github.com/nababur</a>
-                     </p>
-
-                  </div>
-               </div>
-            </div>
-
-
          </div>
+         -->
 
 
 

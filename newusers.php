@@ -1,5 +1,5 @@
 <?php include 'app/inc/header.php'; ?>
-
+<?php Session::requireAdmin($access); ?>
 
 <?php 
 
@@ -112,17 +112,7 @@ if(isset($_GET['enid'])){
                                         
                                     </td>
 
-                                        <?php 
-
-                                       $avatar =  $result['profilePhoto'];
-                                      
-                                       if(is_file($avatar)){ ?>
-                                         
-                                        <td><img id="avatar-css" width="50" height="50" align='middle'src="<?php echo $avatar; ?>"  alt="your image" title=''/></td>
-                                      <?php }else{?>
-                                        
-                                        <td><img id="avatar-css" width="50" height="50" align='middle'src="app/uploads/userAvatar/dev.jpg"  alt="your image" title=''/></td>
-                                      <?php } ?>
+                                    <td><img id="avatar-css" width="50" height="50" align='middle'src="app/uploads/userAvatar/dev.jpg"  alt="your image" title=''/></td>
                                     
 
 

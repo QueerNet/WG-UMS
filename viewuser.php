@@ -45,13 +45,13 @@ $viewuser = isset($_GET['viewuser']) ? $_GET['viewuser'] : '';
             <div class="create-item">
 
 
-              <?php if ($result['rolename'] == "Author") { ?>
-                <?php if ( isset($access) == '$access' ) { ?>
+              <?php if ($result['rolename'] == "sysadmin") { ?>
+                <?php if (  $access  ) { ?>
                   <a href="editprofile.php?edituser=<?php echo $result['userid']; ?>" class="theme-primary-btn btn btn-primary"><i class="material-icons">add</i>Edit profile</a>
                 <?php } ?>
               <?php }else{ ?>
 
-              <?php if ( isset($edit) == '$edit' ) { ?>
+              <?php if (  $edit ) { ?>
                 <a href="editprofile.php?edituser=<?php echo $result['userid']; ?>" class="theme-primary-btn btn btn-primary"><i class="material-icons">add</i>Edit profile</a>  
               <?php } ?>
 
@@ -79,17 +79,7 @@ $viewuser = isset($_GET['viewuser']) ? $_GET['viewuser'] : '';
                             <div class="form-group row">
                               
                               <div class="user-thumb d-mobile">
-                              <?php 
-
-                                   $photo_u =  $result['profilePhoto'];
-                                  
-                                   if(file_exists($photo_u)){ ?>
-                                     <img id="profile-photo" src="<?php echo $photo_u; ?>"  alt="">
-                                  <?php }else{?>
-                                    <img id="profile-photo" align='middle'src="app/uploads/userAvatar/dev.jpg"  alt="your image" title=''/>
-                                  <?php } ?>
-                                
-                                  
+                                <img id="profile-photo" align='middle'src="app/uploads/userAvatar/User.png"  alt="your image" title=''/>
                               </div>
                             </div>
 
@@ -97,42 +87,6 @@ $viewuser = isset($_GET['viewuser']) ? $_GET['viewuser'] : '';
                                 <div class="col-md-4">Name</div>
                                 <div class="col-md-8">
                                     <?php echo $result['name']; ?>
-
-                                 </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <div class="col-md-4">Phone number</div>
-                                <div class="col-md-8">
-                                    <?php echo $result['phone']; ?>
-                                 </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <div class="col-md-4">Address</div>
-                                <div class="col-md-8">
-                                    <?php echo $result['address']; ?>
-                                 </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <div class="col-md-4">About myself</div>
-                                <div class="col-md-8">
-                                     <?php echo $result['information']; ?>
-                                 </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <div class="col-md-4">City</div>
-                                <div class="col-md-8">
-                                   <?php echo $result['city']; ?>
-
-                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-md-4">Contry</div>
-                                <div class="col-md-8">
-                                  <?php echo $result['country']; ?>
 
                                  </div>
                             </div>
@@ -161,16 +115,7 @@ $viewuser = isset($_GET['viewuser']) ? $_GET['viewuser'] : '';
                                         <?php } ?>
                                  </div>
                             </div>
-                            <div class="form-group row">
-                                <div class="col-md-4">Gendar</div>
-                                <div class="col-md-8">
-                                        <?php if ($result['gendar'] == 'male') {?>
-                                        <span class="badge badge-lg badge-secondary text-white">Male</span>
-                                        <?php }elseif($result['gendar'] == 'female'){  ?>
-                                        <span class="badge badge-lg badge-secondary text-white">Female</span>
-                                        <?php } ?>
-                                 </div>
-                            </div>
+
                             <div class="form-group row">
                                 <div class="col-md-4">Account created</div>
                                 <div class="col-md-8">
@@ -182,16 +127,7 @@ $viewuser = isset($_GET['viewuser']) ? $_GET['viewuser'] : '';
                         </div>
                         <div class="col-md-6 d-desktop">
                             <div class="user-thumb">
-                            <?php 
-
-                                 $photo_u =  $result['profilePhoto'];
-                                
-                                 if(file_exists($photo_u)){ ?>
-                                   <img id="profile-photo" src="<?php echo $photo_u; ?>"  alt="">
-                                <?php }else{?>
-                                  <img id="profile-photo" align='middle'src="app/uploads/userAvatar/dev.jpg"  alt="your image" title=''/>
-                                <?php } ?>
-                              
+                              <img id="profile-photo" align='middle'src="app/uploads/userAvatar/User.png"  alt="your image" title=''/>
                                 
                             </div>
 

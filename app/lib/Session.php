@@ -1,7 +1,14 @@
 <?php
+
+
 class Session{
   
-
+   public static function init() {
+       $stat = session_status();
+       if ($stat==1) {
+        session_start();
+       }
+   }
    
    public static function set($key, $val){
     $_SESSION[$key] = $val;
@@ -44,6 +51,15 @@ class Session{
      echo "<script>location.href='login.php';</script>";
     session_unset();
 
+   }
+
+   public static function requireAdmin($access) {
+    self::init();
+    if ($access !== true) {
+        ob_end_clean();
+        header("Location: userdash.php?denied=1");
+        exit();
+    }
    }
 }
 

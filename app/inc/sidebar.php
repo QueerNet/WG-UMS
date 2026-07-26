@@ -2,7 +2,7 @@
       <aside>
         <div class="left-sidebar" id="wrapper-sidebar">
           <ul>
-              <?php if ( isset($access) == '$access' ) { ?>
+              <?php if (  $access  ) { ?>
             <li><a
               <?php 
 
@@ -54,7 +54,7 @@
 
 
                ?>
-             href="role.php"><i class="material-icons">perm_data_setting</i><span>Rolse</span></a></li>
+             href="role.php"><i class="material-icons">perm_data_setting</i><span>Roles</span></a></li>
 
 
             <li><a

@@ -1,4 +1,3 @@
-
 <?php
 
 $filepath = realpath(dirname(__FILE__));
@@ -23,7 +22,9 @@ $result = $usr->getMonthlyNewUser();
 
 
 //now print the data
-print json_encode($data);
+  if (isset($data)) {
+    print json_encode($data);
+  }
 
 
 

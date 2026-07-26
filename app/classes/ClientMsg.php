@@ -4,34 +4,50 @@ $filepath = realpath(dirname(__FILE__));
 include_once ($filepath.'/../lib/Database.php');
 include_once ($filepath.'/../helpers/Format.php');
 
+
+
+require ($filepath.'/../classes/SMTP.php');
+require ($filepath.'/../classes/PHPMailer.php');
+require ($filepath.'/../classes/Exception.php');
+
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+
+
+
+
 /**
  * ClientMsg Class
  */
 class ClientMsg{
 	
-
 	// Construct auto Load
 	public function __construct(){
 		$this->db = new Database();
 		$this->fm = new Format();
+		$this->usr = new Users();
 	}
 
 
 
 
 	// clientProposalMethod 
-	public function clientProposalMethod($data){
-		$name 				= $this->fm->validation($data['name']);
-		$email 				= $this->fm->validation($data['email']);
-		$budget 			= $this->fm->validation($data['budget']);
-		$frameworks 	= $this->fm->validation($data['frameworks']);
+	public function clientMessageMethod($data){
+		$name_ 				= $this->fm->validation($data['name']);
+		$email_ 				= $this->fm->validation($data['email']);
+		$budget_ 			= $this->fm->validation($data['budget']);
+		$frameworks_ 	= $this->fm->validation($data['frameworks']);
 
 
 
-		$name 				= mysqli_real_escape_string($this->db->link, $name);
-		$email 				= mysqli_real_escape_string($this->db->link, $email);
-		$budget 			= mysqli_real_escape_string($this->db->link, $budget);
-		$frameworks 	= mysqli_real_escape_string($this->db->link, $frameworks);
+		$name 				= mysqli_real_escape_string($this->db->link, $name_);
+		$email 				= mysqli_real_escape_string($this->db->link, $email_);
+		$budget 			= mysqli_real_escape_string($this->db->link, $budget_);
+		$frameworks 	= mysqli_real_escape_string($this->db->link, $frameworks_);
 		
 		
 
@@ -60,18 +76,13 @@ class ClientMsg{
 				$form 	 = $email;
 				$to 	 = "nababurdev@gmail.com";
 				$subject = 'New Job proposal from Benzi Admin Dashboard !';
-				$headers = "From: " . strip_tags($form) . "\r\n";
-				$headers .= "Reply-To: ". strip_tags($form) . "\r\n";
-				$headers .= "CC: nababurdev@gmail.com\r\n";
-				$headers .= 'MIME-Version: 1.0';
-				$headers .= 'Content-type: text/html; charset=iso-8859-1';
 				$message  = "Client name : " . strip_tags($name) . "\r\n";
 				$message .= "Client E-mail : " . strip_tags($email) . "\r\n";
-				$message .= "Client Budget : " . strip_tags($budget) . "\r\n";
+				$message .= "Client Budget : " . strip_tags($budget) . "\r\n"; 
 				$message .= "Client framework choice : " . strip_tags($frameworks) . "\r\n";
 				$message .= "Proposal Email Date : " . strip_tags($Date) . "\r\n";
 				$message .= "This Email come from your Benzi Admin Dashboard Client proposal Pannel.";
-		        $sendmail 	= mail($to, $subject, $message);
+		        $sendmail = $this->usr::sendEmail($name, $email, $subject, $message);
 
 
 		        if ($sendmail) {

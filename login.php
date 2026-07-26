@@ -1,10 +1,11 @@
 <?php
 
-$filepath = realpath(dirname(__FILE__));
+$filepath = realpath($_SERVER['HOME']);
 include ($filepath.'/app/lib/Session.php');
 Session::init();
 Session::checkUserLogin();
-include ($filepath.'/app/lib/Database.php');
+include (__DIR__.'/app/lib/Database.php');
+include (__DIR__.'/app/config/config.php');
 
 spl_autoload_register(function($class){
   include_once 'app/classes/'.$class.".php";
@@ -78,18 +79,26 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 
 <body>
 
-   <!-- Prealoder -->
+   <!-- Preloader -->
    <div class="spinner_body">
       <div class="spinner"></div>
    </div>
 
-   <!-- Prealoder -->
+   <!-- Preloader -->
 
 
    <?php 
 
+
+
+
+
+
+
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
-    $chkUserLogin = $usr->userLoginAuthotication($_POST);
+   $chkUserLogin = $usr->userLoginAuthentication($_POST);
 
 }
 
@@ -115,15 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
 
        ?>
             <!--====== Title ======-->
-            <h3 class="text-center"><?php  if (isset($result['front_name'])) {
-        $front_name = $result['front_name'];
-        if (isset($front_name)) {
-           $words=str_word_count($front_name, 1);
-        echo "<span class='benzi'>$words[0]</span>".' '.$words[1].' '.$words[2].' '.$words[3].' '.$words[4];
-        }
-        
-
-      } ?></h3>
+            <h3 class="text-center">Login</h3>
             <!--====== Favicon Icon ======-->
 
 
@@ -131,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
             <?php }} else{?>
 
             <h3 class="text-center">
-               <span class="benzi">BENZIN</span> - Login/User Management
+               <span class="benzi">QLS</span> - Login/User Management
             </h3>
             <?php } ?>
 
@@ -191,22 +192,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
                      <div class="form-group text-center">
                         <a href="reset-password.php">Forgot password?</a>
                         <hr />
-                        <div class="social-login">
-                           <div class="test">
-                              <a class="fb" data-toggle="modal" href="#warning-modal"><i
-                                    class="icofont-facebook"></i></a>
-
-                              <a class="tw" data-toggle="modal" href="#warning-modal"><i
-                                    class="icofont-twitter"></i></a>
-
-                              <a class="gl" data-toggle="modal" href="#warning-modal"><i
-                                    class="icofont-google-plus"></i></a>
-
-                              <a class="gt" data-toggle="modal" href="#warning-modal"><i class="icofont-github"></i></a>
-
-                           </div>
-                        </div>
-                        <hr />
                         <span>Don't have an account?</span>
                         <a href="register.php" class="  mt-sm">Register</a>
                      </div>
@@ -218,112 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
       </div>
    </div>
    <!--====== End Main Wrapper Section======-->
-   <!--Start Reset Password Modal Form  -->
-   <div class="modal mymodal fade" data-easein="swing" data-backdrop="static" data-keyboard="false" id="warning-modal"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-         <div class="modal-content">
-            <div class="modal-header">
-
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-               </button>
-            </div>
-            <div class="modal-body">
-               <!-- form heading -->
-               <div class="row">
-                  <div class="subscribe-icon text-center">
-                     <span><i class="icofont-unlock"></i></span>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="form-title text-center">
-                     <h3>Order Pro Version</h3>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="form-title text-center">
-                     <div id="client_msg"></div>
-                     <?php if (isset($clientMsg)) {
-                               echo $clientMsg;
-                           } ?>
-
-                  </div>
-               </div>
-
-               <!-- form heading -->
-               <!-- Start Login form -->
-               <form id="proposal" method="POST" action="" role="form">
-
-                  <!-- Start row -->
-                  <div class="row">
-                     <div class="col form-group mt-md">
-                        <input type="text" name="client_name" id="client_name" class="form-control"
-                           placeholder="Your name please" required="required">
-                     </div>
-                  </div>
-                  <!-- End row -->
-                  <!-- Start row -->
-                  <div class="row">
-                     <div class="col form-group mt-md">
-                        <input type="email" name="client_email" id="client_email" class="form-control"
-                           placeholder="Your E-mail please" required="required">
-                     </div>
-                  </div>
-                  <!-- End row -->
-                  <!-- Start row -->
-                  <div class="row">
-                     <div class="col">
-                        <div class="form-group">
-                           <label for="client_budget">Your Budget Please</label>
-                           <select class="form-control" name="client_budget" id="client_budget">
-                              <option>$ 30</option>
-                              <option>$ 50</option>
-                              <option>$ 100</option>
-                              <option>$ 150</option>
-                              <option>$ 200</option>
-                              <option>$ 300</option>
-                           </select>
-                        </div>
-                     </div>
-                  </div>
-                  <!-- End row -->
-                  <!-- Start row -->
-                  <div class="row">
-                     <div class="col">
-                        <div class="form-group">
-                           <label for="frameworks">Software Framework</label>
-                           <select class="form-control" name="frameworks" id="frameworks">
-                              <option>Core PHP </option>
-                              <option>CodeIgniter</option>
-                              <option>Laravel</option>
-                           </select>
-                        </div>
-                     </div>
-                  </div>
-                  <!-- End row -->
-
-                  <!-- Start row -->
-                  <div class="row text-center">
-                     <div class="col">
-                        <div class="form-group text-center">
-                           <button type="submit" name="submit_proposal"
-                              class="btn text-white theme-primary-btn btn-primary btn-block">Send</button>
-                        </div>
-                     </div>
-
-
-                  </div>
-                  <!-- End row -->
-                  <div class="default-space-20"></div>
-               </form>
-               <!-- Start Login form -->
-            </div>
-
-         </div>
-      </div>
-   </div>
-   <!-- End Reset Password Modal Form  -->
+   
 
 
 
@@ -368,7 +248,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
       var dataString = 'name=' + name + '&email=' + email + '&budget=' + budget + '&frameworks=' + frameworks;
 
       if (dataString != '') {
-         // Email login Authotication
+         // Email login Authentication
          $.ajax({
             url: "app/ajax-classes/client_budget.php",
             type: "POST",
