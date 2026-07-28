@@ -2,7 +2,7 @@
 
 <?php 
 
-include 'app/inc/header.php';
+include 'app/inc/user-header.php';
 
 
 $userid = Session::get("userid");
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changepass'])) {
 
 <!--====== Start Main Wrapper Section======-->
 <section class="d-flex" id="wrapper">
-<?php if ($access) {include 'app/inc/sidebar.php'; } else {include 'app/inc/user-sidebar.php';}?>
+<?php include 'app/inc/user-sidebar.php';?>
     <div class="page-content-wrapper">
 
 
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changepass'])) {
         <div class="content-header">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="dashboard.php"><i class="material-icons">home</i>Home</a></li>
+                <li class="breadcrumb-item"><a href="userdash.php"><i class="material-icons">home</i>Home</a></li>
               
                 
                <li class="breadcrumb-item active" aria-current="page">Password change</li>
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changepass'])) {
             </nav>
             <div class="create-item">
 
-              <a href="dashboard.php" class="btn btn-secondary"><i class="material-icons md-18">arrow_back</i>Back To Home</a>
+              <a href="userdash.php" class="btn btn-secondary"><i class="material-icons md-18">arrow_back</i>Back To Home</a>
             </div>
         </div>
           <!--  Header BreadCrumb -->  

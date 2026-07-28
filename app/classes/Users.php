@@ -616,7 +616,10 @@ class Users{
 
 
 	// Edit User By Id Method 
-	public function editUserById($edituser){
+	public function editUserById($edituser, $rolename){
+		//if ($rolename=='user') {
+			//exit();
+		//}
 		$editpro = preg_replace('/[^a-zA-Z0-9-]/', '', $edituser);
 		$query = "SELECT * FROM $this->table WHERE userid = '$edituser' LIMIT 1";
 		$result = $this->db->select($query);
@@ -909,10 +912,7 @@ class Users{
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
     <strong>In-complete Profile !</strong> Hey ( '.$name.' ) Please before Complete your profile, then browse Dashboard. ! <a href="editprofile.php?edituser='.$userid.'"><span class="badge badge-lg badge-dark text-white">Go to profile </span></a> </div>';
     		return $msg;
-    		exit();
 		}
-
-
 	}
 
 

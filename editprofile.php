@@ -1,4 +1,4 @@
-<?php include 'app/inc/header.php'; ?>
+<?php include 'app/inc/user-header.php'; ?>
 
 
 <!--====== Start Main Wrapper Section======-->
@@ -9,14 +9,14 @@
    <?php 
 
 
-    $edituser = isset($_GET['edituser']) ? $_GET['edituser'] : '';
-  if (!isset($edituser) && isset($edituser) === NULL) {
+   $edituser = isset($_GET['edituser']) ? $_GET['edituser'] : '';
+   if (!isset($edituser)) {
       // header("Location:users.php");
-      echo "<script>location.href='users.php';</script>";
-      
+      echo '<strong>Error !</strong> Something went wrong...</div>';
+      // echo "<script>location.href='users.php';</script>";
   }else{
      $edituser = preg_replace('/[^a-zA-Z0-9-]/', '', $edituser);
-      $useredit = $usr->editUserById($edituser);
+      $useredit = $usr->editUserById($edituser, $ROLE['ROLENAME']);
   }
 
   
@@ -29,9 +29,8 @@
 
    <?php 
 
-    if ($useredit) {
-        if ($ROLE['ROLENAME']=='sysadmin') {
-         $result = $useredit->fetch_assoc()
+    if (isset($useredit)) {
+      $result = $useredit->fetch_assoc()
     
 
  ?>
@@ -40,15 +39,17 @@
       <div class="content-header">
          <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-               <li class="breadcrumb-item"><a href="dashboard.php"><i class="material-icons">home</i>Home</a></li>
-               <li class="breadcrumb-item"><a href="users.php">Users</a></li>
+               <li class="breadcrumb-item"><a href="user-dash.php"><i class="material-icons">home</i>Home</a></li>
+               <li class="breadcrumb-item"><a href="editprofile.php?edituser=<?php echo Session::get("userid")?>.php">My Account</a></li>
                <li class="breadcrumb-item active" aria-current="page"><?php echo $result['name']; ?></li>
             </ol>
          </nav>
          <div class="create-item">
-
-            <a href="users.php" class="btn btn-secondary"><i class="material-icons md-18">arrow_back</i>Back To
-               Userlist</a>
+            <?php if ( $access ) { ?>
+               <a href="users.php" class="btn btn-secondary"><i class="material-icons md-18">arrow_back</i>Back To Userlist</a>
+            <?php } else { ?>
+               <a href="user-account.php?myid=<?php echo Session::get("userid")?>" class="btn btn-secondary"><i class="material-icons md-18">arrow_back</i>Back to account</a>
+            <?php } ?>
          </div>
       </div>
       <!--  Header BreadCrumb -->
@@ -95,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
                      </div>
                   </div>
                   
-                  <?php if ( isset($access) == '$access' ) { ?>
+                  <?php if ( $access ) { ?>
                   <div class="form-group row">
                      <div class="col-md-2">Role</div>
                      <div class="col-md-4">
@@ -220,8 +221,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
       <!-- Create New User-->
 
       <?php
-        }}else{
+        } elseif ($access){
           echo "<script>window.location='users.php';</script>";
+        } else {
+         echo '<strong>Error !</strong> Something went wrong...</div>';
         }
       ?>
 

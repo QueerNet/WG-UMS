@@ -1,4 +1,4 @@
-<?php include 'app/inc/header.php'; ?>
+<?php include 'app/inc/user-header.php'; ?>
 
 
 
@@ -53,7 +53,7 @@ $myid = isset($_GET['myid']) ? $_GET['myid'] : '';
             <?php if ( isset($edit) == '$edit') { ?>
             <a href="editprofile.php?edituser=<?php echo Session::get("userid")?>"
                class="theme-primary-btn btn btn-primary"><i class="material-icons">add</i>Edit profile</a>
-            <a href="changepass.php" name='export' class=" btn btn-secondary"><i class="material-icons">add</i>Password
+            <a href="user-changepass.php" name='export' class=" btn btn-secondary"><i class="material-icons">add</i>Password
                change</a>
             <?php } ?>
 
@@ -119,7 +119,6 @@ $myid = isset($_GET['myid']) ? $_GET['myid'] : '';
 
                            <span
                               class="badge badge-lg badge-dark"><?php echo $fm->formatDate($result['create_date']); ?></span>
-
                         </div>
                      </div>
                   </div>
