@@ -15,6 +15,9 @@ $db = new Database();
 $usr = new Users();
 $fr = new Frontend();
 
+$THEME = 'dark';
+$COLOR_MODE = 'dark';
+
 
 
  ?>
@@ -27,7 +30,7 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="<?php echo $COLOR_MODE?>">
 
 <head>
 
@@ -52,27 +55,11 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
    <link rel="shortcut icon" href="<?php  if (isset($result['favicon'])) {
         echo $result['favicon'];
       } else{ echo "assets/images/icons/favicon.png";}?>" type="image/png">
-   <?php }} ?>
+   <?php }} 
 
-
-   <!--====== Google Fonts ======-->
-   <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
-
-   <!-- animate css-->
-   <link href="assets/css/animate.css" rel="stylesheet" media="screen">
-
-   <!-- Icofont Icons css-->
-   <link rel="stylesheet" href="assets/icofont/icofont.min.css">
-
-   <!-- normalize css-->
-   <link href="assets/css/normalize.css" rel="stylesheet" media="screen">
-   <!--====== Bootstrap css ======-->
-   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-
-   <!--====== Style css ======-->
-   <link rel="stylesheet" href="assets/css/authotication.css">
-   <!--====== Style css ======-->
-   <link rel="stylesheet" href="assets/css/responsive.css">
+   include ($filepath.'/../inc/loadassets.php');
+   ?>
+   
 
 
 </head>
@@ -233,7 +220,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
    <!--====== Main js ======-->
    <script src="assets/js/plugins.js"></script>
    <script src="assets/js/script.js"></script>
-   <script>
+   <!--====== THEME ======-->
+   <link rel="stylesheet" href="assets/css/themes/<?php echo $THEME?>.css">
+   <!-- <script>
    //Client Proposal 
    $("#proposal").on('submit', function(event) {
       event.preventDefault();
@@ -268,7 +257,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
 
       return false;
    });
-   </script>
+   </script> -->
 
 
 

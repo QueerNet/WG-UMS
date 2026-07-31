@@ -14,6 +14,8 @@ $db = new Database();
 $usr = new Users();
 $fr = new Frontend();
 
+$THEME = 'dark';
+$COLOR_MODE = 'dark';
 
 
  ?>
@@ -29,7 +31,7 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="<?php echo $COLOR_MODE?>">
 
 <head>
 
@@ -64,16 +66,20 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
    <!-- animate css-->
    <link href="assets/css/animate.css" rel="stylesheet" media="screen">
 
-   <!-- Icofont Icons css-->
-   <link rel="stylesheet" href="assets/icofont/icofont.min.css">
+   <!--====== Icofonts css ======-->
+   <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css">
 
    <!-- normalize css-->
    <link href="assets/css/normalize.css" rel="stylesheet" media="screen">
+
    <!--====== Bootstrap css ======-->
    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 
+   <!--====== THEME ======-->
+   <link rel="stylesheet" href="assets/css/themes/<?php echo $THEME?>.css">
+
    <!--====== Style css ======-->
-   <link rel="stylesheet" href="assets/css/authotication.css">
+   <link rel="stylesheet" href="assets/css/style.css">
    <!--====== Style css ======-->
    <link rel="stylesheet" href="assets/css/responsive.css">
 
@@ -82,12 +88,12 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 
 <body>
 
-   <!-- Prealoder -->
+   <!-- Preloader -->
    <div class="spinner_body">
       <div class="spinner"></div>
    </div>
 
-   <!-- Prealoder -->
+   <!-- Preloader -->
 
 
 

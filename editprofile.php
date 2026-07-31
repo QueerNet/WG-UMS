@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
       <!-- Create New User -->
       <div class="main-content">
 
-         <div class="card editprofile bg-white">
+         <div class="card editprofile">
             <div class="card-body mt-5 mb-5">
 
                <form action="" method="POST" enctype="multipart/form-data">

@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
       <!-- Create New User -->
       <div class="main-content">
 
-         <div class="card bg-white">
+         <div class="card">
             <div class="card-body mt-5 mb-5">
 
                <div class="viewuser">

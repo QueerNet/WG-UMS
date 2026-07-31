@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
       <!-- Create New User -->
       <div class="main-content">
 
-         <div class="card bg-white">
+         <div class="card">
             <div class="card-body mt-5 mb-5">
 
                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">

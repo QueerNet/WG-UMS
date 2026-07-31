@@ -23,6 +23,11 @@ $chn = new Changepassword();
 
 
 
+$THEME = 'dark';
+$COLOR_MODE = 'dark';
+
+
+
 
  ?>
 <?php
@@ -82,7 +87,7 @@ $rolename =  Session::get("rolename");
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="<?php echo $COLOR_MODE?>">
 
 <head>
 
@@ -103,57 +108,24 @@ $rolename =  Session::get("rolename");
    <title><?php  if (isset($result['title'])) {
         echo $result['title'];
       } ?></title>
-   <!--====== Favicon Icon ======-->
-   <link rel="shortcut icon" href=assets/images/icons/favicon.png" type="image/png">
-   <?php }} ?>
+   <?php 
+   include ($filepath.'/../inc/loadassets.php');
+   }} 
+   ?>
 
-    <!-- dataTables.bootstrap4.min css-->
-    <link href="assets/css/dataTables.bootstrap4.min.css" rel="stylesheet" media="screen">
-
-
-   <!--====== Google Fonts ======-->
-   <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
-
-   <!--====== Material Icons ======-->
-   <link rel="stylesheet" href="assets/iconfont/material-icons.css">
-
-   <!--====== datetimepicker Icons ======-->
-   <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
-
-   <!--====== select2 css ======-->
-   <link rel="stylesheet" href="assets/css/select2.min.css">
-   <link rel="stylesheet" href="assets/css/select2-bootstrap.min.css">
-
-   <!-- Icofont Icons css-->
-   <link rel="stylesheet" href="assets/icofont/icofont.min.css">
-
-   <!-- Chart.min css-->
-   <link href="assets/css/Chart.min.css" rel="stylesheet" media="screen">
-
-   <!-- animate css-->
-   <link href="assets/css/animate.css" rel="stylesheet" media="screen">
-   <!-- normalize css-->
-   <link href="assets/css/normalize.css" rel="stylesheet" media="screen">
-   <!--====== Bootstrap css ======-->
-   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-
-   <!--====== Style css ======-->
-   <link rel="stylesheet" href="assets/css/style.css">
-   <!--====== Style css ======-->
-   <link rel="stylesheet" href="assets/css/responsive.css">
-
+   
 
 
 </head>
 
 <body>
 
-   <!-- Prealoder -->
+   <!-- Preloader -->
    <div class="spinner_body">
       <div class="spinner"></div>
    </div>
 
-   <!-- Prealoder -->
+   <!-- Preloader -->
    <?php 
     if (isset($_GET['action']) && $_GET['action'] == "logout" && $_GET['sunset'] == "id") {
         $userid = Session::get('userid');
@@ -208,9 +180,9 @@ $rolename =  Session::get("rolename");
 
 
                <div class="for-mobile d-mobile">
-                  <a href="#mobile-authotication" id="mobile-toggle"><span></span></a>
+                  <a href="#mobile-authentication" id="mobile-toggle"><span></span></a>
 
-                  <div id="mobile-authotication">
+                  <div id="mobile-authentication">
                      <ul>
                         <li>
                            <span><?php 
@@ -241,25 +213,14 @@ $rolename =  Session::get("rolename");
 
                <!--<div class="collapse navbar-collapse pr-3" id="#">-->
 
-
-
-
                   <ul class="navbar-nav user-info d-desktop ml-auto mt-2 mt-lg-0">
                      <li class="nav-item dropdown show">
-                        <a href="#" class="navbar-nav-link dropdown-toggle text-light" data-toggle="dropdown"
+                        <a href="#" class="navbar-nav-link dropdown-toggle text-light account" data-toggle="dropdown"
                            aria-expanded="true">
                            <div class="user-photo">
-                              <?php 
 
-                       $profilePhoto = Session::get('profilePhoto');
-                      
-                       if(file_exists($profilePhoto)){ ?>
-                              <img width="70" src="<?php echo $profilePhoto; ?>" alt="">
-                              <?php }else{?>
                               <img width="70" align='middle' src="app/uploads/userAvatar/User.png" alt="your image"
                                  title='' />
-                              <?php } ?>
-
 
                            </div>
                            <strong>Welcome ! </strong><?php echo $userName = Session::get('userName'); ?>
@@ -267,13 +228,11 @@ $rolename =  Session::get("rolename");
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
 
-
                            <a href="account.php?myid=<?php echo Session::get("userid")?>" class="dropdown-item">
                               <i class="material-icons">
                                  supervisor_account
                               </i>
                               Account Settings</a>
-
 
                            <div class="menu-dropdown-divider"></div>
                            <a class="dropdown-item" href="?action=logout&&sunset=id"><i

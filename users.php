@@ -91,7 +91,7 @@ if(isset($_GET['enid'])){
          <!-- Users DataTable-->
          <div class="row mt-3">
             <div class="col-md-12">
-               <div class="card bg-white">
+               <div class="card">
                   <div class="card-body mt-3">
                      <div class="table-responsive">
                         <table id="usersTable" class="table table-striped table-borderless" style="width:100%">

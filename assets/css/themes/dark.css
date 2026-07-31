@@ -1,0 +1,85 @@
+/*!
+ * Bootstrap v4.2.1 (https://getbootstrap.com/)
+ * Copyright 2011-2018 The Bootstrap Authors
+ * Copyright 2011-2018 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+:root{
+    /* Colours */
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --white: #fff;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+
+  /* Backgrounds */
+  --bg-primary: #15121a;
+  --bg-secondary: #3b255b;
+  --bg-tertiary: #5d316a;
+  --bg-quaternary: #42247b;
+
+  /* Buttons */
+  --btn-border: #8f4aff88;
+  --btn-primary: #e83e8c;
+  --btn-success: #55e83e;
+  --btn-info: #a852ad;
+  --btn-warning: #e3d15c;
+  --btn-danger: #cb4a4a;
+
+  /* Button hover */
+  --btn-primary-hov: #e83e8c;
+  --btn-success-hov: #55e83e;
+  --btn-info-hov: #b53ee8;
+  --btn-warning-hov: #dbd94b;
+  --btn-danger-hov: #cb4a4a;
+
+  /* Pallette */
+  --primary: #49185f;
+  --secondary: #3d2e47;
+  --tertiary: #476886;
+  --quaternary: #436686;
+
+  /* Hover */
+  --hover: #763e89;
+  --hover-secondary: #5d316a;
+  --activate: #b15050;
+
+  /* Borders */
+  --border-primary: #000000;
+  --border-secondary: #ffffff;
+  --border-tertiary: #bababa;
+
+  /* Signals */
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --danger: #dc3545;
+
+  /* Light and dark */
+  --light: #f8f9fa;
+  --dark: #343a40;
+
+  /* Breakpoints */
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+
+  /* Font */
+  --text: #ffffff;
+  --btn-text: #ffffff;
+  --text-highlit: #801ce4;
+  --text-lowlit: #b8a6bd;
+  --link: #6e2be1;
+  --font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+}

@@ -31,7 +31,7 @@
           <!-- Create New User -->   
         <div class="main-content">
 
-            <div class="card bg-white">
+            <div class="card">
                 <div class="card-body mt-3 mb-3">
                     
                     <div class="permissions">

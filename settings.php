@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['app-update'])) {
       <!-- Create New User -->
       <div class="main-content">
 
-         <div class="card bg-white">
+         <div class="card">
             <div class="card-body mt-3 mb-3">
                <div class="geleral-settings">
                   <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">

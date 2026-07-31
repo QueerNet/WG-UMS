@@ -64,7 +64,7 @@ $myid = isset($_GET['myid']) ? $_GET['myid'] : '';
       <!-- Create New User -->
       <div class="main-content">
 
-         <div class="card bg-white">
+         <div class="card">
             <div class="card-body mt-3 mb-5">
 
                <div class="viewuser row">

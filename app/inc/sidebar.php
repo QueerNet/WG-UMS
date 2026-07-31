@@ -1,4 +1,5 @@
-  <!--   Left Sidebar  -->
+<?php Session::requireAdmin($access); ?>
+<!--   Left Sidebar  -->
       <aside>
         <div class="left-sidebar" id="wrapper-sidebar">
           <ul>

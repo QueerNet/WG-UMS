@@ -15,6 +15,8 @@ $usr = new Users();
 $fr = new Frontend();
 
 
+$THEME = 'dark';
+$COLOR_MODE = 'dark';
 
  ?>
 <?php
@@ -28,7 +30,7 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="<?php echo $COLOR_MODE?>">
 
 <head>
    
@@ -58,8 +60,11 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
     <!--====== Bootstrap css ======-->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 
+    <!--====== THEME ======-->
+   <link rel="stylesheet" href="assets/css/themes/<?php echo $THEME?>.css">
+
     <!--====== Style css ======-->
-    <link rel="stylesheet" href="assets/css/authotication.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <!--====== Style css ======-->
     <link rel="stylesheet" href="assets/css/responsive.css">
   

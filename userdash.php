@@ -1,17 +1,22 @@
 <?php include 'app/inc/user-header.php' ?>
 
 
+<?php
+
+$vpn = new VPN();
+
+?>
+
 
 <!--====== Start Main Wrapper Section======-->
 <section class="d-flex" id="wrapper">
 
-   <?php include 'app/inc/user-sidebar.php'; ?>
+    <?php include 'app/inc/user-sidebar.php' ?>
 
-
-   <div class="page-content-wrapper">
-
-      <!--  main-content -->
-      <div class="main-content">
+    <div class="page-content-wrapper">
+    
+    <!--  main-content -->
+    <div class="main-content">
 
         <div class="content-header">
             <nav aria-label="breadcrumb">
@@ -20,20 +25,42 @@
               </ol>
             </nav>
         </div>
-        <!-- Dashboard Box -->
-        <div class="row wow animated fadeInUp">
-            
-        </div>
-      <!--  main-content -->
+        
 
 
-   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+    </div>
+    </div>
+    <!--  main-content -->
+
+
+</section>
 
    <?php 
 
 // Delete Role By Id 
 
-if (isset($_GET['delid']) && isset($_GET['remove']) == 'removeid') {
+if (isset($_GET['delid']) && isset($_GET['remove'])) {
     $delid = $fm->sanitizeid($_GET['delid']);
     $deUserByid = $usr->deleteUserById($delid);
 }
