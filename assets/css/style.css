@@ -34,34 +34,13 @@ body {
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'FontAwesome';
-  src: url('../fonts/fontawesome-free-7.3.1-web/webfonts/fa-regular-400.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: block;
+
+
+
+
+hr {
+  color: var(--light);
 }
-
-@font-face {
-  font-family: 'FontAwesome';
-  src: url('../fonts/fontawesome-free-7.3.1-web/webfonts/fa-solid-400.woff2') format('woff2');
-  font-weight: 900;
-  font-style: normal;
-  font-display: block;
-}
-
-@font-face {
-  font-family: 'FontAwesome';
-  src: url('../fonts/fontawesome-free-7.3.1-web/webfonts/fa-solid-400.woff2') format('woff2');
-  font-weight: 900;
-  font-style: normal;
-  font-display: block;
-}
-
-
-
-
-
 
 .btn:focus {
   outline: none;
@@ -844,7 +823,7 @@ text-decoration: none
 
 
 
-/*Data Talbe custom css*/
+/*Data Table custom css*/
 
 
 div.dataTables_wrapper div.dataTables_length select {
@@ -866,14 +845,16 @@ div.dataTables_wrapper div.dataTables_length select {
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 
-input.form-control {
-  background-color: var(--bg-tertiary);
-  color: var(--white);
-  border-color: var(--border-primary);
+input, .form-control, .input-group-text {
+  background-color: var(--bg-tertiary)!important;
+  color: var(--white)!important;
+  border: 1px;
+  border-color: var(--border-primary)!important;
+  box-shadow: 0px 0px 5px -2px #493d5b;
 }
 
-input.form-control::placeholder {
-  color: var(--text-lowlit);
+input::placeholder {
+  color: var(--text-lowlit)!important;
 }
 
 div.dataTables_wrapper div.dataTables_filter input {
@@ -1019,12 +1000,14 @@ color: rgba(43, 193, 202, 0.87);
   padding: 15px;
   max-width: 420px;
   margin: 20px auto 0px;
+  box-shadow: 0px 0px 5px -2px #493d5b;
+  overflow: auto;
 }
 
 .panel .panel-content {
     padding: 12px;
     background-color: var(--bg-secondary)!important;
-    box-shadow: none;
+    box-shadow: 0px 0px 5px -2px #493d5b;
     border: none;
 }
 .bg-scale-0 {
@@ -1038,6 +1021,7 @@ color: rgba(43, 193, 202, 0.87);
     overflow: hidden;
     padding-top: 100px;
     position: relative;
+    padding-bottom: 20px;
 }
 
 

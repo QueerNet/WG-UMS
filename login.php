@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
             <?php }} else{?>
 
             <h3 class="text-center">
-               <span class="benzi">QLS</span> - Login/User Management
+               <span class="benzi">QLS</span> - Login
             </h3>
             <?php } ?>
 
@@ -147,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
                            <input type="email" class="form-control" name="email" id="email"
                               placeholder="Enter your E-Mail ...">
                            <?php } ?>
-                           <i class="icofont-email"></i>
+                           <i class="bi bi-envelope-at-fill"></i>
                         </span>
                      </div>
                      <div class="form-group">
@@ -162,7 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
 
 
 
-                           <i class="icofont-lock"></i>
+                           <i class="bi bi-lock-fill"></i>
                         </span>
                      </div>
                      <div class="form-group">
@@ -220,46 +220,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
    <!--====== Main js ======-->
    <script src="assets/js/plugins.js"></script>
    <script src="assets/js/script.js"></script>
-   <!--====== THEME ======-->
-   <link rel="stylesheet" href="assets/css/themes/<?php echo $THEME?>.css">
-   <!-- <script>
-   //Client Proposal 
-   $("#proposal").on('submit', function(event) {
-      event.preventDefault();
-
-
-
-      var name = $("#client_name").val();
-      var email = $("#client_email").val();
-      var budget = $("#client_budget").val();
-      var frameworks = $("#frameworks").val();
-
-      var dataString = 'name=' + name + '&email=' + email + '&budget=' + budget + '&frameworks=' + frameworks;
-
-      if (dataString != '') {
-         // Email login Authentication
-         $.ajax({
-            url: "app/ajax-classes/client_budget.php",
-            type: "POST",
-            data: dataString,
-            async: false,
-            success: function(data) {
-               $("#client_msg").html(data);
-               $("#flash-msg").delay(8000).fadeOut("slow");
-               //$('.mymodal').hide().delay(9000).fadeOut("slow");
-            }
-
-         });
-
-
-      }
-
-
-      return false;
-   });
-   </script> -->
-
-
 
 </body>
 

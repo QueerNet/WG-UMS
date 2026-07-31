@@ -45,7 +45,7 @@ if(isset($_GET['enid'])){
       <div class="content-header">
          <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-               <li class="breadcrumb-item"><a href="dashboard.php"><i class="material-icons">home</i>Home</a></li>
+               <li class="breadcrumb-item"><a href="dashboard.php"><i class="bi bi-house-door-fill"></i>Home</a></li>
 
                <li class="breadcrumb-item active" aria-current="page">Users</li>
             </ol>
@@ -54,8 +54,8 @@ if(isset($_GET['enid'])){
 
 
             <?php if ( $create ) { ?>
-            <a href="adduser.php" class="theme-primary-btn btn btn-primary"><i class="material-icons">add</i>Create
-               user</a>
+            <a href="adduser.php" class="theme-primary-btn btn btn-primary"><i class="bi bi-person-plus-fill"></i>
+            &nbsp Create user</a>
             <?php } ?>
 
 

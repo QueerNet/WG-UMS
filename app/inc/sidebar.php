@@ -14,7 +14,7 @@
                 }
 
                ?>
-             href="dashboard.php"><i class="material-icons">dashboard</i><span>Dashboard</span></a></li>
+             href="dashboard.php"><i class="bi bi-grid-1x2-fill"></i><span>Dashboard</span></a></li>
             <li><a
               <?php 
 
@@ -37,7 +37,7 @@
                 }
 
                ?>
-             href="users.php"><i class="material-icons">supervisor_account</i><span>Users</span></a></li>
+             href="users.php"><i class="bi bi-people"></i><span>Users</span></a></li>
            
 
             <li><a
@@ -55,7 +55,10 @@
 
 
                ?>
-             href="role.php"><i class="material-icons">perm_data_setting</i><span>Roles</span></a></li>
+             href="role.php">
+             <!-- <i class="bi bi-person-rolodex"></i> -->
+             <i class="bi bi-person-workspace"></i>
+             <span>Roles</span></a></li>
 
 
             <li><a
@@ -68,7 +71,7 @@
                 }
 
                ?>
-             href="permissions.php"><i class="material-icons">lock_open</i><span>Permissions</span></a></li>
+             href="permissions.php"><i class="bi bi-person-fill-lock"></i><span>Permissions</span></a></li>
             <li><a
               <?php 
 
@@ -81,7 +84,7 @@
                ?>
 
 
-             href="settings.php"><i class="material-icons">settings</i><span>General Settings</span></a></li>
+             href="settings.php"><i class="bi bi-gear"></i><span>General Settings</span></a></li>
 
              
            <?php }else{ ?>
@@ -101,7 +104,7 @@
                 }
 
                ?>
-             href="dashboard.php"><i class="material-icons">dashboard</i><span>Dashboard</span></a></li>
+             href="dashboard.php"><i class="bi bi-grid-1x2-fill"></i><span>Dashboard</span></a></li>
             <li><a
               <?php 
 
@@ -124,7 +127,7 @@
                 }
 
                ?>
-             href="users.php"><i class="material-icons">supervisor_account</i><span>Users</span></a></li>
+             href="users.php"><i class="bi bi-people"></i><span>Users</span></a></li>
             <li><a
               <?php 
 
@@ -135,7 +138,7 @@
                 }
 
                ?>
-             href="permissions.php"><i class="material-icons">lock_open</i><span>Permissions</span></a></li>
+             href="permissions.php"><i class="bi bi-person-fill-lock"></i><span>Permissions</span></a></li>
               <?php } ?>
             </ul>
         </div>  

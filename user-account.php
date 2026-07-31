@@ -39,7 +39,7 @@ $myid = isset($_GET['myid']) ? $_GET['myid'] : '';
       <div class="content-header">
          <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-               <li class="breadcrumb-item"><a href="user-dash.php"><i class="material-icons">home</i>Home</a></li>
+               <li class="breadcrumb-item"><a href="user-dash.php"><i class="bi bi-house-door-fill"></i>Home</a></li>
                <?php if ( isset($edit) == '$edit') { ?>
                <li class="breadcrumb-item"><a href="editprofile.php?edituser=<?php echo Session::get("userid")?>">My
                      profile</a></li>
@@ -52,8 +52,8 @@ $myid = isset($_GET['myid']) ? $_GET['myid'] : '';
 
             <?php if ( isset($edit) == '$edit') { ?>
             <a href="editprofile.php?edituser=<?php echo Session::get("userid")?>"
-               class="theme-primary-btn btn btn-primary"><i class="material-icons">add</i>Edit profile</a>
-            <a href="user-changepass.php" name='export' class=" btn btn-secondary"><i class="material-icons">add</i>Password
+               class="theme-primary-btn btn btn-primary"><i class="bi bi-pencil-square"></i>&nbspEdit profile</a>
+            <a href="user-changepass.php" name='export' class=" btn btn-secondary"><i class="bi bi-key-fill"></i>&nbspPassword
                change</a>
             <?php } ?>
 

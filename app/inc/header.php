@@ -201,11 +201,11 @@ $rolename =  Session::get("rolename");
                         <li><span><strong>Welcome ! </strong><?php echo $userName = Session::get('userName'); ?></span>
                         </li>
                         <li><a href="account.php?myid=<?php echo Session::get("userid")?>">
-                              <i class="material-icons">
-                                 supervisor_account
-                              </i>
+                              <i class="bi bi-person-circle"></i>
                               Account Settings</a></li>
-                        <li><a href="?action=logout&&sunset=id"><i class="material-icons pr-1">exit_to_app</i>Logout</a>
+                        <li><a href="?action=logout&&sunset=id">
+                           <i class="bi bi-box-arrow-left"></i>
+                              Logout</a>
                         </li>
                      </ul>
                   </div>
@@ -229,14 +229,13 @@ $rolename =  Session::get("rolename");
                         <div class="dropdown-menu dropdown-menu-right">
 
                            <a href="account.php?myid=<?php echo Session::get("userid")?>" class="dropdown-item">
-                              <i class="material-icons">
-                                 supervisor_account
-                              </i>
+                              <i class="bi bi-person-circle"></i>
                               Account Settings</a>
 
                            <div class="menu-dropdown-divider"></div>
-                           <a class="dropdown-item" href="?action=logout&&sunset=id"><i
-                                 class="material-icons">exit_to_app</i>Logout</a>
+                           <a class="dropdown-item" href="?action=logout&&sunset=id">
+                              <i class="bi bi-box-arrow-left"></i>
+                                 Logout</a>
                         </div>
                      </li>
                   </ul>

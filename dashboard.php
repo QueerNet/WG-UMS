@@ -33,7 +33,7 @@
                <div class="card text-white bg-info o-hidden h-100">
                   <div class="card-body">
                      <div class="card-body-icon">
-                        <i class="material-icons float-right text-white md-5em">group_add</i>
+                        <i class="bi bi-people float-right  md-5em"></i>
                      </div>
                      <div class="mr-5">(
 
@@ -60,9 +60,7 @@
                   <a class="card-footer text-white clearfix small z-1" href="newusers.php">
                      <span class="float-left">View Details</span>
                      <span class="float-right">
-                        <i class="material-icons">
-                           keyboard_arrow_right
-                        </i>
+                        <i class="bi bi-arrow-right-short float-right  md-5em"></i>
                      </span>
                   </a>
                </div>
@@ -71,7 +69,7 @@
                <div class="card text-white bg-primary o-hidden h-100">
                   <div class="card-body">
                      <div class="card-body-icon">
-                        <i class="material-icons float-right text-white md-5em">supervisor_account</i>
+                        <i class="bi bi-person-circle float-right  md-5em"></i>
                      </div>
                      <div class="mr-5">(
                         <?php  
@@ -96,9 +94,7 @@
                   <a class="card-footer text-white clearfix small z-1" href="activeusers.php">
                      <span class="float-left">View Details</span>
                      <span class="float-right">
-                        <i class="material-icons">
-                           keyboard_arrow_right
-                        </i>
+                        <i class="bi bi-arrow-right-short"></i>
                      </span>
                   </a>
                </div>
@@ -107,7 +103,7 @@
                <div class="card text-white bg-danger o-hidden h-100">
                   <div class="card-body">
                      <div class="card-body-icon">
-                        <i class="material-icons float-right text-white md-5em">person_outline</i>
+                        <i class="bi bi-person-circle float-right text-white md-5em"></i>
                      </div>
                      <div class="mr-5">(
                         <?php  
@@ -133,9 +129,7 @@
                   <a class="card-footer text-white clearfix small z-1" href="bandusers.php">
                      <span class="float-left">View Details</span>
                      <span class="float-right">
-                        <i class="material-icons">
-                           keyboard_arrow_right
-                        </i>
+                        <i class="bi bi-arrow-right-short"></i>
                      </span>
                   </a>
                </div>
@@ -144,7 +138,7 @@
                <div class="card text-white bg-success o-hidden h-100">
                   <div class="card-body">
                      <div class="card-body-icon">
-                        <i class="material-icons float-right text-white md-5em">people_outline</i>
+                        <i class="bi bi-people float-right text-white md-5em"></i>
                      </div>
                      <div class="mr-5">(
                         <?php  
@@ -170,9 +164,7 @@
                   <a class="card-footer text-white clearfix small z-1" href="users.php">
                      <span class="float-left">View Details</span>
                      <span class="float-right">
-                        <i class="material-icons">
-                           keyboard_arrow_right
-                        </i>
+                        <i class="bi bi-arrow-right-short"></i>
                      </span>
                   </a>
                </div>
@@ -257,7 +249,7 @@ if(isset($_GET['enid'])){
       <div class="content-header">
          <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-               <li class="breadcrumb-item"><a href="userdash.php"><i class="material-icons">home</i>Home</a></li>
+               <li class="breadcrumb-item"><a href="userdash.php"><i class="bi bi-house-door-fill"></i>Home</a></li>
 
             </ol>
          </nav>

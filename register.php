@@ -56,32 +56,14 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
    <link rel="shortcut icon" href="<?php  if (isset($result['favicon'])) {
         echo $result['favicon'];
       } else{ echo "assets/images/icons/favicon.png";}?>" type="image/png">
-   <?php }} ?>
+   <?php }} 
+   
+   include ($filepath.'/../inc/loadassets.php');
+   
+   ?>
 
 
 
-   <!--====== Google Fonts ======-->
-   <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
-
-   <!-- animate css-->
-   <link href="assets/css/animate.css" rel="stylesheet" media="screen">
-
-   <!--====== Icofonts css ======-->
-   <link rel="stylesheet" href="assets/fonts/icofont/icofont.min.css">
-
-   <!-- normalize css-->
-   <link href="assets/css/normalize.css" rel="stylesheet" media="screen">
-
-   <!--====== Bootstrap css ======-->
-   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-
-   <!--====== THEME ======-->
-   <link rel="stylesheet" href="assets/css/themes/<?php echo $THEME?>.css">
-
-   <!--====== Style css ======-->
-   <link rel="stylesheet" href="assets/css/style.css">
-   <!--====== Style css ======-->
-   <link rel="stylesheet" href="assets/css/responsive.css">
 
 
 </head>

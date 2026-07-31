@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changepass'])) {
         <div class="content-header">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="dashboard.php"><i class="material-icons">home</i>Home</a></li>
+                <li class="breadcrumb-item"><a href="dashboard.php"><i class="bi bi-house-door-fill"></i>Home</a></li>
               
                 
                <li class="breadcrumb-item active" aria-current="page">Password change</li>
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changepass'])) {
             </nav>
             <div class="create-item">
 
-              <a href="dashboard.php" class="btn btn-secondary"><i class="material-icons md-18">arrow_back</i>Back To Home</a>
+              <a href="dashboard.php" class="btn btn-secondary"><i class="bi bi-arrow-left-short"></i>Back To Home</a>
             </div>
         </div>
           <!--  Header BreadCrumb -->  

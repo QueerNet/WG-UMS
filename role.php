@@ -26,13 +26,13 @@ if (isset($delrole) && is_numeric($delrole) && isset($_GET['remove']) == 'remove
       <div class="content-header">
          <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-               <li class="breadcrumb-item"><a href="dashboard.php"><i class="material-icons">home</i>Home</a></li>
+               <li class="breadcrumb-item"><a href="dashboard.php"><i class="bi bi-house-door-fill"></i>Home</a></li>
 
                <li class="breadcrumb-item active" aria-current="page">Roles</li>
             </ol>
          </nav>
          <div class="create-item">
-            <a href="createrole.php" class="theme-primary-btn btn btn-primary"><i class="material-icons">add</i>Add New
+            <a href="createrole.php" class="theme-primary-btn btn btn-primary"><i class="bi bi-plus-circle-fill"></i> &nbsp Add New
                Role</a>
          </div>
       </div>

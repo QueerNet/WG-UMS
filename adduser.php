@@ -21,14 +21,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
       <div class="content-header">
          <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-               <li class="breadcrumb-item"><a href="dashboard.php"><i class="material-icons">home</i>Home</a></li>
+               <li class="breadcrumb-item"><a href="dashboard.php"><i class="bi bi-house-door-fill"></i>Home</a></li>
                <li class="breadcrumb-item"><a href="users.php">Users</a></li>
                <li class="breadcrumb-item active" aria-current="page">Add new User</li>
             </ol>
          </nav>
          <div class="create-item">
 
-            <a href="adduser.php" class="theme-primary-btn btn btn-primary"><i class="material-icons">add</i>Create
+            <a href="adduser.php" class="theme-primary-btn btn btn-primary"><i class="bi bi-plus-square"></i>Create
                user</a>
 
 

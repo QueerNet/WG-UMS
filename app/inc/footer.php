@@ -1,8 +1,6 @@
 <!--====== JQuery from CDN ======-->
 <script src="assets/js/jquery.min.js"></script>
 
-<!--====== Bootstrap icons from CDN ======-->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
 <!--====== Bootstrap js ======-->
 <script src="assets/js/bootstrap.min.js"></script>

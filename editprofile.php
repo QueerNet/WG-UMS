@@ -4,7 +4,13 @@
 <!--====== Start Main Wrapper Section======-->
 <section class="d-flex" id="wrapper">
 
-   <?php include 'app/inc/sidebar.php'; ?>
+   <?php 
+   
+   if ( $ROLE['ROLENAME']=='sysadmin' ) {
+      include 'app/inc/sidebar.php';
+   } else {
+      include 'app/inc/user-sidebar.php';
+   } ?>
 
    <?php 
 
@@ -39,16 +45,16 @@
       <div class="content-header">
          <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-               <li class="breadcrumb-item"><a href="user-dash.php"><i class="material-icons">home</i>Home</a></li>
+               <li class="breadcrumb-item"><a href="user-dash.php"><i class="bi bi-house-door-fill"></i>Home</a></li>
                <li class="breadcrumb-item"><a href="editprofile.php?edituser=<?php echo Session::get("userid")?>.php">My Account</a></li>
                <li class="breadcrumb-item active" aria-current="page"><?php echo $result['name']; ?></li>
             </ol>
          </nav>
          <div class="create-item">
             <?php if ( $access ) { ?>
-               <a href="users.php" class="btn btn-secondary"><i class="material-icons md-18">arrow_back</i>Back To Userlist</a>
+               <a href="users.php" class="btn btn-secondary"><i class="bi bi-arrow-left-short"></i>Back To Userlist</a>
             <?php } else { ?>
-               <a href="user-account.php?myid=<?php echo Session::get("userid")?>" class="btn btn-secondary"><i class="material-icons md-18">arrow_back</i>Back to account</a>
+               <a href="user-account.php?myid=<?php echo Session::get("userid")?>" class="btn btn-secondary"><i class="bi bi-arrow-left-short"></i>Back to account</a>
             <?php } ?>
          </div>
       </div>
@@ -199,7 +205,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
                               class="form-control" required />
                            <div class="input-group-addon input-group-append">
                               <div class="input-group-text">
-                                 <i class="icofont-ui-calendar"></i>
+                                 <i class="bi bi-calendar-week"></i>
                               </div>
                            </div>
                         </div>

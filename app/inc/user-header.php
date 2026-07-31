@@ -106,41 +106,13 @@ $rolename =  Session::get("rolename");
       } ?></title>
    <!--====== Favicon Icon ======-->
    <link rel="shortcut icon" href="assets/images/icons/favicon.png" type="image/png">
-   <?php }} ?>
+   <?php }} 
    
 
-    <!-- dataTables.bootstrap4.min css-->
-    <link href="assets/css/dataTables.bootstrap4.min.css" rel="stylesheet" media="screen">
+   include ('loadassets.php');
+   ?>
+   
 
-   <!--====== Material Icons ======-->
-   <link rel="stylesheet" href="assets/iconfont/material-icons.css">
-
-   <!--====== datetimepicker Icons ======-->
-   <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
-
-   <!--====== select2 css ======-->
-   <link rel="stylesheet" href="assets/css/select2.min.css">
-   <link rel="stylesheet" href="assets/css/select2-bootstrap.min.css">
-
-   <!-- Icofont Icons css-->
-   <link rel="stylesheet" href="assets/icofont/icofont.min.css">
-
-   <!-- Chart.min css-->
-   <link href="assets/css/Chart.min.css" rel="stylesheet" media="screen">
-
-   <!-- animate css-->
-   <link href="assets/css/animate.css" rel="stylesheet" media="screen">
-   <!-- normalize css-->
-   <link href="assets/css/normalize.css" rel="stylesheet" media="screen">
-   <!--====== Bootstrap css ======-->
-   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-
-   <!--====== THEME ======-->
-   <link rel="stylesheet" href="assets/css/themes/<?php echo $THEME?>.css">
-   <!--====== Style css ======-->
-   <link rel="stylesheet" href="assets/css/style.css">
-   <!--====== Style css ======-->
-   <link rel="stylesheet" href="assets/css/responsive.css">
 
 
 
@@ -221,11 +193,11 @@ $rolename =  Session::get("rolename");
                         <li><span><strong>Welcome!</strong><?php echo $userName = Session::get('userName'); ?></span>
                         </li>
                         <li><a href="user-account.php?myid=<?php echo Session::get("userid")?>">
-                              <i class="material-icons">
-                                 supervisor_account
-                              </i>
+                              <i class="bi bi-person-circle"></i>
                               Account Settings</a></li>
-                        <li><a href="?action=logout&&sunset=id"><i class="material-icons pr-1">exit_to_app</i>Logout</a>
+                        <li><a href="?action=logout&&sunset=id">
+                           <i class="bi bi-box-arrow-left"></i>
+                        Logout</a>
                         </li>
                      </ul>
                   </div>
@@ -245,13 +217,12 @@ $rolename =  Session::get("rolename");
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                            <a href="user-account.php?myid=<?php echo Session::get("userid")?>" class="dropdown-item">
-                              <i class="material-icons">
-                                 supervisor_account
-                              </i>
+                              <i class="bi bi-person-circle"></i>
                               Account Settings</a>
                            <div class="menu-dropdown-divider"></div>
-                           <a class="dropdown-item" href="?action=logout&&sunset=id"><i
-                                 class="material-icons">exit_to_app</i>Logout</a>
+                           <a class="dropdown-item" href="?action=logout&&sunset=id">
+                              <i class="bi bi-box-arrow-left"></i>
+                              Logout</a>
                         </div>
                      </li>
                   </ul>
