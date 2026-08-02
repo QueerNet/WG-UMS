@@ -310,13 +310,6 @@ $(document).ready(function(){
 
 
 
-
-
-
-
-       // For Mobile Toggle Menu
-      var theToggle = document.getElementById('mobile-toggle');
-
       // based on Todd Motto functions
       // https://toddmotto.com/labs/reusable-js/
 
@@ -352,11 +345,6 @@ $(document).ready(function(){
               elem.className += ' ' + className;
           }
       }
-
-      theToggle.onclick = function() {
-         toggleClass(this, 'on');
-         return false;
-      };
 
 
 

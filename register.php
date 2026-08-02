@@ -128,27 +128,27 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
                      <div class="form-group mt-md">
                         <span class="input-with-icon">
                            <input type="text" class="form-control" name="name" id="name" placeholder="Name">
-                           <i class="icofont-ui-user"></i>
+                           <i class="bi bi-person-fill"></i>
                         </span>
                      </div>
                      <div class="form-group mt-md">
                         <span class="input-with-icon">
                            <input type="email" class="form-control" name="email" id="email" placeholder="Email">
-                           <i class="icofont-email"></i>
+                           <i class="bi bi-envelope-at-fill"></i>
                         </span>
                      </div>
                      <div class="form-group">
                         <span class="input-with-icon">
                            <input type="password" name="password" class="form-control" id="password"
                               placeholder="Password">
-                           <i class="icofont-lock"></i>
+                           <i class="bi bi-shield-lock-fill"></i>
                         </span>
                      </div>
                      <div class="form-group">
                         <span class="input-with-icon">
                            <input type="text" class="form-control" name="confirm_password" id="confirm_password"
                               placeholder="Confirm Password">
-                           <i class="icofont-unlock"></i>
+                           <i class="bi bi-shield-lock"></i>
                         </span>
                      </div>
                      <div class="form-group">

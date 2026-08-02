@@ -1,4 +1,3 @@
-   <?php $THEME='dark'?>
    
    
    <!--====== Favicon Icon ======-->
@@ -22,11 +21,12 @@
 
    <!--====== Bootstrap css ======-->
    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+   <link rel="stylesheet" href="assets/css/OLD_bootstrap.min.css">
 
    <!--====== Bootstrap icons ======-->
    <link rel="stylesheet" href="assets/css/bootstrap-icons.min.css">
 
-   <!-- dataTables.bootstrap4.min css-->
+   <!-- Bootstrap DataTables-->
    <link rel="stylesheet" href="assets/css/dataTables.bootstrap4.min.css" media="screen">
 
    <!--====== THEME ======-->

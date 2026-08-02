@@ -41,32 +41,9 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 
       <!--====== Title ======-->
       <title>Reset Password</title>
-    <!--====== Favicon Icon ======-->
-    <link rel="shortcut icon" href="assets/images/icons/favicon.png" type="image/png">
-
-
-
-    <!--====== Google Fonts ======-->
-    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
-
-    <!-- animate css-->
-    <link href="assets/css/animate.css" rel="stylesheet" media="screen">
-
-    <!-- Icofont Icons css-->
-    <link rel="stylesheet" href="assets/icofont/icofont.min.css">
-
-    <!-- normalize css-->
-    <link href="assets/css/normalize.css" rel="stylesheet" media="screen">
-    <!--====== Bootstrap css ======-->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-
-    <!--====== THEME ======-->
-   <link rel="stylesheet" href="assets/css/themes/<?php echo $THEME?>.css">
-
-    <!--====== Style css ======-->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <!--====== Style css ======-->
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <?php
+    include('app/inc/loadassets.php')
+    ?>
   
 
 </head>
@@ -113,7 +90,7 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
                         <div class="form-group mt-3">
                             <span class="input-with-icon">
                                 <input type="email" class="form-control" name="email" id="email" placeholder="Email">
-                                <i class="icofont-email"></i>
+                                <i class="bi bi-envelope-at-fill"></i>
                             </span>
                         </div>
                         <div class="form-group">

@@ -74,25 +74,8 @@ class Users{
 				$value = $result->fetch_assoc();
 
 					if (password_verify($password, $value['password'] )) {
-						   if(!empty($data['remember']))   
-							   {  
-							    setcookie ("email",$email,time()+ (10 * 365 * 24 * 60 * 60));  
-							    setcookie ("password",$password,time()+ (10 * 365 * 24 * 60 * 60));
-							   
-							   }  
-							   else  
-							   {  
-							    if(isset($_COOKIE["email"]))   
-							    {  
-							     setcookie ("email","");  
-							    }  
-							    if(isset($_COOKIE["password"]))   
-							    {  
-							     setcookie ("password","");  
-							    }  
-						   }
 						$userid = $value['userid'];
-						//$userOn = $this->userActive_ON($userid);
+						$userOn = $this->userActive_ON($userid);
 						if ($value['status'] == '1') {
 							$msg = '<div class="alert alert-danger" id="flash-msg"><strong>Error !</strong>  Your Account is Disabled, conact with Author !</div>';
 							return $msg;
@@ -116,15 +99,9 @@ class Users{
 						$msg = '<div class="alert alert-danger" id="flash-msg"><strong>Error!</strong>  Your password did not Match!</div>';
 						return $msg;
 					}
-
-
-
-
 			}else{
 		       $msg = "<div id='flash-msg' class='alert alert-danger'><strong>Error ! </strong>No user found for associated credentials...</div>";
-		       return $msg;
-		       //exit();
-		       
+		       return $msg;		       
 			}
 		}
 

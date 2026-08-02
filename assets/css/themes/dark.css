@@ -1,10 +1,4 @@
-/*!
- * Bootstrap v4.2.1 (https://getbootstrap.com/)
- * Copyright 2011-2018 The Bootstrap Authors
- * Copyright 2011-2018 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- */
-:root{
+:root {
     /* Colours */
   --blue: #007bff;
   --indigo: #6610f2;
@@ -21,41 +15,34 @@
   --gray-dark: #343a40;
 
   /* Backgrounds */
-  --bg-primary: #15121a;
-  --bg-secondary: #3b255b;
-  --bg-tertiary: #5d316a;
-  --bg-quaternary: #42247b;
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #121212;
+  --bg-tertiary: #1a1a1a;
+  --bg-quaternary: #222222;
 
   /* Buttons */
-  --btn-border: #8f4aff88;
-  --btn-primary: #e83e8c;
-  --btn-success: #55e83e;
-  --btn-info: #a852ad;
-  --btn-warning: #e3d15c;
-  --btn-danger: #cb4a4a;
+  --btn-border: #666;
+  --btn-primary: #6ea8fe;   /* Soft blue */
+  --btn-success: #81c995;   /* Soft green */
+  --btn-info: #7dcdd6;     /* Soft cyan */
+  --btn-warning: #ffeaa7;  /* Soft yellow */
+  --btn-danger: #f28b82;   /* Soft red */
 
-  /* Button hover */
-  --btn-primary-hov: #e83e8c;
-  --btn-success-hov: #55e83e;
-  --btn-info-hov: #b53ee8;
-  --btn-warning-hov: #dbd94b;
-  --btn-danger-hov: #cb4a4a;
-
-  /* Pallette */
-  --primary: #49185f;
-  --secondary: #3d2e47;
-  --tertiary: #476886;
-  --quaternary: #436686;
+  /* Palette */
+  --primary: #43215a;    /* This is used for banner */
+  --secondary: #121212;  /* This is used for header, nav-toggle, and sidebar */
+  --tertiary: #17a2b8;
+  --quaternary: #28a745;
 
   /* Hover */
-  --hover: #763e89;
-  --hover-secondary: #5d316a;
-  --activate: #b15050;
+  --hover: #1e1e1e;
+  --hover-secondary: #2a2a2a;
+  --activate: #0a58ca;
 
   /* Borders */
-  --border-primary: #000000;
-  --border-secondary: #ffffff;
-  --border-tertiary: #bababa;
+  --border-primary: #333;
+  --border-secondary: #444;
+  --border-tertiary: #555;
 
   /* Signals */
   --success: #28a745;
@@ -64,22 +51,17 @@
   --danger: #dc3545;
 
   /* Light and dark */
-  --light: #f8f9fa;
-  --dark: #343a40;
+  --light: #e9ecef;
+  --dark: #212529;
 
-  /* Breakpoints */
-  --breakpoint-xs: 0;
-  --breakpoint-sm: 576px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 992px;
-  --breakpoint-xl: 1200px;
+  /* Text */
+  --text: #e9ecef;
+  --btn-text: #000000;
+  --text-highlit: #0d6efd;
+  --text-lowlit: #adb5bd;
+  --link: #0d6efd;
 
   /* Font */
-  --text: #ffffff;
-  --btn-text: #ffffff;
-  --text-highlit: #801ce4;
-  --text-lowlit: #b8a6bd;
-  --link: #6e2be1;
   --font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
   --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
 }

@@ -70,7 +70,7 @@ $viewuser = isset($_GET['viewuser']) ? $_GET['viewuser'] : '';
           <!-- Create New User -->   
         <div class="main-content">
 
-            <div class="card bg-white">
+            <div class="card">
                 <div class="card-body mt-5 mb-5">
 
                     <div class="viewuser row">

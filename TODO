@@ -1,0 +1,11 @@
+TODO:
+
+When delete, refresh page (js reload)
+When call list-devices, prune inactive?
+Generate modal with QR
+Allow to download file or send
+
+
+Fix selinux contexts for wg set pipeline
+
+When deleting user, delete all their devices

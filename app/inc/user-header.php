@@ -22,11 +22,17 @@ $apa = new AppAutho();
 $fr = new Frontend();
 $chn = new Changepassword();
 
-$THEME = 'dark';
-$COLOR_MODE = 'dark';
+// Set dark vs light mode
+$COLOR_MODE = 'light';
 
- ?>
-<?php
+// Get user's preferred theme
+$userid = $_SESSION['userid'];
+$query = "SELECT theme FROM USERS WHERE userid = '$userid';";
+$result = $db->select($query);
+$field = $result->fetch_assoc();
+$THEME = $field['theme'];
+
+
 header("Cache-Control: no-store, no-cache, must-revalidate"); 
 header("Cache-Control: pre-check=0, post-check=0, max-age=0"); 
 header("Pragma: no-cache"); 

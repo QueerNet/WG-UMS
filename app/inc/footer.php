@@ -1,6 +1,5 @@
-<!--====== JQuery from CDN ======-->
+<!--====== JQuery ======-->
 <script src="assets/js/jquery.min.js"></script>
-
 
 <!--====== Bootstrap js ======-->
 <script src="assets/js/bootstrap.min.js"></script>
@@ -39,7 +38,12 @@
 })(jQuery);
 </script>
 
+<!--====== Wireguard ======-->
+<script src="assets/js/wireguard-tools.js"></script>
+<script src="assets/js/wireguard.js"></script>
 
+<!--====== QREncode ======-->
+<script src="assets/js/qrcode.min.js"></script>
 
 
 

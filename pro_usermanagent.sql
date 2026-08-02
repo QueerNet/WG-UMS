@@ -140,12 +140,13 @@ CREATE TABLE `USERS` (
   `rolename` varchar(255) NOT NULL DEFAULT 0,
   `status` int(11) NOT NULL DEFAULT 0,
   `create_date` datetime NOT NULL,
-  `lastactivity` int(11) NOT NULL DEFAULT 0
+  `lastactivity` int(11) NOT NULL DEFAULT 0,
+  `theme` varchar(255) NOT NULL DEFAULT 'dark'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Add sysadmin record
-INSERT INTO `USERS` (`userid`, `name`, `email`, `password`, `rolename`, `status`, `create_date`, `lastactivity`) VALUES
-(1, 'sysadmin', @sysadmin, 'password', 'sysadmin', 0, '2026-07-11 23:50:55', 0);
+INSERT INTO `USERS` (`userid`, `name`, `email`, `password`, `rolename`, `status`, `create_date`, `lastactivity`, 'theme') VALUES
+(1, 'sysadmin', @sysadmin, 'password', 'sysadmin', 0, '2026-07-11 23:50:55', 0, 'dark');
 
 --
 -- Dumping data for table `USERS`
@@ -229,13 +230,14 @@ COMMIT;
 CREATE TABLE WG (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     userid INT UNSIGNED NOT NULL,
-    devid VARCHAR(64) NOT NULL,
+    devname VARCHAR(64) NOT NULL,
     AllowedIPs VARCHAR(45) NOT NULL,
     PRIMARY KEY (id),
     UNIQUE KEY uniq_user_device (userid, devid),
-    UNIQUE KEY uniq_allowed_ip (AllowedIPs)
+    UNIQUE KEY uniq_allowed_ip (AllowedIPs),
+    active BOOLEAN DEFAULT FALSE;
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-INSERT INTO WG (userid, devid, AllowedIPs)
-VALUES (0, 'wg-server', '10.200.200.1/32');
+INSERT INTO WG (userid, devid, AllowedIPs, active)
+VALUES (0, 'wg-server', '10.200.200.1/32', TRUE );

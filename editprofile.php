@@ -205,7 +205,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
                               class="form-control" required />
                            <div class="input-group-addon input-group-append">
                               <div class="input-group-text">
-                                 <i class="bi bi-calendar-week"></i>
+                                 <i class="bi bi-calendar-week" style="max-height:25px"></i>
                               </div>
                            </div>
                         </div>

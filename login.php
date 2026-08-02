@@ -140,37 +140,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
                      </div>
                      <div class="form-group mt-md">
                         <span class="input-with-icon">
-                           <?php if(isset($_COOKIE["email"])) {  ?>
-                           <input type="email" class="form-control" name="email" id="email"
-                              value="<?php echo $_COOKIE["email"]; ?>">
-                           <?php }else{ ?>
                            <input type="email" class="form-control" name="email" id="email"
                               placeholder="Enter your E-Mail ...">
-                           <?php } ?>
                            <i class="bi bi-envelope-at-fill"></i>
                         </span>
                      </div>
                      <div class="form-group">
                         <span class="input-with-icon">
-                           <?php if(isset($_COOKIE["password"])) {  ?>
-                           <input type="password" class="form-control" name="password" id="password"
-                              value="<?php echo $_COOKIE["password"]; ?>">
-                           <?php }else{ ?>
                            <input type="password" class="form-control" name="password" id="password"
                               placeholder="Enter your Password ...">
-                           <?php } ?>
-
 
 
                            <i class="bi bi-lock-fill"></i>
                         </span>
-                     </div>
-                     <div class="form-group">
-                        <div class="checkbox-custom checkbox-primary">
-                           <input type="checkbox" name="remember" id="remember" <?php if(isset($_COOKIE["email"])) { ?>
-                              checked <?php } ?> />
-                           <label class="check" for="remember">Remember me</label>
-                        </div>
                      </div>
                      <div class="form-group">
                         <button type="submit" name="login" id="login"
