@@ -1,11 +1,9 @@
 TODO:
 
-When delete, refresh page (js reload)
-When call list-devices, prune inactive?
-Generate modal with QR
-Allow to download file or send
-
-
-Fix selinux contexts for wg set pipeline
+When call list-devices, prune inactive? Also, reorder buttons and add status indicator and pull status from db when pulling other deets
 
 When deleting user, delete all their devices
+
+Fix outdated Bootstrap CSS
+
+Comb the project for "data-toggle=" or others that need to be "data-bs-toggle="

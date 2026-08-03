@@ -42,6 +42,14 @@ hr {
   color: var(--light);
 }
 
+.user-info {
+  float: right;
+}
+
+.navbar {
+  justify-content: space-between!important;
+}
+
 .btn:focus {
   outline: none;
 }
@@ -733,11 +741,6 @@ p {
   animation-name: swing;
 }
 
-table {
-  background: white;
-}
-
-
 
 
 /*Main content Header Bradcumb css*/
@@ -1009,9 +1012,7 @@ color: rgba(43, 193, 202, 0.87);
     background-color: var(--bg-secondary)!important;
     border: none;
 }
-.bg-scale-0 {
-    background: #f7f7f7 !important;
-}
+
 
 .wrap .page-body {
     display: block;
@@ -1266,9 +1267,6 @@ Select custom css*/
 }
 
 .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice {
-    color: #fff;
-    background: #6c757d;
-    border: 1px solid #6c757d;
     border-radius: 4px;
     cursor: default;
     float: left;
@@ -1379,14 +1377,12 @@ border-radius: 200px;
 /* menu appearance*/
 #mobile-authentication {
   position: relative;
-  color: #fff;
   width: 200px;
   padding: 10px;
   margin: auto;
 
   text-align: center;
   border-radius: 4px;
-  background: #202020;
   box-shadow: 0 1px 8px rgba(0,0,0,0.05);
   /* just for this demo */
   opacity: 0;
@@ -1428,13 +1424,11 @@ border-radius: 200px;
 }
 #mobile-authentication {
     position: absolute;
-    color: #fff;
     width: 200px;
     padding: 10px;
     margin: auto;
     text-align: center;
     border-radius: 4px;
-    background: #202020;
     box-shadow: 0 1px 8px rgba(0,0,0,0.05);
     opacity: 0;
     visibility: hidden;

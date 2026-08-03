@@ -215,7 +215,7 @@ $rolename =  Session::get("rolename");
 
                   <ul class="navbar-nav user-info d-desktop ml-auto mt-2 mt-lg-0">
                      <li class="nav-item dropdown show">
-                        <a href="#" class="navbar-nav-link dropdown-toggle text-light account" data-toggle="dropdown"
+                        <a href="#" class="navbar-nav-link dropdown-toggle text-light account" data-bs-toggle="dropdown"
                            aria-expanded="true">
                            <div class="user-photo">
 

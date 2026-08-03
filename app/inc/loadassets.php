@@ -21,7 +21,6 @@
 
    <!--====== Bootstrap css ======-->
    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-   <link rel="stylesheet" href="assets/css/OLD_bootstrap.min.css">
 
    <!--====== Bootstrap icons ======-->
    <link rel="stylesheet" href="assets/css/bootstrap-icons.min.css">

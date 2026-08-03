@@ -23,7 +23,7 @@ $fr = new Frontend();
 $chn = new Changepassword();
 
 // Set dark vs light mode
-$COLOR_MODE = 'light';
+$COLOR_MODE = 'dark';
 
 // Get user's preferred theme
 $userid = $_SESSION['userid'];
@@ -212,7 +212,7 @@ $rolename =  Session::get("rolename");
                <!--<div class="collapse navbar-collapse pr-3" id="#">-->
                   <ul class="navbar-nav user-info d-desktop ml-auto mt-2 mt-lg-0">
                      <li class="nav-item dropdown show">
-                        <a href="#" class="navbar-nav-link dropdown-toggle text-light account" data-toggle="dropdown"
+                        <a href="#" class="navbar-nav-link dropdown-toggle text-light account" data-bs-toggle="dropdown"
                            aria-expanded="true">
                            <div class="user-photo">
                               <img width="70" align='middle' src="app/uploads/userAvatar/User.png" alt="your image"
