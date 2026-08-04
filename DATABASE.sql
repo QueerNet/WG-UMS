@@ -17,6 +17,7 @@
 
 SET @sysadmin_name = 'Morrigan';
 SET @sysadmin = 'mj.qls@tuta.io';
+SET @default_pass = '$2y$10$CbIbazIHAk0kQqfsrycc9Oimm7sLWaP6x7VgWcrCvYnBmx7EQkk..';
 -- SET @db_passwd = 'zRnFvtt7@1p2bJv#&R^F';
 
 
@@ -149,7 +150,7 @@ CREATE TABLE `USERS` (
 
 -- Add sysadmin record
 INSERT INTO `USERS` (`userid`, `name`, `email`, `password`, `rolename`, `status`, `create_date`, `lastactivity`, `theme`) VALUES
-(1, 'sysadmin', @sysadmin, 'password', 'sysadmin', 0, '2026-07-11 23:50:55', 0, 'dark');
+(1, 'sysadmin', @sysadmin, @default_pass, 'sysadmin', 0, '2026-07-11 23:50:55', 0, 'dark');
 
 --
 -- Dumping data for table `USERS`

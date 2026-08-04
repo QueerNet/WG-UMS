@@ -33,7 +33,7 @@ trait Wg
             $startedTransaction = true;
         }
         // TODO: check for orphaned device listings in SQL and prune
-        $stmt = $this->db->prepare("SELECT id, devname, AllowedIPs FROM WG WHERE userid = ?");
+        $stmt = $this->db->prepare("SELECT * FROM WG WHERE userid = ?");
         $stmt->execute([$UUID]);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -224,6 +224,28 @@ trait Wg
                 $result = ['success', TRUE, 'data', 'Successfully removed device'];
             }
         } else {
+            $result = ['success', FALSE, 'error', $stderr];
+        }
+        return $result;
+    }
+
+    public function wg_rename(int $devid, string $newname): array
+    {
+        $newname = preg_replace('/[^a-zA-Z0-9 ]/', '', $newname);
+        try {
+            // Begin PDO transaction
+            $startedTransaction = false;
+            if (!$this->db->inTransaction()) {
+                $this->db->beginTransaction();
+                $startedTransaction = true;
+            }
+
+            // Update name in DB
+            $insert = $this->db->prepare("UPDATE WG SET devname = ? WHERE id= ? ;");
+            $insert->execute([$newname, $devid]);
+            $this->db->commit();
+            $result = ['success', TRUE, 'data', $newname];
+        } catch (\PDOException $e) {
             $result = ['success', FALSE, 'error', $stderr];
         }
         return $result;

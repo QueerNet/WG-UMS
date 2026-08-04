@@ -93,7 +93,7 @@ $vpn = new VPN();
                                 <tr>
                                     <th>Device</th>
                                     <th>Name</th>
-                                    <th>Connect</th>
+                                    <th>Active</th>
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>
@@ -103,8 +103,9 @@ $vpn = new VPN();
                                     $i = 0;
                                     foreach ($devices as $device) {
                                         $ID = $device['id'];
-                                        $NAME = preg_replace('/[^a-zA-Z0-9]/', '', $device['devname']);;
+                                        $NAME = htmlspecialchars($device['devname'], ENT_QUOTES, 'UTF-8');
                                         $IP = $device['AllowedIPs'];
+                                        $active = $device['active'];
                                         $i++;
                                     ?>
                                     <tr>
@@ -112,18 +113,18 @@ $vpn = new VPN();
                                         <td class="pt-4"><?php echo $NAME ?></td>
                                         </td>
                                         <td class="pt-4">
-                                        <button type="button" class="btn btn-success">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-fill" viewBox="0 0 16 16">
-                                            <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"></path>
-                                            </svg>&nbspResend
-                                        </button>
+                                        <?php
+                                        if ($active ) {
+                                            echo '<button type="button" class="btn btn-success">Active</button>';
+                                        } else {
+                                            echo '<button type="button" class="btn btn-warning">Inactive</button>';
+                                        }
+                                        ?>
                                         </td>
                                         <td class="text-center pt-3">
-                                        <a class="btn btn-info" >&nbspEdit&nbsp</a>
-                                        <!--<a class="btn btn-info" >&nbspEdit&nbsp</a>-->
-                                        <a class="btn btn-warning"
-                                            onclick="return confirm('Are you sure you want to deactivate $NAME?')"
-                                            >&nbspDeactive&nbsp</a>
+                                        <a class="btn btn-info" 
+                                        onclick="let x=prompt('Enter the new name for <?php echo $NAME ?>:'); renameDevice(<?php echo $ID ?>, x)"
+                                        >&nbspEdit&nbsp</a>
                                         <a class="btn btn-danger"
                                             onclick="let x=confirm('Are you sure you want to delete <?php echo $NAME ?>?');if (x) {rmDevice(<?php echo $ID ?>)};">&nbspDelete&nbsp</a>
                                         </td>

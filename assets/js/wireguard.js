@@ -14,7 +14,7 @@ async function callVpnApi(method, params = {}) {
 
 
 
-async function addDevice (userid, devname, pubkey, endpt) {
+async function addDevice(userid, devname, pubkey, endpt) {
     if (devname==="") {
         return;
     } else {
@@ -32,7 +32,6 @@ async function addDevice (userid, devname, pubkey, endpt) {
         let allowedIp = result['ip'];
 
         // Generate configuration
-
         
         let confArr = [
         "[Interface]\r\n",
@@ -65,14 +64,20 @@ async function addDevice (userid, devname, pubkey, endpt) {
         });
 
         // Display QR
-        new QRCode(document.getElementById("qrcode"), configuration);
+        //https://davidshimjs.github.io/qrcodejs/
+        new QRCode(document.getElementById("qrcode"), {
+            text: configuration,
+            width: 512,
+            height: 512,
+            correctLevel: QRCode.CorrectLevel.M
+        });
         
         // Show error or success message
         console.log(result_add_peer)
     }
 }
 
-async function rmDevice (id) {
+async function rmDevice(id) {
     const result = await callVpnApi('wg_rm_peer', { iface: 'QLS', devid: id });
     console.log(result);
     window.location.reload();
@@ -93,4 +98,10 @@ function triggerBlobDownload(fileBlob, fileName) {
   setTimeout(() => {
     URL.revokeObjectURL(tempUrl)
   }, 1000)
+}
+
+async function renameDevice(devid, newname) {
+    const result = await callVpnApi('wg_rename', { devid: devid, newname: newname });
+    window.location.reload();
+    return true;
 }

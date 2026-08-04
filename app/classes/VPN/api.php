@@ -16,7 +16,8 @@ $allowedMethods = [
     'wg_check'         => ['allowedip', 'devid'],
     'wg_get_next_ip'   => ['userid', 'devname'],
     'wg_add_peer'      => ['iface', 'pubkey', 'psk', 'allowedIp'],
-    'wg_rm_peer'       => ['iface', 'devid']
+    'wg_rm_peer'       => ['iface', 'devid'],
+    'wg_rename'        => ['devid', 'newname']
 ];
 
 // Get which method was called

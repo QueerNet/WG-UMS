@@ -12,7 +12,8 @@
 :root {
   --header: var(--secondary);
   --nav-toggle: var(--secondary);
-  --sidebar: var(--secondary)
+  --sidebar: var(--secondary);
+  --bs-modal-width: 600!important;
 }
 
 
