@@ -1,86 +1,193 @@
+### About
+This API initiates a wg-quick setup but adds and removes peers using "wg set" commands for live updates without interrupting existing connections. Use the config.php file under app/classes/config/config.php to enter your instance's specific parameters.
 
-# Pro User Management System with PHP MySQL and Ajax
+PHPMailer is used and configuration parameters are exposed as described above.
 
-<p>Pro User Management System is a powerful PHP Ajax script that offers a secure user management system. The application is a great way to build your website, allowing your users to register an account and build restricted access to certain users. We offer great support and it’s very easy to install. It’s powered by MYSQL and PHP, Ajax.</p>
+#### Privacy statement
+All wireguard keys are generated locally in the user's browser. These keys are never collected or stored by the server. Do bear in mind, though, that this project is still young and overall security is imperfect. Some security concerns that have already been accounted for:
+- No plaintext passwords
+- Strict access controls for VPN api
+- Access controls for admin panel
 
+# VPN API
 
-<div class="script-details">
-  <h3>Script Features::-</h3>
-  <hr>
-  <p><strong>User Login and Registration features:</strong></p>
+Call originates from Javascript which sends POST request to api.php which parses and validates inputs and forwards the work to the corresponding function within Wg.php. Response is parsed into array and sent back to javascript for handling.
 
-<ul>
- <li>User registration with email </li>
- <li>User Login with remember password(SHA1()).</li>
- <li>Change password.</li>
- <li>User profile.</li>
- <li>User profile edit & save.</li>
-</ul>
+Javascript uses async await and database uses PDO for rollback support. Devices added to the database that fail to create new peers in WG, will be marked as inactive and may be pruned automatically (tbd).
 
-<p><strong>Admin Panel features:</strong></p>
+# Bash
 
-<ul>
-  <li>Dashboard (Total Users, Deleted Users, Band Users, Active Users, Monthly total register users,)</li>
-  <li>Sign Up user</li>
-  <li>User disable/Enable feature</li>
-  <li>User email support</li>
-  <li>Mail confirmation</li>
- <li>Admin password Chane password.</li>
- <li>Admin profile.</li>
- <li>Users list.</li>
- <li>Add new user with role.</li>
- <li>Edit & save user.</li>
- <li>Delete user.</li>
- <li>Many more features, you can have a look in live video link</li>
-</ul>
-</div>
+### Init
+```bash
+#!/bin/bash
+# /usr/local/bin/wg-init.sh
 
-<h3>Script Thumbnails::-</h3>
- <hr>
- 
-![login](https://user-images.githubusercontent.com/8381528/224330417-252ec32c-3f15-4d4f-9543-4e7fe19e0533.png)
-![Pass-reset](https://user-images.githubusercontent.com/8381528/224330420-c27548c9-cb08-428b-81c3-6bc5bbd93561.png)
-![registration](https://user-images.githubusercontent.com/8381528/224330910-a1af3a50-9044-40b3-b53a-ee39c835221a.png)
-![dashboard](https://user-images.githubusercontent.com/8381528/224330411-162a523b-dec0-4207-bb5e-7f556b0e9ab7.png)
-![create-new-user](https://user-images.githubusercontent.com/8381528/224330406-996b9ee0-85da-440d-855c-25f4e7587d67.png)
-![role](https://user-images.githubusercontent.com/8381528/224330422-10c31378-368a-415b-bf22-1ced8e2ca8d2.png)
-![users](https://user-images.githubusercontent.com/8381528/224330431-f3c85868-eb56-47c2-86e7-1a1565b374ea.png)
-![settings](https://user-images.githubusercontent.com/8381528/224330426-1faac7e4-df25-4cf5-a785-173f74477cb9.png)
+set -e
 
+WG_DIR="/etc/wireguard"
+IFACE="QLS"
+LISTEN_PORT=42069
 
-<div class='install-script'>
-  <h3>How to Install</h3>
-   <hr>
-  <ul>
- <li>Create a database name (pro_usermanagent)</li>
- <li>Import database file (pro_usermanagent.sql)</li>
- <li>Admin:Info</li>
- <li>Admin username: nababurdev@gmail.com</li>
- <li>Admin pass: An123456</li>
- <li><a href='https://www.youtube.com/@CodewithNababur'>Live video a Youtube</a></li>
- 
+umask 077
+wg genkey | tee privkey | wg pubkey > pubkey
+PRIVATE_KEY=$(cat privkey)
+PUBLIC_KEY=$(cat pubkey)
+echo "$PRIVATE_KEY" > "$WG_DIR/$IFACE.key"
+echo "$PUBLIC_KEY" > "$WG_DIR/$IFACE.pub"
+rm privkey pubkey
 
-</ul>
+# Write the initial config — wg-quick will create/manage the interface from this
+sudo tee "$WG_DIR/$IFACE.conf" > /dev/null <<EOF
+[Interface]
+PrivateKey = $PRIVATE_KEY
+Address = 10.200.200.1/24
+ListenPort = $LISTEN_PORT
+SaveConfig = true
 
-<h3>Author</h3>
-<span>Nababur Rahaman</span>
-<ul>
-  <li><a href='https://github.com/nababur'>Author profile</a></li>
-  <li><a href='mailto:nababurdev@gmail.com'>For any support or project email me nababurdev@gmail.com</a></li>
-  
-</ul>
-<h4>Buy me a coffee :) </h4>
-<p dir="auto">
-  <a href="https://www.buymeacoffee.com/nababur" rel="nofollow">
-    <img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*MgGIm08OdUTUvgNyaUl0hw.jpeg" alt="Buy Me A Coffee" width="225" height="225" data-canonical-src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*MgGIm08OdUTUvgNyaUl0hw.jpeg" style="max-width: 100%;">
-  </a>
-</p>
+# Allow only HTTP/HTTPS between VPN peers
+PostUp = iptables -A FORWARD -i $IFACE -o $IFACE -p tcp --dport 80  -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+PostUp = iptables -A FORWARD -i $IFACE -o $IFACE -p tcp --dport 443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+PostUp = iptables -A FORWARD -i $IFACE -o $IFACE -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+# Everything else peer-to-peer: explicit deny, not silent drop, so it's auditable
+PostUp = iptables -A FORWARD -i $IFACE -o $IFACE -j REJECT --reject-with icmp-port-unreachable
+# Peer <-> internet
+PostUp = iptables -A FORWARD -i $IFACE -j ACCEPT
+PostUp = iptables -A FORWARD -o $IFACE -j ACCEPT
+# Masquerade
+PostUp = iptables -t nat -I POSTROUTING 1 -s 10.200.200.0/24 -o ens3 -j MASQUERADE
 
-<h4>Happy Open Source....</h4>
-</div>
+PostDown = iptables -D FORWARD -i $IFACE -o $IFACE -p tcp --dport 80  -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+PostDown = iptables -D FORWARD -i $IFACE -o $IFACE -p tcp --dport 443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+PostDown = iptables -D FORWARD -i $IFACE -o $IFACE -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+PostDown = iptables -D FORWARD -i $IFACE -o $IFACE -j REJECT --reject-with icmp-port-unreachable
+PostDown = iptables -D FORWARD -i $IFACE -j ACCEPT
+PostDown = iptables -D FORWARD -o $IFACE -j ACCEPT
+PostDown = iptables -t nat -D POSTROUTING -s 10.200.200.0/24 -o ens3 -j MASQUERADE
+EOF
 
+# Lock down conf
+chmod 600 "$WG_DIR/$IFACE.conf"
 
+# Create folder for PSK storage
+mkdir -p /dev/shm/wireguard
 
+# Enable daemon for managing WG
+systemctl enable --now wg-quick@$IFACE
+```
 
+### Get pubkey
+```bash
+#!/usr/bin/env bash
+# /usr/local/bin/wg-get-pubkey.sh
+set -euo pipefail
+
+IFACE="$1"
+ALLOWED_IP="$2"
+
+# Check interface name is whitelisted
+case "$IFACE" in
+    QLS|wg0|wg1) ;;  # add any other valid interface names here
+    *) echo "bad interface"; exit 1 ;;
+esac
+
+# Basic IPv4/32 CIDR check — tighten to your actual subnet
+[[ "$ALLOWED_IP" =~ ^10\.200\.200\.[0-9]{1,3}/32$ ]] || { echo "bad ip"; exit 1; }
+
+PUBKEY=$(sudo wg show QLS dump | awk -v ip=$ALLOWED_IP '$4 == ip {print $1}')
+
+# if PUBKEY is blank, this user wasn't real
+if [[ -z "$PUBKEY" ]]; then
+echo "IP not found" >&2; # log error
+exit;
+
+fi
+
+sudo wg set "$IFACE" peer "$PUBKEY" remove
+
+# Persist so it survives a reboot (writes current running state back to the conf file)
+wg-quick save "$IFACE"
+
+```
+
+### Add peer
+```bash
+#!/usr/bin/env bash
+# /usr/local/bin/wg-add-peer.sh
+set -euo pipefail
+
+IFACE="$1"
+PUBKEY="$2"
+PSK="$3"
+ALLOWED_IP="$4"
+
+PSK_PATH=$(mktemp /dev/shm/wireguard/psk.XXXXXX)
+chmod 600 "$PSK_PATH"
+
+echo "$PSK" > "$PSK_PATH"
+
+WG_PUBKEY=$(wg show | sed -n -e 's/^.*public key: //p')
+
+if [[ "$2" == "pubkey" ]]; then
+echo "$WG_PUBKEY";
+exit;
+fi
+
+# Check interface name is whitelisted
+case "$IFACE" in
+    QLS|wg0|wg1) ;;  # add any other valid interface names here
+    *) echo "bad interface"; exit 1 ;;
+esac
+
+# WireGuard pubkeys: 44 base64 chars, ends in '='
+[[ "$PUBKEY" =~ ^[A-Za-z0-9+/]{43}=$ ]] || { echo "bad pubkey"; exit 1; }
+
+# Basic IPv4/32 CIDR check — tighten to your actual subnet
+[[ "$ALLOWED_IP" =~ ^10\.200\.200\.[0-9]{1,3}/32$ ]] || { echo "bad ip"; exit 1; }
+
+# Live-add the peer — no reload, no restart, no interruption to other peers
+wg set "$IFACE" peer "$PUBKEY" allowed-ips "$ALLOWED_IP" preshared-key "$PSK_PATH"
+
+rm -f "$PSK_PATH"
+
+# Persist so it survives a reboot (writes current running state back to the conf file)
+wg-quick save "$IFACE"
+```
+
+### Remove peer
+```bash
+#!/usr/bin/env bash
+# /usr/local/bin/wg-rm-peer.sh
+set -euo pipefail
+
+IFACE="$1"
+
+# Check interface name is whitelisted
+case "$IFACE" in
+    QLS|wg0|wg1) ;;  # put any valid interface names here
+    *) echo "bad interface"; exit 1 ;;
+esac
+
+# Get server pubkey
+WG_PUBKEY=$(wg show | sed -n -e 's/^.*public key: //p')
+
+# Return to stdout
+echo "$WG_PUBKEY";
+exit;
+```
+
+# Sudoers rules
+
+```
+# /etc/sudoers.d/wg-add-peer
+www-data ALL=(root) NOPASSWD: /usr/local/bin/wg-get-pubkey.sh
+www-data ALL=(root) NOPASSWD: /usr/local/bin/wg-add-peer.sh
+www-data ALL=(root) NOPASSWD: /usr/local/bin/wg-rm-peer.sh
+```
+
+#### Permissions for scripts:
+```bash
+sudo chown root:root /usr/local/bin/wg-*
+sudo chmod 744 /usr/local/bin/wg-*
+```
 
 
