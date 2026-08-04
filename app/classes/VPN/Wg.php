@@ -38,12 +38,10 @@ trait Wg
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function wg_check(string $allowedip, int $devid): array
+    public function wg_check_ip(string $allowedip): array
     {
-        
         $IP = false;   // true if this IP is already in use
-        $NAME = false; // true if this devid is already in use
-
+        
         // Begin PDO transaction
         $startedTransaction = false;
         if (!$this->db->inTransaction()) {
@@ -52,20 +50,44 @@ trait Wg
         }
 
         // Check for duplicate IPs or devices
-        $stmt = $this->db->prepare("SELECT AllowedIPs, id FROM WG WHERE (AllowedIPs = ? OR devname = ?) AND active=TRUE");
-        $stmt->execute([$allowedip, $devid]);
+        $stmt = $this->db->prepare("SELECT AllowedIPs FROM WG WHERE (AllowedIPs = ? AND active=TRUE)");
+        $stmt->execute([$allowedip]);
 
         // For each result in net, resolve to two booleans (IP duped, NAME, duped)
         foreach ($stmt->fetchAll(\PDO::FETCH_ASSOC) as $device) {
             if ($device['AllowedIPs'] === $allowedip) {
-                $IP = true;
-            }
-            if ($device['id'] === $devid) {
-                $NAME = true;
+                $IP = $IP || true;
             }
         }
         // Return boolean array from dupe check
-        $result = ['success' => true, 'data' => [$IP, $NAME]];
+        $result = ['success' => true, 'data' => $IP];
+        return $result;
+    }
+
+
+    public function wg_check_name(int $userid, string $devname): array
+    {
+        $NAME = false;   // true if this IP is already in use
+        
+        // Begin PDO transaction
+        $startedTransaction = false;
+        if (!$this->db->inTransaction()) {
+            $this->db->beginTransaction();
+            $startedTransaction = true;
+        }
+
+        // Check for duplicate devnames
+        $stmt = $this->db->prepare("SELECT devname FROM WG WHERE (userid = ? AND devname = ?)");
+        $stmt->execute([$userid, $devname]);
+
+        // For each result in net, resolve to two booleans (IP duped, NAME, duped)
+        foreach ($stmt->fetchAll(\PDO::FETCH_ASSOC) as $device) {
+            if ($device['devname'] === $devname) {
+                $NAME = $NAME || true;
+            }
+        }
+        // Return boolean array from dupe check
+        $result = ['success' => true, 'data' => $NAME];
         return $result;
     }
 
@@ -81,6 +103,13 @@ trait Wg
                 $this->db->beginTransaction();
                 $startedTransaction = true;
             }
+
+            $dupe = $this->wg_check_name($userid, $devname);
+
+            if ($dupe['data']) {
+                return ['success', false, 'error', 11];
+            }
+
 
             // Build query string
             $sql = "SELECT CONCAT('10.200.200.', 
@@ -130,12 +159,18 @@ trait Wg
         $stmt->execute([$allowedIp]);
         $devid = $stmt->fetchColumn();
 
+        // Get corresponding name and userid
+        $stmt = $this->db->prepare("SELECT devname, userid FROM WG WHERE id = ?");
+        $stmt->execute([$devid]);
+        $dev_details = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        
+
         // Look for existing/repeated user (wg_check, above)
-        $dupe_check = $this->wg_check($allowedIp, $devid);
-        $ip_dupe = $dupe_check['data'][0];
-        $name_dupe = $dupe_check['data'][1];
-        $dupe = $ip_dupe && $name_dupe;
-        if ($dupe) {
+        $dupe_check_ip = $this->wg_check_ip($allowedIp, $devid);
+        $dupe_check_name = $this->wg_check_name($dev_details[0]['userid'], $dev_details[0]['devname']);
+        $ip_dupe = $dupe_check_ip['data'];
+
+        if ($ip_dupe || $dupe_check_name) {
             $result = ['success' => FALSE, 'error' => "Entry is duplicate."];
             return $result;
         } else {

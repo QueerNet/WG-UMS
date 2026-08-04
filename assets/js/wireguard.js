@@ -29,6 +29,13 @@ async function addDevice(userid, devname, pubkey, endpt) {
 
         // Fetch next available
         const result = await callVpnApi('wg_get_next_ip', { userid: userid, devname: devname });
+
+        if (result[3]==11) {
+            alert('Duplicate device name for this user!')
+            location.reload();
+            return
+        }
+
         let allowedIp = result['ip'];
 
         // Generate configuration
@@ -37,7 +44,7 @@ async function addDevice(userid, devname, pubkey, endpt) {
         "[Interface]\r\n",
         "Address = " + allowedIp.replace('/32', '/24') + "\r\n",
         "PrivateKey = " + privateKey + "\r\n",
-        "DNS = 10.200.200.1\r\n",
+        "DNS = 9.9.9.9\r\n",
         "[Peer]\r\n",
         "PublicKey = "+ pubkey + "\r\n",
         "PresharedKey = "+ psk + "\r\n",
