@@ -15,6 +15,23 @@ Call originates from Javascript which sends POST request to api.php which parses
 
 Javascript uses async await and database uses PDO for rollback support. Devices added to the database that fail to create new peers in WG, will be marked as inactive and may be pruned automatically (tbd).
 
+# Screenshots
+#### Login:
+<img width="1919" height="916" alt="Screenshot 2026-08-04 at 16-38-30 QLS Dashboard" src="https://github.com/user-attachments/assets/0ce758f7-5d63-4156-823d-759164f079b0" />
+
+#### Empty user dashboard ready to be populated with content
+<img width="1919" height="914" alt="Screenshot 2026-08-04 at 16-38-17 QLS Dashboard" src="https://github.com/user-attachments/assets/6d9e72be-7955-46d1-a737-39257e66eb53" />
+
+#### Devices tab
+<img width="1274" height="839" alt="Screenshot 2026-08-04 at 16-37-54 QLS Dashboard" src="https://github.com/user-attachments/assets/85c82587-09dc-4289-9e08-f3241d4a9de3" />
+
+#### Admin dashboard
+<img width="1013" height="801" alt="Screenshot 2026-08-04 at 16-47-28 QLS Dashboard" src="https://github.com/user-attachments/assets/829f6e52-3f15-4077-a4b5-a9c2f72a1d52" />
+
+
+
+
+
 # Bash
 
 ### Init
