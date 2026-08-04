@@ -236,24 +236,24 @@ class Users{
 		if ($name == "" ||$email == "" ||$password == ""||$confirm_password == ""||$rolename == ""||$status == ""||$create_date == "" ) {
 	     
 	        $msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-	    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 	    <strong>Error !</strong> Input fields must not be Empty!</div>';
 	        return $msg;
 		}elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 			$msg = '<div class="alert alert-danger text-center alert-dismissible" id="flash-msg">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     <strong>Error !</strong> Please fill up Valid Email !</div>';
 			return $msg;
 		
 		    }elseif (strlen($password) <= '6') {
 				$msg = '<div class="alert alert-danger text-center alert-dismissible" id="flash-msg">
-	    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 	    <strong>Error !</strong> Your Password Must Contain At Least 6 Characters !</div>';
 				return $msg;
 
 	    }elseif($password != $confirm_password) {
 	        $msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-	    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 	    <strong>Error !</strong> Password did not matched, please try agian and use same password two fields.</div>';
 	        return $msg;
 		    }else{
@@ -261,7 +261,7 @@ class Users{
 			    	$mailCheck = $this->db->select($checkUserEmail);
 			    	if ($mailCheck != false) {
 						$msg = '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-			    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			    <strong>Error !</strong> Email already Exist, Please use another Email for create new User. !</div>';
 						return $msg;
 						//exit();
@@ -315,7 +315,7 @@ class Users{
 						}
 				    }else {
 				        $msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-		    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 		    <strong>Error !</strong> New User not Created, Something went wrong!</div>';
 				        return $msg;
 				    }
@@ -349,12 +349,12 @@ class Users{
 		if ($name == "" ||$email == "" ||$rolename == ""||$status == ""|| $create_date == ""  ) {
 	     
 	        $msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-	    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 	    <strong>Error !</strong> Input fields must not be Empty!</div>';
 	        return $msg;
 		}elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 			$msg = '<div class="alert alert-danger text-center alert-dismissible" id="flash-msg">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     <strong>Error !</strong> Please fill up Valid Email !</div>';
 			return $msg;
 		
@@ -515,7 +515,7 @@ class Users{
 								}
 						    } else {
 						        $msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-				    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 				    <strong>Error !</strong> User Data not Updated!</div>';
 						        return $msg;
 						    }
@@ -566,7 +566,7 @@ class Users{
 	        sendEmail::sendEmail($name, $email, $subject, $message);
 		} else {
 			$msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 				<strong>Error !</strong> Something went wrong...</div>';
 			return $msg;	       
 		}
@@ -662,7 +662,7 @@ class Users{
 	        sendEmail::sendEmail($name, $email, $subject, $message);
 	 	}else{
 			$msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 				<strong>Error !</strong> Something went wrong...</div>';
 			return $msg;
 	 	}
@@ -720,7 +720,7 @@ class Users{
 	        sendEmail::sendEmail($name, $email, $subject, $message);
 	 	}else{
 			$msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 				<strong>Error !</strong> Something went wrong...</div>';
 			return $msg;
 	 	}
@@ -886,8 +886,8 @@ class Users{
 
 		if (empty($rolename)) {
 			 $msg 	= '<div class="alert alert-danger animated fadeInUp bg-danger text-white alert-dismissible">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>In-complete Profile !</strong> Hey ( '.$name.' ) Please before Complete your profile, then browse Dashboard. ! <a href="editprofile.php?edituser='.$userid.'"><span class="badge badge-lg badge-dark text-white">Go to profile </span></a> </div>';
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <strong>In-complete Profile !</strong> Hey ( '.$name.' ) Please before Complete your profile, then browse Dashboard. ! <a href="editprofile.php?edituser='.$userid.'"><span class="badge badge-lg text-bg-dark">Go to profile </span></a> </div>';
     		return $msg;
 		}
 	}

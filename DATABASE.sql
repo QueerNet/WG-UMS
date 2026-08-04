@@ -17,7 +17,7 @@
 
 SET @sysadmin_name = 'Morrigan';
 SET @sysadmin = 'mj.qls@tuta.io';
-SET @db_passwd = 'zRnFvtt7@1p2bJv#&R^F';
+-- SET @db_passwd = 'zRnFvtt7@1p2bJv#&R^F';
 
 
 
@@ -33,8 +33,11 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_management`
+-- Database: `UMS`
 --
+
+CREATE DATABASE IF NOT EXISTS UMS;
+USE UMS;
 
 -- --------------------------------------------------------
 
@@ -145,7 +148,7 @@ CREATE TABLE `USERS` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Add sysadmin record
-INSERT INTO `USERS` (`userid`, `name`, `email`, `password`, `rolename`, `status`, `create_date`, `lastactivity`, 'theme') VALUES
+INSERT INTO `USERS` (`userid`, `name`, `email`, `password`, `rolename`, `status`, `create_date`, `lastactivity`, `theme`) VALUES
 (1, 'sysadmin', @sysadmin, 'password', 'sysadmin', 0, '2026-07-11 23:50:55', 0, 'dark');
 
 --
@@ -233,11 +236,11 @@ CREATE TABLE WG (
     devname VARCHAR(64) NOT NULL,
     AllowedIPs VARCHAR(45) NOT NULL,
     PRIMARY KEY (id),
-    UNIQUE KEY uniq_user_device (userid, devid),
+    UNIQUE KEY uniq_user_device (userid, devname),
     UNIQUE KEY uniq_allowed_ip (AllowedIPs),
-    active BOOLEAN DEFAULT FALSE;
+    active BOOLEAN DEFAULT FALSE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-INSERT INTO WG (userid, devid, AllowedIPs, active)
-VALUES (0, 'wg-server', '10.200.200.1/32', TRUE );
+INSERT INTO WG (userid, devname, AllowedIPs, active)
+VALUES (0, 'wg-server', '10.200.200.1/32', TRUE);

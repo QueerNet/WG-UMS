@@ -52,7 +52,7 @@ $myid = isset($_GET['myid']) ? $_GET['myid'] : '';
 
             <?php if ( isset($edit) == '$edit') { ?>
             <a href="editprofile.php?edituser=<?php echo Session::get("userid")?>"
-               class="theme-primary-btn btn btn-primary"><i class="bi bi-pencil-square"></i>&nbspEdit profile</a>
+               class="btn btn-primary"><i class="bi bi-pencil-square"></i>&nbspEdit profile</a>
             <a href="user-changepass.php" name='export' class=" btn btn-secondary"><i class="bi bi-key-fill"></i>&nbspPassword
                change</a>
             <?php } ?>
@@ -99,7 +99,7 @@ $myid = isset($_GET['myid']) ? $_GET['myid'] : '';
                         <div class="col-md-4">Role</div>
                         <div class="col-md-8">
                            <span
-                              class="badge badge-lg badge-secondary text-white"><?php echo $result['rolename']; ?></span>
+                              class="badge badge-lg text-bg-secondary"><?php echo $result['rolename']; ?></span>
                         </div>
                      </div>
                       
@@ -107,9 +107,9 @@ $myid = isset($_GET['myid']) ? $_GET['myid'] : '';
                         <div class="col-md-4">Status</div>
                         <div class="col-md-8">
                            <?php if ($result['status'] == '0') {?>
-                           <span class="badge badge-lg badge-success text-white">Active</span>
+                           <span class="badge badge-lg text-bg-success">Active</span>
                            <?php }elseif($result['status'] == '1'){  ?>
-                           <span class="badge badge-lg badge-warning text-white">Deactive</span>
+                           <span class="badge badge-lg text-bg-warning">Deactive</span>
                            <?php } ?>
                         </div>
                      </div>
@@ -118,7 +118,7 @@ $myid = isset($_GET['myid']) ? $_GET['myid'] : '';
                         <div class="col-md-8">
 
                            <span
-                              class="badge badge-lg badge-dark"><?php echo $fm->formatDate($result['create_date']); ?></span>
+                              class="badge badge-lg text-bg-dark"><?php echo $fm->formatDate($result['create_date']); ?></span>
                         </div>
                      </div>
                   </div>

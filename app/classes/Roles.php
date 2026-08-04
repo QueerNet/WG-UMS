@@ -33,7 +33,7 @@ class Roles{
 
 		if (empty($rolename) OR empty($roledname) ) {
 			$msg = '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     <strong>Error ! </strong>Role Name and Display Name field must not be Empty!</div>';
 		       return $msg;
 		       exit();
@@ -44,7 +44,7 @@ class Roles{
             $CheckColumn = $this->db->select($checkName);
             if($CheckColumn == TRUE){
 			$msg = '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     <strong>Error ! </strong> Role is already added in Database !</div>';
 			       return $msg;
 			       exit();
@@ -70,13 +70,13 @@ class Roles{
 					$result = $this->db->insert($query); 
 				if ($result) {
 					$msg = ' <div class="alert alert-success alert-dismissible" id="flash-msg">
-				    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 				        <strong>Success! </strong> New user Role added Successfully !</div>';
 				        return  $msg;
 				        exit();
 				}else{
 					$msg = '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-		    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 		    <strong>Error ! </strong>Something went wrong , Data not inserted.</div>';
 			       return $msg;
 			       exit();
@@ -117,7 +117,7 @@ class Roles{
 
 		if (empty($roledname)) {
 			$msg = '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     <strong>Error ! </strong>Display Name field must not be Empty!</div>';
 		       return $msg;
 		       exit();
@@ -134,13 +134,13 @@ class Roles{
 			$updated_row = $this->db->update($query);
 			if ($updated_row) {
 					$msg = ' <div class="alert alert-success alert-dismissible" id="flash-msg">
-				    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			        <strong>Success! </strong> User Role Updated Successfully !</div>';
 			        return  $msg;
 			        exit();
 			}else{
 			$msg = '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     <strong>Error ! </strong>Something went wrong , Data not updated.</div>';
 		       return $msg;
 		       exit();
@@ -157,13 +157,13 @@ class Roles{
 		$delete_row = $this->db->delete($query);
 		if ($delete_row) {
 					$msg = ' <div class="alert alert-success alert-dismissible" id="flash-msg">
-				    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 		        <strong>Success! </strong> User Role Deleted Successfully !</div>';
 		        return  $msg;
 		        exit();
 		}else{
 			$msg = '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     <strong>Error ! </strong>Something went wrong , Data not Deleted.</div>';
 	       return $msg;
 	       exit();

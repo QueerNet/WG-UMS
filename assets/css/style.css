@@ -35,7 +35,9 @@ body {
 }
 
 
-
+.row {
+  row-gap: 1ch!important;
+}
 
 
 hr {
@@ -217,11 +219,22 @@ a:hover {
 }
 
 
-
 .form-group .form-control {
     border-radius: 0;
     border: 1px;
+    padding: 1ch;
+    margin-bottom: 2ch;
 }
+
+.row {
+  margin-bottom: 2ch;
+}
+
+.viewuser {
+  margin-left:2ch;
+}
+
+
 
 /*Preloader css3*/
 .spinner_body{
@@ -354,24 +367,11 @@ position: absolute;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 /*Header Navigation Nav*/
 .brand-logo{
   position: relative;
 }
-.navigation{
 
-}
 .navigation nav.navbar{
 padding: 0;
     margin: 0;

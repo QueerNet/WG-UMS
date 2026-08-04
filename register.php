@@ -152,7 +152,7 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
                         </span>
                      </div>
                      <div class="form-group">
-                        <button class="btn theme-primary-btn btn-primary btn-block" type="submit"
+                        <button class="btn btn-primary w-100" type="submit"
                            name="register">Register</button>
                      </div>
                      <div class="form-group text-center">

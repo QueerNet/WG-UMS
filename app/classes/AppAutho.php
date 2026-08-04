@@ -47,13 +47,13 @@ class AppAutho{
     	$updated_row = $this->db->update($query);
 		if ($updated_row) {
 			echo $msg = ' <div class="alert alert-success alert-dismissible" id="flash-msg">
-<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 <strong>Success! </strong>Allow Registration Changed Save Successfully !</div>';
 			
 			exit();
 		}else{
 			echo $msg = ' <div class="alert alert-danger alert-dismissible" id="flash-msg">
-<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 <strong>Error! </strong>Something went wrong !</div>';
 			exit();
 		}

@@ -140,7 +140,7 @@ trait Wg
             return $result;
         } else {
             // Build call to script
-            $cmd = ['sudo', '/usr/local/bin/wg-add-peer.sh', $iface, $pubkey, $allowedIp];
+            $cmd = ['sudo', '/usr/local/bin/wg-add-peer.sh', $iface, $pubkey, $psk, $allowedIp];
 
             // Run process
             $process = proc_open($cmd, [
@@ -180,25 +180,37 @@ trait Wg
         }
 
         // Get allowedIPs from devid
-        $stmt = $this->db->prepare("SELECT AllowedIPs FROM WG WHERE id = ?");
+        $stmt = $this->db->prepare("SELECT AllowedIPs, active FROM WG WHERE id = ?");
         $stmt->execute([$devid]);
-        $allowedIp = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        $allowedIp = $allowedIp[0]['AllowedIPs'];
 
-        // Build call to script
-        $cmd = ['sudo', '/usr/local/bin/wg-rm-peer.sh', $iface, $allowedIp];
+        $results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $allowedIp = $results[0]['AllowedIPs'];
+        $active = $results[0]['active'];
 
-        // Run process
-        $process = proc_open($cmd, [
-            1 => ['pipe', 'w'], // stdout
-            2 => ['pipe', 'w'], // stderr
-        ], $pipes);
+        if (!$active) {
+            // If dev was removed successfully, remove from DB
+            $insert = $this->db->prepare("DELETE FROM WG WHERE id= ? ;");
+            $insert->execute([$devid]);
+            $this->db->commit();
+            $result = ['success', TRUE, 'data', 'Successfully removed phantom device'];
+            return $result;
+        } else {
 
-        // Get result and clean up
-        $stderr = stream_get_contents($pipes[2]);
-        fclose($pipes[1]);
-        fclose($pipes[2]);
-        $exitCode = proc_close($process);
+            // Build call to script
+            $cmd = ['sudo', '/usr/local/bin/wg-rm-peer.sh', $iface, $allowedIp];
+
+            // Run process
+            $process = proc_open($cmd, [
+                1 => ['pipe', 'w'], // stdout
+                2 => ['pipe', 'w'], // stderr
+            ], $pipes);
+
+            // Get result and clean up
+            $stderr = stream_get_contents($pipes[2]);
+            fclose($pipes[1]);
+            fclose($pipes[2]);
+            $exitCode = proc_close($process);
+        }
 
         if (!$exitCode) {
             // If dev was removed successfully, remove from DB

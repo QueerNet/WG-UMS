@@ -7,3 +7,6 @@ When deleting user, delete all their devices
 Fix outdated Bootstrap CSS
 
 Comb the project for "data-toggle=" or others that need to be "data-bs-toggle="
+
+
+Compare style.css to previous commit

@@ -54,7 +54,7 @@ if(isset($_GET['enid'])){
 
 
             <?php if ( $create ) { ?>
-            <a href="adduser.php" class="theme-primary-btn btn btn-primary"><i class="bi bi-person-plus-fill"></i>
+            <a href="adduser.php" class="btn btn-primary"><i class="bi bi-person-plus-fill"></i>
             &nbsp Create user</a>
             <?php } ?>
 
@@ -150,13 +150,13 @@ if(isset($_GET['enid'])){
                                  <td class="pt-4"><?php echo $userentry['name']; ?></td>
                                  <td class="pt-4"><?php echo $userentry['email']; ?></td>
                                  <td class="pt-4"><span
-                                       class="badge badge-lg badge-secondary text-white"><?php echo $userentry['rolename']; ?></span>
+                                       class="badge badge-lg text-bg-secondary"><?php echo $userentry['rolename']; ?></span>
                                  </td>
                                  <td class="pt-4">
                                     <?php if ($userentry['status'] == '0') {?>
-                                    <span class="badge badge-lg badge-success text-white">Active</span>
+                                    <span class="badge badge-lg text-bg-success">Active</span>
                                     <?php }elseif($userentry['status'] == '1'){  ?>
-                                    <span class="badge badge-lg badge-warning text-white">Deactive</span>
+                                    <span class="badge badge-lg text-bg-warning">Deactive</span>
                                     <?php } ?>
 
                                  </td>

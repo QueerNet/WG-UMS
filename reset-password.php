@@ -94,7 +94,7 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
                             </span>
                         </div>
                         <div class="form-group">
-                            <button type="submit" name="reset_password" class="btn theme-primary-btn btn-primary btn-block"> Reset Password</button>
+                            <button type="submit" name="reset_password" class="btn btn-primary w-100"> Reset Password</button>
                         </div>
                         <div class="form-group text-center">
                             You remembered? <a href="login.php">Sign in!</a>

@@ -47,12 +47,12 @@ $viewuser = isset($_GET['viewuser']) ? $_GET['viewuser'] : '';
 
               <?php if ($result['rolename'] == "sysadmin") { ?>
                 <?php if (  $access  ) { ?>
-                  <a href="editprofile.php?edituser=<?php echo $result['userid']; ?>" class="theme-primary-btn btn btn-primary"><i class="material-icons">add</i>Edit profile</a>
+                  <a href="editprofile.php?edituser=<?php echo $result['userid']; ?>" class="btn btn-primary"><i class="material-icons">add</i>Edit profile</a>
                 <?php } ?>
               <?php }else{ ?>
 
               <?php if (  $edit ) { ?>
-                <a href="editprofile.php?edituser=<?php echo $result['userid']; ?>" class="theme-primary-btn btn btn-primary"><i class="material-icons">add</i>Edit profile</a>  
+                <a href="editprofile.php?edituser=<?php echo $result['userid']; ?>" class="btn btn-primary"><i class="material-icons">add</i>Edit profile</a>  
               <?php } ?>
 
               <?php } ?>
@@ -102,16 +102,16 @@ $viewuser = isset($_GET['viewuser']) ? $_GET['viewuser'] : '';
                             <div class="form-group row">
                                 <div class="col-md-4">Role</div>
                                 <div class="col-md-8">
-                                   <span class="badge badge-lg badge-secondary text-white"><?php echo $result['rolename']; ?></span>
+                                   <span class="badge badge-lg text-bg-secondary"><?php echo $result['rolename']; ?></span>
                                  </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-4">Status</div>
                                 <div class="col-md-8">
                                         <?php if ($result['status'] == '0') {?>
-                                        <span class="badge badge-lg badge-success text-white">Active</span>
+                                        <span class="badge badge-lg text-bg-success">Active</span>
                                         <?php }elseif($result['status'] == '1'){  ?>
-                                        <span class="badge badge-lg badge-warning text-white">Deactive</span>
+                                        <span class="badge badge-lg text-bg-warning">Deactive</span>
                                         <?php } ?>
                                  </div>
                             </div>
@@ -120,7 +120,7 @@ $viewuser = isset($_GET['viewuser']) ? $_GET['viewuser'] : '';
                                 <div class="col-md-4">Account created</div>
                                 <div class="col-md-8">
                                     
-                                  <span class="badge badge-lg badge-dark"><?php echo $fm->formatDate($result['create_date']); ?></span>
+                                  <span class="badge badge-lg text-bg-dark"><?php echo $fm->formatDate($result['create_date']); ?></span>
 
                                  </div>
                             </div>

@@ -118,12 +118,12 @@ if(isset($_GET['enid'])){
 
                                     <td class="pt-4"><?php echo $result['name']; ?></td>
                                     <td class="pt-4"><?php echo $result['email']; ?></td>
-                                    <td class="pt-4"><span class="badge badge-lg badge-secondary text-white"><?php echo $result['rolename']; ?></span></td>
+                                    <td class="pt-4"><span class="badge badge-lg text-bg-secondary"><?php echo $result['rolename']; ?></span></td>
                                     <td class="pt-4">
                                         <?php if ($result['status'] == '0') {?>
-                                        <span class="badge badge-lg badge-success text-white">Active</span>
+                                        <span class="badge badge-lg text-bg-success">Active</span>
                                         <?php }elseif($result['status'] == '1'){  ?>
-                                        <span class="badge badge-lg badge-info text-white">Deactive</span>
+                                        <span class="badge badge-lg text-bg-info">Deactive</span>
                                         <?php } ?>
 
                                     </td>

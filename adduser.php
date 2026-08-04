@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
          </nav>
          <div class="create-item">
 
-            <a href="adduser.php" class="theme-primary-btn btn btn-primary"><i class="bi bi-plus-square"></i>Create
+            <a href="adduser.php" class="btn btn-primary"><i class="bi bi-plus-square"></i>Create
                user</a>
 
 
@@ -143,11 +143,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 
                         <div class="input-group date" id="id_0">
                            <input type="text" name="create_date" value="" class="form-control" />
-                           <div class="input-group-addon input-group-append">
-                              <div class="input-group-text">
-                                 <i class="icofont-ui-calendar"></i>
-                              </div>
-                           </div>
+                           <span class="input-group-text">
+                              <i class="icofont-ui-calendar"></i>
+                           </span>
                         </div>
 
                      </div>
@@ -156,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                   <div class="form-group pt-2 row">
                      <div class="col-md-2"></div>
                      <div class="col-md-4">
-                        <button class="theme-primary-btn btn btn-success" type="submit" name="submit">Create
+                        <button class="btn btn-success" type="submit" name="submit">Create
                            User</button>
                         <button class="btn btn-warning text-white" type="reset">Reset</button>
                      </div>

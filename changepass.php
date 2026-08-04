@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changepass'])) {
                         <div class="form-group pt-2 row">
                             <div class="col-md-2"></div>
                             <div class="col-md-4">
-                                <button class="theme-primary-btn btn btn-success" type="submit" name="changepass">Update Password</button>
+                                <button class="btn btn-success" type="submit" name="changepass">Update Password</button>
                                 <button class="btn btn-warning text-white" type="reset">Reset</button>
                              </div>
                         </div>

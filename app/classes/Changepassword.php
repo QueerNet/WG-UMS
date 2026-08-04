@@ -106,12 +106,12 @@ class Changepassword{
 
 				        if ($sent) {
 					        $msg = ' <div class="alert alert-success alert-dismissible" id="flash-msg">
-			    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			    <strong>Wow ! </strong> Your Password has been Successfully Changed !</div>';
 					        return $msg;
 				        }else{
 				        $msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-		    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 		    <strong>Error !</strong> Something went wrong !</div>';
 				        return $msg;
 				        }
@@ -120,7 +120,7 @@ class Changepassword{
 
 				    }else {
 				        $msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-		    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 		    <strong>Error !</strong> Something went wrong !</div>';
 				        return $msg;
 				    }

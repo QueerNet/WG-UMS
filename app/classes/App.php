@@ -70,7 +70,7 @@ class App{
 		if ($app_name == "" ) {
 	     
 	        $msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-	    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 	    <strong>Error !</strong> Input & Upload fields must not be Empty!</div>';
 	        return $msg;
 		       exit();
@@ -80,12 +80,12 @@ class App{
 
 				    if($file_size >1048567 OR $file_logo_size >1048567) {
 				        $msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-				    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 				    <strong>Error !</strong> Image Size should be less then 1MB!</div>';
 				        return $msg;
 					    } elseif (in_array($file_ext, $permited) === false OR in_array($file_logo_ext, $permited) === false) {
 					        $msg = '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-				    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 				    <strong>Error !</strong> You can upload only:-'.implode(', ', $permited).'</div>';
 					        return $msg;
 					    }else{
@@ -144,12 +144,12 @@ class App{
 				        	$updated_row = $this->db->update($query);
 						    if ($updated_row) {
 						        $msg = ' <div class="alert alert-success alert-dismissible" id="flash-msg">
-				    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 				    <strong>Success! </strong> App Settings Contents Updated Successfully !</div>';
 						        return $msg;
 						    }else {
 						        $msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-				    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 				    <strong>Error !</strong> Settings not Updated!</div>';
 						        return $msg;
 						    }
@@ -165,13 +165,13 @@ class App{
 				        	$updated_row = $this->db->update($query);
 						    if ($updated_row) {
 						        $msg = ' <div class="alert alert-success alert-dismissible" id="flash-msg">
-				    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 				    <strong>Success! </strong> App Settings Contents Updated Successfully !</div>';
 						        return $msg;
 
 						    }else {
 						        $msg =   '<div class="alert alert-danger alert-dismissible" id="flash-msg">
-				    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 				    <strong>Error !</strong> Settings Data not Updated!</div>';
 						        return $msg;
 						    }

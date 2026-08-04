@@ -48,7 +48,8 @@ $vpn = new VPN();
                             aria-controls="confModal"
                             onclick="
                             addDevice(<?php echo (int)$_SESSION['userid']; ?>, document.getElementById('devname').value, 
-                            '<?php echo $vpn->wg_get_pubkey('QLS'); ?>')"
+                            '<?php echo $vpn->wg_get_pubkey('QLS'); ?>',
+                            '<?php echo $_SERVER['SERVER_ADDR'] ?>')"
                             >+ Add</button>
                         </div>
                     </div>

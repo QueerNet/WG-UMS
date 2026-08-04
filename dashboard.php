@@ -35,7 +35,7 @@
                      <div class="card-body-icon">
                         <i class="bi bi-people float-right  md-5em"></i>
                      </div>
-                     <div class="mr-5">(
+                     <div class="me-5">(
 
                         <?php  
 
@@ -71,7 +71,7 @@
                      <div class="card-body-icon">
                         <i class="bi bi-person-circle float-right  md-5em"></i>
                      </div>
-                     <div class="mr-5">(
+                     <div class="me-5">(
                         <?php  
 
                     $activeUser = $usr->onlyActiveUsers();
@@ -105,7 +105,7 @@
                      <div class="card-body-icon">
                         <i class="bi bi-person-circle float-right text-white md-5em"></i>
                      </div>
-                     <div class="mr-5">(
+                     <div class="me-5">(
                         <?php  
 
                     $bandUser = $usr->bandUsers();
@@ -140,7 +140,7 @@
                      <div class="card-body-icon">
                         <i class="bi bi-people float-right text-white md-5em"></i>
                      </div>
-                     <div class="mr-5">(
+                     <div class="me-5">(
                         <?php  
 
                     $totalUsers = $usr->totalUsers();
@@ -339,13 +339,13 @@ if(isset($_GET['enid'])){
                                  <td class="pt-4"><?php echo $userentry['name']; ?></td>
                                  <td class="pt-4"><?php echo $userentry['email']; ?></td>
                                  <td class="pt-4"><span
-                                       class="badge badge-lg badge-secondary text-white"><?php echo $userentry['rolename']; ?></span>
+                                       class="badge badge-lg text-bg-secondary"><?php echo $userentry['rolename']; ?></span>
                                  </td>
                                  <td class="pt-4">
                                     <?php if ($userentry['status'] == '0') {?>
-                                    <span class="badge badge-lg badge-success text-white">Active</span>
+                                    <span class="badge badge-lg text-bg-success">Active</span>
                                     <?php }elseif($userentry['status'] == '1'){  ?>
-                                    <span class="badge badge-lg badge-warning text-white">Deactive</span>
+                                    <span class="badge badge-lg text-bg-warning">Deactive</span>
                                     <?php } ?>
 
                                  </td>

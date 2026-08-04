@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['createrole'])) {
             </ol>
          </nav>
          <div class="create-item">
-            <a href="createrole.php" class="theme-primary-btn btn btn-primary"><i class="material-icons">add</i>Add New
+            <a href="createrole.php" class="btn btn-primary"><i class="material-icons">add</i>Add New
                Role</a>
          </div>
       </div>
@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['createrole'])) {
                      <div class="form-group pt-2 row">
                         <div class="col-md-2"></div>
                         <div class="col-md-4">
-                           <button class="theme-primary-btn btn btn-success" type="submit" name="createrole">Create
+                           <button class="btn btn-success" type="submit" name="createrole">Create
                               role</button>
                            <button class="btn btn-warning text-white" type="reset">Reset</button>
                         </div>

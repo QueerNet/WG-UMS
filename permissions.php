@@ -56,9 +56,9 @@
                                         <td>
                                             
                                             <?php if ($result['status'] == '1') { ?>
-                                            <h5 class="mb-2"><span class="badge badge-warning text-white"><?php echo $result['rolename']; ?></span></h5>
+                                            <h5 class="mb-2"><span class="badge text-bg-warning"><?php echo $result['rolename']; ?></span></h5>
                                             <?php }else{  ?>
-                                            <h5 class="mb-2"><span class="badge badge-secondary text-white"><?php echo $result['rolename']; ?></span></h5>
+                                            <h5 class="mb-2"><span class="badge text-bg-secondary"><?php echo $result['rolename']; ?></span></h5>
                                             <?php } ?>
 
                                             <div>
@@ -70,10 +70,10 @@
                                          foreach ($list as $item)
                                          {
                                             if ($item) { ?>
-                                                 <span class="mr-4"><i class="material-icons md-18 text-success">check_circle</i> <?php echo $item; ?></span>
+                                                 <span class="me-4"><i class="material-icons md-18 text-success">check_circle</i> <?php echo $item; ?></span>
                                             <?php }else{ ?> 
                                        
-                                                <span class="mr-4"><i class="material-icons md-18 text-danger">check_circle</i> Nothing</span>
+                                                <span class="me-4"><i class="material-icons md-18 text-danger">check_circle</i> Nothing</span>
 
                                             <?php } ?>
 

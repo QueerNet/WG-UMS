@@ -201,13 +201,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
                      <div class="col-md-4">
 
                         <div class="input-group date" id="id_0">
+                           <span class="input-with-icon">
                            <input type="text" name="create_date" value="<?php echo $result['create_date']; ?>"
-                              class="form-control" required />
-                           <div class="input-group-addon input-group-append">
-                              <div class="input-group-text">
-                                 <i class="bi bi-calendar-week" style="max-height:25px"></i>
-                              </div>
-                           </div>
+                              class="form-control" required /><i class="bi bi-calendar-week" style="max-height:25px"></i>
+                           </span>
                         </div>
 
                      </div>
@@ -215,7 +212,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
                   <div class="form-group pt-2 row">
                      <div class="col-md-2"></div>
                      <div class="col-md-4">
-                        <button class="theme-primary-btn btn btn-success" type="submit" name="update">Update User</button>
+                        <button class="btn btn-success" type="submit" name="update">Update User</button>
                      </div>
                   </div>
 

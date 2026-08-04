@@ -1,6 +1,6 @@
 <?php
 
-$filepath = realpath($_SERVER['HOME']);
+$filepath = realpath($_SERVER['DOCUMENT_ROOT']);
 include ($filepath.'/app/lib/Session.php');
 Session::init();
 Session::checkUserLogin();

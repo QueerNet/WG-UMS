@@ -32,7 +32,7 @@ if (isset($delrole) && is_numeric($delrole) && isset($_GET['remove']) == 'remove
             </ol>
          </nav>
          <div class="create-item">
-            <a href="createrole.php" class="theme-primary-btn btn btn-primary"><i class="bi bi-plus-circle-fill"></i> &nbsp Add New
+            <a href="createrole.php" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i> &nbsp Add New
                Role</a>
          </div>
       </div>
@@ -82,13 +82,13 @@ if (isset($delrole) && is_numeric($delrole) && isset($_GET['remove']) == 'remove
                                  <td class="pt-3"><?php echo $i; ?></td>
                                  <td class="pt-3"><?php echo $result['roledname']; ?></td>
                                  <td class="pt-3"><span
-                                       class="badge badge-lg badge-secondary text-white"><?php echo $result['rolename']; ?></span>
+                                       class="badge badge-lg text-bg-secondary"><?php echo $result['rolename']; ?></span>
                                  </td>
                                  <td class="pt-3">
                                     <?php if ($result['status'] == '0') {?>
-                                    <span class="badge badge-lg badge-success text-white">Active</span>
+                                    <span class="badge badge-lg text-bg-success">Active</span>
                                     <?php }elseif($result['status'] == '1'){  ?>
-                                    <span class="badge badge-lg badge-warning text-white">Deactive</span>
+                                    <span class="badge badge-lg text-bg-warning">Deactive</span>
                                     <?php } ?>
 
                                  </td>

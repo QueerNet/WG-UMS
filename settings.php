@@ -50,10 +50,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['app-update'])) {
                <div class="geleral-settings">
                   <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
                      <li class="nav-item">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#app-setting">App Settings</a>
+                        <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#app-setting">App Settings</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#placeholder" role="tab"
+                        <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#placeholder" role="tab"
                            aria-controls="profile" aria-selected="false">Placeholder tab</a>
                      </li>
                   </ul>
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['app-update'])) {
 
 
                            <div class="form-group row">
-                              <div class="col-md-2 text-right">App Name</div>
+                              <div class="col-md-2 text-end">App Name</div>
                               <div class="col-md-4">
                                  <input id="app_name" type="text" value="<?php echo $appResult['app_name']; ?>"
                                     class="form-control" name="app_name" autofocus="">
@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['app-update'])) {
 
 
                            <div class="form-group row">
-                              <div class="col-md-2 text-right">App Title</div>
+                              <div class="col-md-2 text-end">App Title</div>
                               <div class="col-md-4">
                                  <input id="title" type="text" value="<?php echo $appResult['title']; ?>"
                                     class="form-control" name="title" autofocus="">
@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['app-update'])) {
                            </div>
 
                            <div class="form-group row">
-                              <div class="col-md-2 text-right">Front-end app Name</div>
+                              <div class="col-md-2 text-end">Front-end app Name</div>
                               <div class="col-md-4">
                                  <input id="front_name" type="text" value="<?php echo $appResult['front_name']; ?>"
                                     class="form-control" name="front_name" autofocus="">
@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['app-update'])) {
                            </div>
 
                            <div class="form-group row">
-                              <div class="col-md-2 pt-5 text-right">Upload favicon</div>
+                              <div class="col-md-2 pt-5 text-end">Upload favicon</div>
                               <div class="col-md-4">
                                  <div class="set_thumb">
 
@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['app-update'])) {
                            </div>
 
                            <div class="form-group row">
-                              <div class="col-md-2 pt-5 text-right">Upload Website Logo</div>
+                              <div class="col-md-2 pt-5 text-end">Upload Website Logo</div>
                               <div class="col-md-4">
                                  <div class="set_thumb">
 
@@ -153,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['app-update'])) {
                               <div class="col-md-4">
                                  <input type="hidden" id="app_id" name="app_id"
                                     value="<?php echo $appResult['app_id']; ?>">
-                                 <button class="theme-primary-btn btn btn-success" name="app-update"
+                                 <button class="btn btn-success" name="app-update"
                                     type="submit">Update settings</button>
 
                               </div>
@@ -178,7 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['app-update'])) {
                         <form id="placeholder" action="" method="POST">
 
                            <div class="form-group email-user row">
-                              <div class="col-md-3 text-right">Allow Registration - E-Mail</div>
+                              <div class="col-md-3 text-end">Allow Registration - E-Mail</div>
                               <div class="col-md-4">
                                  <!--
                                  <div class="checkbox">
@@ -207,7 +207,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['app-update'])) {
                               <div class="col-md-4">
                                  <input type="hidden" name="id_autho" id="id_autho"
                                     value="<?php echo $getApp['id_autho']; ?>" />
-                                 <button class="theme-primary-btn btn btn-success" type="submit">Update
+                                 <button class="btn btn-success" type="submit">Update
                                     settings</button>
 
                               </div>

@@ -14,8 +14,7 @@ async function callVpnApi(method, params = {}) {
 
 
 
-async function addDevice (userid, devname, pubkey) {
-    var endpt = '75.44.20.106';
+async function addDevice (userid, devname, pubkey, endpt) {
     if (devname==="") {
         return;
     } else {
@@ -32,24 +31,10 @@ async function addDevice (userid, devname, pubkey) {
         const result = await callVpnApi('wg_get_next_ip', { userid: userid, devname: devname });
         let allowedIp = result['ip'];
 
-        let configuration ="";
-
         // Generate configuration
-        configuration = 
-        "[Interface]\r\n" +
-        "Address = " + allowedIp.replace('/32', '/24') + "\r\n" + 
-        "PrivateKey = " + privateKey + "\r\n" + 
-        "DNS = 10.200.200.1\r\n" +
-        "[Peer]\r\n" +
-        "PublicKey = "+ pubkey + "\r\n" + 
-        "PresharedKey = "+ psk + "\r\n" + 
-        "AllowedIPs = 0.0.0.0/0, ::0/0\r\n"+
-        "Endpoint = "+ endpt +":42069\r\n";
 
-        // Assemble file
-        let conf;
-        // Generate configuration array
-        conf = [
+        
+        let confArr = [
         "[Interface]\r\n",
         "Address = " + allowedIp.replace('/32', '/24') + "\r\n",
         "PrivateKey = " + privateKey + "\r\n",
@@ -59,7 +44,10 @@ async function addDevice (userid, devname, pubkey) {
         "PresharedKey = "+ psk + "\r\n",
         "AllowedIPs = 0.0.0.0/0, ::0/0\r\n",
         "Endpoint = "+ endpt +":42069\r\n"];
-        var confBlob = new Blob(conf)
+
+        var confBlob = new Blob(confArr);
+
+        let configuration = confArr.join('');
         
 
         // Create an eventlistener for "Save" button to trigger "saveDevice"

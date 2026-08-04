@@ -7,7 +7,7 @@ if (defined('BASE_DIR')==FALSE) {
 // Database
 if (defined('DB_HOST')==FALSE) {define('DB_HOST', 'localhost');}
 if (defined('DB_USER')==FALSE) {define('DB_USER', 'sysadmin');}
-if (defined('DB_PASS')==FALSE) {define('DB_PASS', 'zRnFvtt7@1p2bJv#&R^F');}
+if (defined('DB_PASS')==FALSE) {define('DB_PASS', 'AH7QVt*JazxG@zFTEDV*');}
 if (defined('DB_NAME')==FALSE) {define('DB_NAME', 'UMS');}
 
 // Email server
