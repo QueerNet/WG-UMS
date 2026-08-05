@@ -12,10 +12,13 @@ if (defined('DB_PASS')==FALSE) {define('DB_PASS', 'AH7QVt*JazxG@zFTEDV*');}
 if (defined('DB_NAME')==FALSE) {define('DB_NAME', 'UMS');}
 
 // Email server
-if (defined('SMTP_HOST')==FALSE) {define('SMTP_HOST', 'mail.queerliberationserver.org');}
-if (defined('SMTP_UNAME')==FALSE) {define('SMTP_UNAME', 'noreply@queerliberationserver.org');}
-if (defined('SMTP_PASS')==FALSE) {define('SMTP_PASS', 'P$tzsyXEjvVa3MBvmK0X');}
+if (defined('SMTP_HOST')==FALSE) {define('SMTP_HOST', 'mail-eu.smtp2go.com');}
+if (defined('SMTP_UNAME')==FALSE) {define('SMTP_UNAME', 'ansionnachdana');}
+if (defined('SMTP_SENDER')==FALSE) {define('SMTP_SENDER', 'ansionnachdana@queerliberationserver.org');}
 if (defined('SMTP_SENDER_PRETTY')==FALSE) {define('SMTP_SENDER_PRETTY', 'Queer Liberation Server');}
+
+//TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+if (defined('SMTP_PORT')==FALSE) {define('SMTP_PORT', 465);}
 
 // Sysadmin
 if (defined('sysadmin_email')==FALSE) {define('sysadmin_email', 'mj.qls@tuta.io');}

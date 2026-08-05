@@ -1,5 +1,5 @@
 <?php
-namespace sendEmail;;
+namespace sendEmail;
 $filepath = realpath(dirname(__FILE__));
 
 require ($filepath.'/../classes/SMTP.php');
@@ -28,12 +28,15 @@ class sendEmail {
             $mail->Username   = constant('SMTP_UNAME');                     //SMTP username
             $mail->Password   = $_ENV['SMTP_PASS'];                               //SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-            $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+            
+            // TCP port to connect to; use 587 if you have set:
+            // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS
+            $mail->Port       = constant('SMTP_PORT');
 
             // Recipients
-            $mail->setFrom(constant('SMTP_UNAME'), constant('SMTP_SENDER_PRETTY'));
+            $mail->setFrom(constant('SMTP_SENDER'), constant('SMTP_SENDER_PRETTY'));
             $mail->addAddress($email);               //Add recipient
-            $mail->addReplyTo(constant('SMTP_UNAME'), constant('SMTP_SENDER_PRETTY'));
+            $mail->addReplyTo(constant('SMTP_SENDER'), constant('SMTP_SENDER_PRETTY'));
             $mail->addBCC(constant('sysadmin_email'));
 
             // Content

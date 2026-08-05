@@ -155,8 +155,10 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
                         <button class="btn btn-primary w-100" type="submit"
                            name="register">Register</button>
                      </div>
-                     <div class="form-group text-center">
-                        Have an account? <a href="login.php">Sign In</a>
+
+                     <!--Submit -->
+                     <div class="form-group text-center">Have an account? <a href="login.php">Sign In</a>
+                     
                      </div>
                   </form>
                </div>
