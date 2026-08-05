@@ -19,9 +19,6 @@ $THEME = 'dark';
 $COLOR_MODE = 'dark';
 
 
-
- ?>
-<?php
 header("Cache-Control: no-store, no-cache, must-revalidate"); 
 header("Cache-Control: pre-check=0, post-check=0, max-age=0"); 
 header("Pragma: no-cache"); 
@@ -75,14 +72,6 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 
 
    <?php 
-
-
-
-
-
-
-
-
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
    $chkUserLogin = $usr->userLoginAuthentication($_POST);
@@ -175,34 +164,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
    
 
 
-
-   <!--====== JQuery from CDN ======-->
-   <script src="assets/js/jquery.min.js"></script>
-
-   <!--====== Bootstrap js ======-->
-   <script src="assets/js/bootstrap.min.js"></script>
-   <script src="assets/js/popper.min.js"></script>
-
-   <!--====== datepicker js ======-->
-   <script src="assets/js/moment-with-locales.min.js"></script>
-   <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
-
-   <!--====== select2.min.js ======-->
-   <script src="assets/js/select2.min.js"></script>
-
-   <!--====== dataTables js ======-->
-   <script src="assets/js/dataTables.bootstrap4.min.js"></script>
-   <script src="assets/js/jquery.dataTables.min.js"></script>
-
-   <!--====== Chart.min js ======-->
-   <script src="assets/js/Chart.bundle.min.js"></script>
-
-   <!--====== wow.min js ======-->
-   <script src="assets/js/wow.min.js"></script>
-   <!--====== Main js ======-->
-   <script src="assets/js/plugins.js"></script>
-   <script src="assets/js/script.js"></script>
-
-</body>
-
-</html>
+<?php include 'app/inc/footer.php'; ?>

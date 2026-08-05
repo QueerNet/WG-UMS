@@ -16,7 +16,7 @@ Class Database{
    }
    
   private function connectDB(){
-     $this->link = new mysqli(constant('DB_HOST'), constant('DB_USER'), constant('DB_PASS'), constant('DB_NAME'));
+     $this->link = new mysqli(constant('DB_HOST'), constant('DB_USER'), $_ENV['DB_PASS'], constant('DB_NAME'));
      if(!$this->link){
        $this->error ="Connection fail".$this->link->connect_error;
       return false;

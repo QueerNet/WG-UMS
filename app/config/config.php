@@ -1,8 +1,9 @@
 <?php
 
-if (defined('BASE_DIR')==FALSE) {
-    define('BASE_DIR', __DIR__);
-}
+require __DIR__ . '/../../vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/../../../');
+$dotenv->load();
 
 // Database
 if (defined('DB_HOST')==FALSE) {define('DB_HOST', 'localhost');}
