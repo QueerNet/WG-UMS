@@ -37,7 +37,7 @@ class sendEmail {
             $mail->setFrom(constant('SMTP_SENDER'), constant('SMTP_SENDER_PRETTY'));
             $mail->addAddress($email);               //Add recipient
             $mail->addReplyTo(constant('SMTP_SENDER'), constant('SMTP_SENDER_PRETTY'));
-            $mail->addBCC(constant('sysadmin_email'));
+            //$mail->addBCC(constant('sysadmin_email'));
 
             // Content
             $mail->isHTML(true);                                  //Set email format to HTML

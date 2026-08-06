@@ -30,7 +30,14 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 <html lang="en" data-bs-theme="<?php echo $COLOR_MODE?>">
 
 <head>
-
+   <!-- Preloader styles -->
+   <style>
+   .spinner_body{position:fixed;inset:0;margin:auto;z-index:999999;background:#0a0a0a;height:100vh}
+   .spinner{width:80px;height:80px;border:2px solid #f3f3f3;border-top:3px solid #2a2a2a;border-radius:100%;position:absolute;right:50%;top:45%;animation:spin 1s infinite linear}
+   @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+   </style>
+   <!-- Preloader styles -->
+    
    <!--====== Required meta tags ======-->
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

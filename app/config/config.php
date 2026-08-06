@@ -13,8 +13,8 @@ if (defined('DB_NAME')==FALSE) {define('DB_NAME', 'UMS');}
 
 // Email server
 if (defined('SMTP_HOST')==FALSE) {define('SMTP_HOST', 'mail-eu.smtp2go.com');}
-if (defined('SMTP_UNAME')==FALSE) {define('SMTP_UNAME', 'ansionnachdana');}
-if (defined('SMTP_SENDER')==FALSE) {define('SMTP_SENDER', 'ansionnachdana@queerliberationserver.org');}
+if (defined('SMTP_UNAME')==FALSE) {define('SMTP_UNAME', 'no-reply.qls');}
+if (defined('SMTP_SENDER')==FALSE) {define('SMTP_SENDER', 'no-reply.qls@queerliberationserver.org');}
 if (defined('SMTP_SENDER_PRETTY')==FALSE) {define('SMTP_SENDER_PRETTY', 'Queer Liberation Server');}
 
 //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`

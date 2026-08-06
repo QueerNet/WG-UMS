@@ -1,12 +1,12 @@
 TODO:
 
-When call list-devices, prune inactive? Also, reorder buttons and add status indicator and pull status from db when pulling other deets
+When call list-devices, prune inactive?
 
 When deleting user, delete all their devices
 
-Fix outdated Bootstrap CSS
 
-Comb the project for "data-toggle=" or others that need to be "data-bs-toggle="
+Fix account dropdown on mobile dashboard
 
 
-Compare style.css to previous commit
+Scheduled cron check to diff wireguard clients with SQL database
+- if extra peer, remove and alert sysadmin
