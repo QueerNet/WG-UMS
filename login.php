@@ -14,6 +14,7 @@ spl_autoload_register(function($class){
 $db = new Database();
 $usr = new Users();
 $fr = new Frontend();
+$msg = "";
 
 $THEME = 'dark';
 $COLOR_MODE = 'dark';
@@ -45,12 +46,12 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 
    <?php 
 
-        $header_contents = $fr->selectfrontendpart();
-        if ($header_contents) {
-          while ($result = $header_contents->fetch_assoc()) {
-          
+   $header_contents = $fr->selectfrontendpart();
+   if ($header_contents) {
+      while ($result = $header_contents->fetch_assoc()) {
+      
 
-       ?>
+   ?>
    <!--====== Title ======-->
    <title><?php  if (isset($result['title'])) {
         echo $result['title'];
@@ -64,29 +65,56 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
    include ($filepath.'/../inc/loadassets.php');
    ?>
    
-
-
 </head>
 
 <body>
 
-   <!-- Preloader -->
-   <div class="spinner_body">
-      <div class="spinner"></div>
-   </div>
+<!-- Preloader -->
+<div class="spinner_body">
+   <div class="spinner"></div>
+</div>
+<!-- Preloader -->
 
-   <!-- Preloader -->
 
-
-   <?php 
+<?php
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
-   $chkUserLogin = $usr->userLoginAuthentication($_POST);
-
+   if ($_POST['email']=="") {
+      $data = "nologin";
+   } else {
+      try {
+         if ($_POST['cap-token']=="") {
+            $data = "EMPTY";
+         } else {
+            $data = json_decode(file_get_contents("https://".$_ENV['Cap_Site'].":".$_ENV['Cap_Site_Port']."/siteverify",
+            false, stream_context_create([
+               "http" => [
+               "method" => "POST",
+               "header" => "Content-Type: application/json",
+               "content" => json_encode(["secret"=>$_ENV['Cap_Key'],"response"=>$_POST['cap-token']])
+               ]
+            ])
+            ), true);
+         }
+      } catch (Exception $e) {
+         $data['success'] = FALSE;
+      }
+   }
+   
+   // var_dump($data['success'] ?? false);
+   if ($data=="EMPTY") {
+      $msg = '<div class="alert alert-danger" id="flash-msg"><strong>Please complete captcha</strong></div>';
+   } elseif ($data=="nologin") {
+      $msg = "";
+   } elseif ($data['success']===FALSE) {
+      $msg = '<div class="alert alert-danger" id="flash-msg"><strong>Captcha failed to authenticate</strong></div>';
+   } elseif ($data['success']===TRUE) {
+      $chkUserLogin = $usr->userLoginAuthentication($_POST);
+   } else {
+      $msg = '<div class="alert alert-danger" id="flash-msg"><strong>Unknown captcha error! Please report to ".sysadmin_email."</strong></div>';
+   }
 }
-
-
- ?>
+?>
 
 
    <!--====== Start Main Wrapper Section======-->
@@ -150,6 +178,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
                            <i class="bi bi-lock-fill"></i>
                         </span>
                      </div>
+                     <?php if (!$msg=="") {echo $msg;} ?>
+                     <cap-widget data-cap-api-endpoint="https://<?php echo $_ENV['Cap_Site'] ?>:<?php echo $_ENV['Cap_Site_Port'] ?>/<?php echo $_ENV['Cap_Site_Key'] ?>"></cap-widget>
                      <div class="form-group">
                         <button type="submit" name="login" id="login"
                            class="btn text-white theme-primary-btn btn-primary btn-block">Sign In</button>

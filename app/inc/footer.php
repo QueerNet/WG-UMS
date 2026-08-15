@@ -44,6 +44,9 @@
 <!--====== QREncode ======-->
 <script src="assets/js/qrcode.min.js"></script>
 
+<!--====== Cap ======-->
+<script src="https://cdn.jsdelivr.net/npm/@cap.js/widget"></script>
+
 
 
 </body>

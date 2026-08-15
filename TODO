@@ -5,8 +5,12 @@ When call list-devices, prune inactive?
 When deleting user, delete all their devices
 
 
-Fix account dropdown on mobile dashboard
+!!! Fix account dropdown on mobile dashboard !!!
 
 
 Scheduled cron check to diff wireguard clients with SQL database
 - if extra peer, remove and alert sysadmin
+
+Look at ajax-classes/email-allow.php
+
+Finish cap integration - need to add logic
