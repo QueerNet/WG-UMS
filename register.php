@@ -13,6 +13,7 @@ spl_autoload_register(function($class){
 $db = new Database();
 $usr = new Users();
 $fr = new Frontend();
+$msg = "";
 
 $THEME = 'dark';
 $COLOR_MODE = 'dark';
@@ -25,10 +26,59 @@ header("Cache-Control: pre-check=0, post-check=0, max-age=0");
 header("Pragma: no-cache"); 
 header("Expires: Mon, 6 Dec 1977 00:00:00 GMT"); 
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+
+
+
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+   if ($_POST['email']=="") {
+      $data = "nologin";
+   } else {
+      try {
+         if ($_POST['cap-token']=="") {
+            $data = "EMPTY";
+         } else {
+            $data = json_decode(file_get_contents("https://".$_ENV['Cap_Site'].":".$_ENV['Cap_Site_Port']."/siteverify",
+            false, stream_context_create([
+               "http" => [
+               "method" => "POST",
+               "header" => "Content-Type: application/json",
+               "content" => json_encode(["secret"=>$_ENV['Cap_Key'],"response"=>$_POST['cap-token']])
+               ]
+            ])
+            ), true);
+         }
+      } catch (Exception $e) {
+         $data['success'] = FALSE;
+      }
+   }
+   
+   // var_dump($data['success'] ?? false);
+   if ($data=="EMPTY") {
+      $msg = '<div class="alert alert-danger" id="flash-msg"><strong>Please complete captcha</strong></div>';
+   } elseif ($data=="nologin") {
+      $msg = "";
+   } elseif ($data['success']===FALSE) {
+      $msg = '<div class="alert alert-danger" id="flash-msg"><strong>Captcha failed to authenticate</strong></div>';
+   } elseif ($data['success']===TRUE) {
+      $register = $usr->newUserRegistration($_POST);
+      if ($register['DB'] && $register['EMAIL']===TRUE) {
+         $msg = '<div class="alert alert-success" id="flash-msg"><strong>Registered Successfully</strong></div>';
+      } elseif ($register['DB']) {
+         $msg = '<div class="alert alert-danger" id="flash-msg"><strong>Registered. Failed to send email. Please report to '.sysadmin_email.'</strong></div>';
+      } elseif (!$register['DB'] && !$register['EMAIL']===TRUE) {
+         $msg = '<div class="alert alert-danger" id="flash-msg"><strong>Failure to register. Please report to '.sysadmin_email.'</strong></div>';
+      } else {
+         $msg = '<div class="alert alert-danger" id="flash-msg"><strong>Unknown registration error! Please report to '.sysadmin_email.'</strong></div>';
+      }
+   } else {
+      $msg = '<div class="alert alert-danger" id="flash-msg"><strong>Unknown captcha error! Please report to '.sysadmin_email.'</strong></div>';
+   }
+}
+
+
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="<?php echo $COLOR_MODE?>">
@@ -121,16 +171,9 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
             <!--SIGN IN FORM-->
             <div class="panel mb-none">
                <div class="panel-content bg-scale-0">
-                  <form method="POST" id="register_user" action="" role="form">
+                  <form action="" method="post" id="register_user">
                      <div class="form-group mt-md">
-                        <div id="msg"></div>
-                        <?php if (isset($register)) {
-                               echo $register;
-                           }
-                           
-                           
-                           
-                           ?>
+                        <!-- <div id="msg"></div> -->
                      </div>
                      <div class="form-group mt-md">
                         <span class="input-with-icon">
@@ -158,6 +201,8 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
                            <i class="bi bi-shield-lock"></i>
                         </span>
                      </div>
+                     <?php if (!$msg=="") {echo $msg;} ?>
+                     <cap-widget data-cap-api-endpoint="https://<?php echo $_ENV['Cap_Site'] ?>:<?php echo $_ENV['Cap_Site_Port'] ?>/<?php echo $_ENV['Cap_Site_Key'] ?>"></cap-widget>
                      <div class="form-group">
                         <button class="btn btn-primary w-100" type="submit"
                            name="register">Register</button>

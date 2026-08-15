@@ -249,45 +249,6 @@ $(document).ready(function(){
 
 
 
-    //User Registration 
-     $("#register_user").on('submit', function(event){
-      event.preventDefault();
-
-
-
-          var name                = $("#name").val();
-          var email               = $("#email").val();
-          var password            = $("#password").val();
-          var confirm_password    = $("#confirm_password").val();
-          var create_date = new Date().toISOString().slice(0, 19).replace('T', ' ');
-
-          var dataString  = 'name='+name+'&email='+email+'&password='+password+'&confirm_password='+confirm_password+'&create_date='+create_date;
-
-          if (dataString !== '') {
-            // Email login Authotication
-              $.ajax({
-                  url:"app/ajax-classes/register-user.php",
-                  type:"POST",
-                  data:dataString,
-                   async: false,
-                  success:function(data){
-                     $("#msg").html(data);
-                     $("#flash-msg").delay(5000).fadeOut("slow");
-                     $("#name").val('');
-                     $("#email").val('');
-                     $("#password").val('');
-                     $("#confirm_password").val('');
-                  }
-
-              });
-                   
-                     
-          }
-
-
-    return false;
-    });
-
       //User Reset password 
        $("#reset_password").on('submit', function(event){
         event.preventDefault();

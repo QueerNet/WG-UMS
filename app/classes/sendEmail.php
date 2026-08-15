@@ -21,7 +21,8 @@ class sendEmail {
             $mail = new PHPMailer(true);
 
             // Server settings
-            $mail->SMTPDebug = SMTP::DEBUG_OFF;                      //Enable verbose debug output
+            $mail->SMTPDebug = SMTP::DEBUG_OFF;                      //Disable verbose debug output
+            $mail->Debugoutput = 'error_log';
             $mail->isSMTP();                                            //Send using SMTP
             $mail->Host       = constant('SMTP_HOST');                     //Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
@@ -45,12 +46,10 @@ class sendEmail {
             $mail->Body    = $message;
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-            $mail->send();
-            echo '<strong>Success!</strong>';
+            $result = $mail->send();
             $sent = TRUE;
         } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            $sent =   FALSE;
+            $sent =   $mail->ErrorInfo;
         }
         return $sent;
     }

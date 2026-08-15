@@ -126,85 +126,93 @@ class Users{
 		$email_ 				= $this->fm->validation($data['email']);
 		$password_ 			= $this->fm->validation($data['password']);
 		$confirm_password_               = $this->fm->validation($data['confirm_password']);
-                $create_date_                    = $this->fm->validation($data['create_date']);
+		// $create_date_                    = $this->fm->validation($data['create_date']);
 
 		$name 				= mysqli_real_escape_string($this->db->link, $name_);
 		$email 				= mysqli_real_escape_string($this->db->link, $email_);
 		$password 			= mysqli_real_escape_string($this->db->link, $password_);
 		$confirm_password               = mysqli_real_escape_string($this->db->link, $confirm_password_);
-                $create_date                    = mysqli_real_escape_string($this->db->link, $create_date_);
+		// $create_date                    = mysqli_real_escape_string($this->db->link, $create_date_);
+		$create_date = date('Y-m-d H:i:s');
 		
+		//Set default return - fail
+		$result = ['DB'=> FALSE, 'EMAIL'=> FALSE];
 
 
 		$pregExp = "/^[a-z0-9_-]+(\.[a-z0-9_-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/";
 		if ($name == "" || $email == "" || $password == "" || $confirm_password == "") {
 	     
 	        $msg =   '<div class="alert alert-danger " id="flash-msg">
-	    <strong>Error !</strong> Input fields must not be Empty!</div>';
+	    			<strong>Error !</strong> Input fields must not be Empty!</div>';
 	        echo $msg;
 		       exit();
-		}elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+		} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 			$msg = '<div class="alert alert-danger" id="flash-msg">
-    <strong>Error !</strong> Please fill up Valid Email !</div>';
+    				<strong>Error !</strong> Please fill up Valid Email !</div>';
 			echo $msg;
-		}elseif(!preg_match($pregExp, $email)) {
+		} elseif (!preg_match($pregExp, $email)) {
 			$msg = '<div class="alert alert-danger " id="flash-msg">
-    <strong>Error !</strong> Please fill up Valid Email !</div>';
+    				<strong>Error !</strong> Please fill up Valid Email !</div>';
 			echo  $msg;
 		
-		}elseif (strlen($password) < '6') {
+		} elseif (strlen($password) < '6') {
 				$msg = '<div class="alert alert-danger " id="flash-msg">
-	    <strong>Error !</strong> Your Password Must Contain At Least 6 Characters !</div>';
+	    				<strong>Error !</strong> Your Password Must Contain At Least 6 Characters !</div>';
 				echo $msg;
-	    }elseif(!preg_match("#[0-9]+#",$password)) {
+	    } elseif (!preg_match("#[0-9]+#",$password)) {
 			$msg = '<div class="alert alert-danger " id="flash-msg">
-    <strong>Error !</strong> Your Password Must Contain At Least 1 Number !</div>';
+    				<strong>Error !</strong> Your Password Must Contain At Least 1 Number !</div>';
 			echo $msg;
-	    }elseif(!preg_match("#[a-z]+#",$password)) {
+	    } elseif (!preg_match("#[a-z]+#",$password)) {
 			$msg = '<div class="alert alert-danger " id="flash-msg">
-    <strong>Error !</strong> Your Password Must be Contain At Least 1 Lowercase Letter !</div>';
+    				<strong>Error !</strong> Your Password Must be Contain At Least 1 Lowercase Letter !</div>';
 			echo $msg;
-	    }elseif($password != $confirm_password) {
-	        $msg =   '<div class="alert alert-danger " id="flash-msg">
-	    <strong>Error !</strong> Password did not matched, please try agian and use same password two fields.</div>';
-	        echo $msg;
-		    }else{
-			    	$checkUserEmail = "SELECT email FROM $this->table WHERE email = '$email' LIMIT 1";
-			    	$mailCheck = $this->db->select($checkUserEmail);
-			    	if ($mailCheck != false) {
-						$msg = '<div class="alert alert-danger" id="flash-msg">
-			    <strong>Error !</strong> Email already used, Please use another Email. !</div>';
-						echo $msg;
-						exit();
-			    	}else{
-                                    $base_url   = $this->getBaseUrl();
-                                    // This is query for handle use registration permission
-                                    $onQuery = "SELECT * FROM $this->apptable";
-                                    $allowRegistration = $this->db->select($onQuery);
-                                    $value = $allowRegistration->fetch_assoc();
-                                    
-                                    if ($value['allow_email'] === '1') {
-                                        $msg = '<div class="alert alert-danger" id="flash-msg">
-                                        <strong>Error !</strong> New user Registration is closed by Author !</div>';
-                                        echo $msg;
-                                        exit();
-                                    }else{
-                                        // Has password 
-                                        $has_pass 	= password_hash($password, PASSWORD_DEFAULT);
-                                        $query = "INSERT INTO $this->table(name,  email, password, rolename, create_date) VALUES('$name', '$email', '$has_pass', 'Only user', '$create_date')";
-                                        $inserted_rows = $this->db->insert($query);
-                                        $to 		= $email;
-                                        $subject 	= 'Welcome to QLS!';
-                                        $message 	 = "Your name is : " . strip_tags($name) . "\r\n";
-                                        $message 	.= "Your E-mail is : " . strip_tags($email) . "\r\n";
-                                        $message 	.= "Your account was created at : " . $create_date . "\r\n";
-                                        $message 	.= "Message : Please visit our website to login ".$base_url." ";
+	    } elseif ($password != $confirm_password) {
+			$msg =   '<div class="alert alert-danger " id="flash-msg">
+					<strong>Error !</strong> Password did not matched, please try agian and use same password two fields.</div>';
+			echo $msg;
+		} else {
+			$checkUserEmail = "SELECT email FROM $this->table WHERE email = '$email' LIMIT 1";
+			$mailCheck = $this->db->select($checkUserEmail);
+			if ($mailCheck != false) {
+				$msg = '<div class="alert alert-danger" id="flash-msg">
+						<strong>Error !</strong> Email already used, Please use another Email. !</div>';
+				echo $msg;
+				exit();
+			} else {
+				$base_url   = $this->getBaseUrl();
+				// This is query for handle use registration permission
+				$onQuery = "SELECT * FROM $this->apptable";
+				$allowRegistration = $this->db->select($onQuery);
+				$value = $allowRegistration->fetch_assoc();
+				
+				if ($value['allow_email'] === '1') {
+					$msg = '<div class="alert alert-danger" id="flash-msg">
+					<strong>Error !</strong> New user Registration is closed by Author !</div>';
+					$result = ['DB'=> FALSE, 'EMAIL'=> FALSE];
+					echo $msg;
+					exit();
+				} else {
+					// Has password 
+					$has_pass 	= password_hash($password, PASSWORD_DEFAULT);
+					$query = "INSERT INTO $this->table(name,  email, password, rolename, create_date) VALUES('$name', '$email', '$has_pass', 'Only user', '$create_date')";
+					$inserted_rows = $this->db->insert($query);
+					$to 		= $email;
+					$subject 	= 'Welcome to QLS!';
+					$message 	 = "Your name is : " . strip_tags($name) . "\r\n";
+					$message 	.= "Your E-mail is : " . strip_tags($email) . "\r\n";
+					$message 	.= "Your account was created at : " . $create_date . "\r\n";
+					$message 	.= "Message : Please visit our website to login ".$base_url." ";
 
-                                        // Use our sendEmail function
-                                        sendEmail::sendEmail($name, $email, $subject, $message);
-                                    }
+					$result = ['DB'=> TRUE, 'EMAIL'=> FALSE];
+
+					// Use our sendEmail function
+					$emailer = sendEmail::sendEmail($name, $email, $subject, $message);
+					$result = ['DB'=> TRUE, 'EMAIL'=> $emailer];
+					return $result;
 				}
-		    }
+			}
+		}
 	}
 
 
