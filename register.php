@@ -203,14 +203,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                      </div>
                      <?php if (!$msg=="") {echo $msg;} ?>
                      <cap-widget data-cap-api-endpoint="https://<?php echo $_ENV['Cap_Site'] ?>:<?php echo $_ENV['Cap_Site_Port'] ?>/<?php echo $_ENV['Cap_Site_Key'] ?>"></cap-widget>
-                     <div class="form-group">
+                     <br><br>
+                     <div class="form-group d-grid gap-2 col-6 mx-auto">
                         <button class="btn btn-primary w-100" type="submit"
                            name="register">Register</button>
                      </div>
-
+                     <br>
                      <!--Submit -->
                      <div class="form-group text-center">Have an account? <a href="login.php">Sign In</a>
-                     
                      </div>
                   </form>
                </div>

@@ -180,10 +180,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
                      </div>
                      <?php if (!$msg=="") {echo $msg;} ?>
                      <cap-widget data-cap-api-endpoint="https://<?php echo $_ENV['Cap_Site'] ?>:<?php echo $_ENV['Cap_Site_Port'] ?>/<?php echo $_ENV['Cap_Site_Key'] ?>"></cap-widget>
-                     <div class="form-group">
+                     <br><br>
+                     <div class="form-group  d-grid gap-2 col-6 mx-auto">
                         <button type="submit" name="login" id="login"
                            class="btn text-white theme-primary-btn btn-primary btn-block">Sign In</button>
                      </div>
+                     <br>
                      <div class="form-group text-center">
                         <a href="reset-password.php">Forgot password?</a>
                         <hr />

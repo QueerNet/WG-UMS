@@ -12,7 +12,7 @@
       <div class="content-header">
          <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-               <li class="breadcrumb-item"><a href="dashboard.php"><i class="material-icons">home</i>Home</a></li>
+               <li class="breadcrumb-item"><a href="dashboard.php"><i class="bi bi-house-door-fill"></i>Home</a></li>
                <li class="breadcrumb-item active" aria-current="page">General settings</li>
             </ol>
          </nav>
@@ -20,10 +20,6 @@
       <!--  Header BreadCrumb -->
 
       <?php 
-
-
-
-    
 
 
 
@@ -117,8 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['app-update'])) {
                                     </div>
                                     <div class="fileUploadInput">
                                        <input type="file" name="favicon" id="file-input-favicon" />
-                                       <button class="input-file-btn"><i class="material-icons"> cloud_upload
-                                          </i></button>
+                                       <button class="input-file-btn"><i class="bi bi-cloud-upload"></i></button>
                                     </div>
                                  </div>
                               </div>
@@ -142,8 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['app-update'])) {
                                     </div>
                                     <div class="fileUploadInput">
                                        <input type="file" name="logo" id="file-input-logo" />
-                                       <button class="input-file-btn"><i class="material-icons"> cloud_upload
-                                          </i></button>
+                                       <button class="input-file-btn"><i class="bi bi-cloud-upload"></i></button>
                                     </div>
                                  </div>
                               </div>

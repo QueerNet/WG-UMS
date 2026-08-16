@@ -167,10 +167,10 @@ trait Wg
 
         // Look for existing/repeated user (wg_check, above)
         $dupe_check_ip = $this->wg_check_ip($allowedIp, $devid);
-        $dupe_check_name = $this->wg_check_name($dev_details[0]['userid'], $dev_details[0]['devname']);
+        //$dupe_check_name = $this->wg_check_name($dev_details[0]['userid'], $dev_details[0]['devname']);
         $ip_dupe = $dupe_check_ip['data'];
 
-        if ($ip_dupe || $dupe_check_name) {
+        if ($ip_dupe) {
             $result = ['success' => FALSE, 'error' => "Entry is duplicate."];
             return $result;
         } else {

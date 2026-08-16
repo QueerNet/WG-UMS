@@ -12,7 +12,7 @@
         <div class="content-header">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="dashboard.php"><i class="material-icons">home</i>Home</a></li>
+                <li class="breadcrumb-item"><a href="dashboard.php"><i class="bi bi-house-door-fill"></i>Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Permissions details</li>
               </ol>
             </nav>
@@ -70,7 +70,7 @@
                                          foreach ($list as $item)
                                          {
                                             if ($item) { ?>
-                                                 <span class="me-4"><i class="material-icons md-18 text-success">check_circle</i> <?php echo $item; ?></span>
+                                                 <span class="me-4"><i class="bi bi-check-circle md-18"></i> <?php echo $item; ?></span>
                                             <?php }else{ ?> 
                                        
                                                 <span class="me-4"><i class="material-icons md-18 text-danger">check_circle</i> Nothing</span>

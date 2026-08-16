@@ -150,101 +150,83 @@ $rolename =  Session::get("rolename");
  ?>
 
 
-   <!--====== Start Header Section======-->
-   <header>
-      <div class="header">
 
+<!--====== Start Header Section======-->
+<header>
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-         <div class="navigation">
-            <nav class="navbar navbar-expand-lg navbar-bg">
+      <!-- Branding -->
+      <div style="width: 250px;" class="flex-shrink-0">
+         <a class="navbar-brand" href="userdash.php" id="menu-action">
+            <?php 
+            $header_contents = $fr->selectfrontendpart();
+            if ($header_contents) {
+               while ($result = $header_contents->fetch_assoc()) {
+            ?>
+            <!--====== App Name ======-->
+            <span>
+               <?php if (isset($result['logo'])) { ?>
+               <img width="40" align='middle' src="assets/images/icons/favicon.png" alt="your image"
+                  title='' />
+               <?php }else{ ?>
+               <img width="40" align='middle' src="assets/images/icons/favicon.png" alt="your image" title=''>
+               <?php } ?>
 
-               <div class="brand-logo">
-                  <a class="navbar-brand" href="userdash.php" id="menu-action">
-                     <?php 
-
-              $header_contents = $fr->selectfrontendpart();
-              if ($header_contents) {
-                while ($result = $header_contents->fetch_assoc()) {
-                
-
-             ?>
-                     <!--====== App Name ======-->
-                     <span>
-                        <?php if (isset($result['logo'])) { ?>
-                        <img width="40" align='middle' src="assets/images/icons/favicon.png" alt="your image"
-                           title='' />
-                        <?php }else{ ?>
-                        <img width="40" align='middle' src="assets/images/icons/favicon.png" alt="your image" title=''>
-                        <?php } ?>
-
-                        <?php  if (isset($result['app_name'])) {
-              echo $result['app_name'];
-            } else{?>
-                     </span>
-                     <span>Admin Panel</span>
-                     <?php }} }?>
-
-                  </a>
-                  <div id="nav-toggle">
-                     <div class="cta">
-                        <div class="toggle-btn type1"></div>
-                     </div>
-                  </div>
-               </div>
-
-
-               <div class="for-mobile d-mobile">
-                  <a href="#mobile-authentication" id="mobile-toggle"><span></span></a>
-
-                  <div id="mobile-authentication">
-                     <ul>
-                        <li>
-                           <span>
-                              <img width="70" align='middle' src="app/uploads/userAvatar/User.png" alt="your image"
-                                 title='' />
-                           </span>
-                        </li>
-                        <li><span><strong>Welcome!</strong><?php echo $userName = Session::get('userName'); ?></span>
-                        </li>
-                        <li><a href="user-account.php?myid=<?php echo Session::get("userid")?>">
-                              <i class="bi bi-person-circle"></i>
-                              Account Settings</a></li>
-                        <li><a href="?action=logout&&sunset=id">
-                           <i class="bi bi-box-arrow-left"></i>
-                        Logout</a>
-                        </li>
-                     </ul>
-                  </div>
-               </div>
-
-               <!--<div class="collapse navbar-collapse pr-3" id="#">-->
-                  <ul class="navbar-nav user-info d-desktop ms-auto mt-2 mt-lg-0">
-                     <li class="nav-item dropdown show">
-                        <a href="#" class="navbar-nav-link dropdown-toggle text-light account" data-bs-toggle="dropdown"
-                           aria-expanded="true">
-                           <div class="user-photo">
-                              <img width="70" align='middle' src="app/uploads/userAvatar/User.png" alt="your image"
-                                 title='' />
-                           </div>
-                           <strong>Welcome ! </strong><?php echo $userName = Session::get('userName'); ?>
-
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                           <a href="user-account.php?myid=<?php echo Session::get("userid")?>" class="dropdown-item">
-                              <i class="bi bi-person-circle"></i>
-                              Account Settings</a>
-                           <div class="menu-dropdown-divider"></div>
-                           <a class="dropdown-item" href="?action=logout&&sunset=id">
-                              <i class="bi bi-box-arrow-left"></i>
-                              Logout</a>
-                        </div>
-                     </li>
-                  </ul>
-
-               </div>
-            </nav>
-
-         </div>
+               <?php  if (isset($result['app_name'])) {
+                  echo $result['app_name'];
+               } else{?>
+            </span>
+            <span>Portal</span>
+            <?php }}}?>
+         </a>
       </div>
-   </header>
-   <!--====== End Header Section======-->
+      <!-- Branding -->
+
+      <!-- Sidebar hamburger -->
+      <button class="navbar-toggler flex-shrink-0 rounded-0" type="button"
+            style="width: 50px;"
+            data-bs-toggle="collapse" data-bs-target="#wrapper-sidebar"
+            aria-controls="wrapper-sidebar" aria-expanded="true"
+            aria-label="Toggle sidebar">
+         <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Sidebar hamburger -->
+
+      <!-- Middle space -->
+      <div class="flex-grow-1"></div>
+      <!-- Middle space -->
+
+      <!-- Account toggle -->
+      <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Account toggle -->
+         
+      <!-- Account dropdown -->
+      <div class="ms-auto pr-3 collapse navbar-collapse" id="navbarNavDarkDropdown">
+         <ul class="navbar-nav user-info ms-auto mt-2 mt-lg-0">
+            <li class="nav-item dropdown" style="padding-right:1vw;">
+               <a href="#" class="navbar-nav-link dropdown-toggle text-light account" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  <div class="user-photo">
+                     <img width="70" align='middle' src="app/uploads/userAvatar/User.png" alt="your image"
+                        title='' />
+                  </div>
+                  <!-- <strong>Welcome! &nbsp</strong>--><?php echo $userName = Session::get('userName'); ?> 
+               </a>
+               <div class="dropdown-menu dropdown-menu-right">
+                  <a href="account.php?myid=<?php echo Session::get("userid")?>" class="dropdown-item">
+                     <i class="bi bi-person-circle"></i>
+                     Account Settings</a>
+                  <div class="menu-dropdown-divider"></div>
+                  <a class="dropdown-item" href="?action=logout&&sunset=id">
+                     <i class="bi bi-box-arrow-left"></i>
+                        Logout</a>
+               </div>
+            </li>
+         </ul>
+      </div>
+      <!-- Account dropdown -->
+   </nav>
+</header>
+<!--====== End Header Section======-->

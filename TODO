@@ -13,4 +13,6 @@ Scheduled cron check to diff wireguard clients with SQL database
 
 Look at ajax-classes/email-allow.php
 
-Finish cap integration - need to add logic
+Fix add devices (add back in (dupe check name in wg_add_peer inside Wg.php))
+
+Make device adding errors verbose and output them into modal

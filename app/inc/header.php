@@ -129,130 +129,92 @@ $rolename =  Session::get("rolename");
 
 <body>
 
-   <!-- Preloader -->
-   <div class="spinner_body">
-      <div class="spinner"></div>
-   </div>
+<!-- Preloader -->
+<div class="spinner_body">
+   <div class="spinner"></div>
+</div>
 
-   <!-- Preloader -->
-   <?php 
-    if (isset($_GET['action']) && $_GET['action'] == "logout" && $_GET['sunset'] == "id") {
-        $userid = Session::get('userid');
-        $update_off = $usr->userActive_OFF($userid);
-        $logOut = $usr->userLogOut();
-        
-    }
- ?>
-
-
-   <!--====== Start Header Section======-->
-   <header>
-      <div class="header">
+<!-- Preloader -->
+<?php 
+   if (isset($_GET['action']) && $_GET['action'] == "logout" && $_GET['sunset'] == "id") {
+      $userid = Session::get('userid');
+      $update_off = $usr->userActive_OFF($userid);
+      $logOut = $usr->userLogOut();
+      
+   }
+?>
 
 
-         <div class="navigation">
-            <nav class="navbar navbar-expand-lg navbar-bg">
+<!--====== Start Header Section======-->
+<header>
+   <div class="header">
 
-               <div class="brand-logo">
-                  <a class="navbar-brand" href="dashboard.php" id="menu-action">
-                     <?php 
 
-              $header_contents = $fr->selectfrontendpart();
-              if ($header_contents) {
-                while ($result = $header_contents->fetch_assoc()) {
-                
+      <div class="navigation">
+         <nav class="navbar navbar-expand-lg navbar-bg">
 
-             ?>
-                     <!--====== App Name ======-->
-                     <span>
-                        <?php if (isset($result['logo'])) { ?>
+            <div class="brand-logo">
+               <a class="navbar-brand" href="dashboard.php" id="menu-action">
+                  <?php
+                  $header_contents = $fr->selectfrontendpart();
+                  if ($header_contents) {
+                     while ($result = $header_contents->fetch_assoc()) {
+                  ?>
+                  <!--====== App Name ======-->
+                  <span>
+                     <?php if (isset($result['logo'])) { ?>
                         <img width="40" align='middle' src="assets/images/icons/favicon.png" alt="your image"
                            title='' />
-                        <?php }else{ ?>
+                     <?php }else{ ?>
                         <img width="40" align='middle' src="assets/images/icons/favicon.png" alt="your image" title=''>
-                        <?php } ?>
-
-                        <?php  if (isset($result['app_name'])) {
-              echo $result['app_name'];
-            } else{?>
-                     </span>
-                     <span>Admin Panel</span>
+                     <?php }
+                     
+                     if (isset($result['app_name'])) {
+                        echo $result['app_name'];
+                     } else{?>
+                  </span>
+                  <span>Admin Panel</span>
                      <?php }} }?>
-
-                  </a>
-                  <div id="nav-toggle">
-                     <div class="cta">
-                        <div class="toggle-btn type1"></div>
-                     </div>
+               </a>
+               <div id="nav-toggle">
+                  <div class="cta">
+                     <div class="toggle-btn type1"></div>
                   </div>
                </div>
-
-
-               <div class="for-mobile d-mobile">
-                  <a href="#mobile-authentication" id="mobile-toggle"><span></span></a>
-
-                  <div id="mobile-authentication">
-                     <ul>
-                        <li>
-                           <span><?php 
-
-                       $profilePhoto = Session::get('profilePhoto');
-                      
-                       if(file_exists($profilePhoto)){ ?>
-                              <img width="70" src="<?php echo $profilePhoto; ?>" alt="">
-                              <?php }else{?>
-                              <img width="70" align='middle' src="app/uploads/userAvatar/User.png" alt="your image"
-                                 title='' />
-                              <?php } ?>
-                           </span>
-
-                        </li>
-                        <li><span><strong>Welcome ! </strong><?php echo $userName = Session::get('userName'); ?></span>
-                        </li>
-                        <li><a href="account.php?myid=<?php echo Session::get("userid")?>">
-                              <i class="bi bi-person-circle"></i>
-                              Account Settings</a></li>
-                        <li><a href="?action=logout&&sunset=id">
+            </div>
+            <!-- Account dropdown -->
+            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+            </button>
+               
+            <!-- Account dropdown -->
+            <div class="ms-auto pr-3 collapse navbar-collapse" id="navbarNavDarkDropdown">
+               <ul class="navbar-nav user-info ms-auto mt-2 mt-lg-0">
+                  <li class="nav-item dropdown" style="padding-right:1vw;">
+                     <a href="#" class="navbar-nav-link dropdown-toggle text-light account" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <div class="user-photo">
+                           <img width="70" align='middle' src="app/uploads/userAvatar/User.png" alt="your image"
+                              title='' />
+                        </div>
+                        <!-- <strong>Welcome! &nbsp</strong>--><?php echo $userName = Session::get('userName'); ?> 
+                     </a>
+                     <div class="dropdown-menu dropdown-menu-right">
+                        <a href="account.php?myid=<?php echo Session::get("userid")?>" class="dropdown-item">
+                           <i class="bi bi-person-circle"></i>
+                           Account Settings</a>
+                        <div class="menu-dropdown-divider"></div>
+                        <a class="dropdown-item" href="?action=logout&&sunset=id">
                            <i class="bi bi-box-arrow-left"></i>
                               Logout</a>
-                        </li>
-                     </ul>
-                  </div>
-               </div>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+            <!-- Account dropdown -->
 
-               <!--<div class="collapse navbar-collapse pr-3" id="#">-->
-
-                  <ul class="navbar-nav user-info d-desktop ml-auto mt-2 mt-lg-0">
-                     <li class="nav-item dropdown show">
-                        <a href="#" class="navbar-nav-link dropdown-toggle text-light account" data-bs-toggle="dropdown"
-                           aria-expanded="true">
-                           <div class="user-photo">
-
-                              <img width="70" align='middle' src="app/uploads/userAvatar/User.png" alt="your image"
-                                 title='' />
-
-                           </div>
-                           <strong>Welcome ! </strong><?php echo $userName = Session::get('userName'); ?>
-
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-
-                           <a href="account.php?myid=<?php echo Session::get("userid")?>" class="dropdown-item">
-                              <i class="bi bi-person-circle"></i>
-                              Account Settings</a>
-
-                           <div class="menu-dropdown-divider"></div>
-                           <a class="dropdown-item" href="?action=logout&&sunset=id">
-                              <i class="bi bi-box-arrow-left"></i>
-                                 Logout</a>
-                        </div>
-                     </li>
-                  </ul>
-
-               </div>
-            </nav>
-
-         </div>
+         </nav>
       </div>
-   </header>
-   <!--====== End Header Section======-->
+   </div>
+</header>
+<!--====== End Header Section======-->
