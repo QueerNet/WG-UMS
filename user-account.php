@@ -4,19 +4,12 @@
 
 <?php 
 
-$myid = isset($_GET['myid']) ? $_GET['myid'] : '';
-  if (!isset($myid) && $myid == NULL) {
-      //header("user-dash.php");
-      echo "<script>location.href='user-dash.php';</script>";
-      exit();
-
-  }else{
-    $myid = preg_replace('/[^a-zA-Z0-9-]/', '', $myid);
-    $myprofile = $usr->getUserById($myid);
-  }
-
-   
-
+$myid = Session::get('userid');
+if (!$myid) {
+    echo "<script>location.href='login.php';</script>";
+    exit();
+}
+$myprofile = $usr->getUserById($myid);
  ?>
 
 

@@ -594,7 +594,7 @@ class Users{
 
 	// View User By Id Method 
 	public function getUserById($viewuser){
-		//$viewuser = preg_replace('/[^a-zA-Z0-9-]/', '', $viewuser);
+		$viewuser = preg_replace('/[^a-zA-Z0-9-]/', '', $viewuser);
 		$query = "SELECT * FROM $this->table WHERE userid = '$viewuser'";
 		$result = $this->db->select($query);
 		return $result;
@@ -604,7 +604,7 @@ class Users{
 
 	// Edit User By Id Method 
 	public function editUserById($edituser, $rolename){
-		if ($rolename !== 'sysadmin') {
+		if ($rolename !== 'sysadmin' && $edituser !== Session::get('userid')) {
 			exit();
 		}
 		$editpro = preg_replace('/[^a-zA-Z0-9-]/', '', $edituser);

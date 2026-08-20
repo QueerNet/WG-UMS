@@ -5,7 +5,7 @@ include_once ($filepath."/../classes/AppAutho.php");
 $apa = new AppAutho();
 
 
-// Swithch to Email
+// Switch to Email
 if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
 	$allow_email 	  = $_POST['allow_email'];
 	$id_autho 	  = $_POST['id_autho'];
