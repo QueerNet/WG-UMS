@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['createrole'])) {
       <!--  Header BreadCrumb -->
       <!-- Flash Message -->
       <?php if (isset($addRole)) {
-              echo $addRole;
+              echo e($addRole);
           } ?>
       <!-- Flash Message -->
       <!-- Create New User -->

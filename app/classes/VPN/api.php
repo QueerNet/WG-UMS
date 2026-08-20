@@ -26,7 +26,7 @@ $method = $_POST['method'] ?? '';
 // If method is not allowed, return an error and exit
 if (!array_key_exists($method, $allowedMethods)) {
     http_response_code(400);
-    echo json_encode(['success' => false, 'error' => 'Unknown method: ' . $method]);
+    echo e(json_encode(['success' => false, 'error' => 'Unknown method: ' . $method]));
     exit;
 }
 
@@ -35,7 +35,7 @@ $args = [];
 foreach ($allowedMethods[$method] as $field) {
     if (!isset($_POST[$field])) {
         http_response_code(400);
-        echo json_encode(['success' => false, 'error' => "Missing field: $field"]);
+        echo e(json_encode(['success' => false, 'error' => "Missing field: $field"]));
         exit;
     }
     $args[] = $_POST[$field];
@@ -57,4 +57,4 @@ if (isset($result['success']) && !$result['success']) {
 }
 
 // Return result
-echo json_encode($result);
+echo e(json_encode($result));

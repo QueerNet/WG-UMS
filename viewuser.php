@@ -39,7 +39,7 @@ $viewuser = isset($_GET['viewuser']) ? $_GET['viewuser'] : '';
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="dashboard.php"><i class="material-icons">home</i>Home</a></li>
                 <li class="breadcrumb-item"><a href="users.php">Users</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><?php echo $result['name']; ?></li>
+                <li class="breadcrumb-item active" aria-current="page"><?php echo e($result['name']); ?></li>
               </ol>
             </nav>
             <div class="create-item">
@@ -47,12 +47,12 @@ $viewuser = isset($_GET['viewuser']) ? $_GET['viewuser'] : '';
 
               <?php if ($result['rolename'] == "sysadmin") { ?>
                 <?php if (  $access  ) { ?>
-                  <a href="editprofile.php?edituser=<?php echo $result['userid']; ?>" class="btn btn-primary"><i class="material-icons">add</i>Edit profile</a>
+                  <a href="editprofile.php?edituser=<?php echo e($result['userid']); ?>" class="btn btn-primary"><i class="material-icons">add</i>Edit profile</a>
                 <?php } ?>
               <?php }else{ ?>
 
               <?php if (  $edit ) { ?>
-                <a href="editprofile.php?edituser=<?php echo $result['userid']; ?>" class="btn btn-primary"><i class="material-icons">add</i>Edit profile</a>  
+                <a href="editprofile.php?edituser=<?php echo e($result['userid']); ?>" class="btn btn-primary"><i class="material-icons">add</i>Edit profile</a>  
               <?php } ?>
 
               <?php } ?>
@@ -86,7 +86,7 @@ $viewuser = isset($_GET['viewuser']) ? $_GET['viewuser'] : '';
                             <div class="form-group row">
                                 <div class="col-md-4">Name</div>
                                 <div class="col-md-8">
-                                    <?php echo $result['name']; ?>
+                                    <?php echo e($result['name']); ?>
 
                                  </div>
                             </div>
@@ -94,7 +94,7 @@ $viewuser = isset($_GET['viewuser']) ? $_GET['viewuser'] : '';
                             <div class="form-group row">
                                 <div class="col-md-4">E-Mail Address</div>
                                 <div class="col-md-8">
-                                    <?php echo $result['email']; ?>
+                                    <?php echo e($result['email']); ?>
 
                                  </div>
                             </div>
@@ -102,7 +102,7 @@ $viewuser = isset($_GET['viewuser']) ? $_GET['viewuser'] : '';
                             <div class="form-group row">
                                 <div class="col-md-4">Role</div>
                                 <div class="col-md-8">
-                                   <span class="badge badge-lg text-bg-secondary"><?php echo $result['rolename']; ?></span>
+                                   <span class="badge badge-lg text-bg-secondary"><?php echo e($result['rolename']); ?></span>
                                  </div>
                             </div>
                             <div class="form-group row">
@@ -120,7 +120,7 @@ $viewuser = isset($_GET['viewuser']) ? $_GET['viewuser'] : '';
                                 <div class="col-md-4">Account created</div>
                                 <div class="col-md-8">
                                     
-                                  <span class="badge badge-lg text-bg-dark"><?php echo $fm->formatDate($result['create_date']); ?></span>
+                                  <span class="badge badge-lg text-bg-dark"><?php echo e($fm->formatDate($result['create_date'])); ?></span>
 
                                  </div>
                             </div>

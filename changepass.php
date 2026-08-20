@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['changepass'])) {
         <?php 
 
           if (isset($updatepass)) {
-              echo $updatepass;
+              echo e($updatepass);
                 
           } 
 

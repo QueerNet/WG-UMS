@@ -40,7 +40,7 @@ if (isset($delrole) && is_numeric($delrole) && isset($_GET['remove']) == 'remove
       <?php 
 
             if (isset($delRole)) {
-                echo $delRole;
+                echo e($delRole);
                 
             }
 

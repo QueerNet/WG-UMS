@@ -33,10 +33,7 @@
 
                   <div class="col-md-6">
                      <div class="form-group row">
-                        <div class="user-thumb d-mobile">
-                           <img id="profile-photo" align='middle' src="app/uploads/userAvatar/User.png" alt="your image"
-                              title='' />
-                        </div>
+
                      </div>
                      <div class="form-group row">
                         <div class="col-md-4">Name</div>
@@ -52,10 +49,7 @@
                      </div>
                   </div>
                   <div class="col-md-6 d-desktop">
-                     <div class="user-thumb">
-                        <img id="profile-photo" align='middle' src="app/uploads/userAvatar/User.png" alt="your image"
-                           title='' />
-                     </div>
+
 
                   </div>
 

@@ -47,7 +47,7 @@
             <ol class="breadcrumb">
                <li class="breadcrumb-item"><a href="user-dash.php"><i class="bi bi-house-door-fill"></i>Home</a></li>
                <li class="breadcrumb-item"><a href="editprofile.php?edituser=<?php echo Session::get("userid")?>.php">My Account</a></li>
-               <li class="breadcrumb-item active" aria-current="page"><?php echo $result['name']; ?></li>
+               <li class="breadcrumb-item active" aria-current="page"><?php echo e($result['name']); ?></li>
             </ol>
          </nav>
          <div class="create-item">
@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
       <?php 
 
             if (isset($updateUser)) {
-              echo $updateUser;
+              echo e($updateUser);
             }
 
            ?>
@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
                   <div class="form-group row">
                      <div class="col-md-2">Name</div>
                      <div class="col-md-8">
-                        <input id="name" type="text" value="<?php echo $result['name']; ?>" class="form-control"
+                        <input id="name" type="text" value="<?php echo e($result['name']); ?>" class="form-control"
                            name="name" value="" autofocus="">
 
                      </div>
@@ -149,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
                         <select class="form-control" id="rolename" name="rolename">
 
 
-                           <option value="<?php echo $result['rolename']; ?>"><?php echo $result['rolename']; ?>
+                           <option value="<?php echo e($result['rolename']); ?>"><?php echo e($result['rolename']); ?>
                            </option>
 
                         </select>
@@ -202,7 +202,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
 
                         <div class="input-group date" id="id_0">
                            <span class="input-with-icon">
-                           <input type="text" name="create_date" value="<?php echo $result['create_date']; ?>"
+                           <input type="text" name="create_date" value="<?php echo e($result['create_date']); ?>"
                               class="form-control" required /><i class="bi bi-calendar-week" style="max-height:25px"></i>
                            </span>
                         </div>

@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['app-update'])) {
     $app_update = $app->updateAppSettings($_POST, $_FILES, $app_id);
 
     if (isset($app_update)) {
-      echo $app_update;
+      echo e($app_update);
     }
 
 

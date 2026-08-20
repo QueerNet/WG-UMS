@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
       <?php 
 
           if (isset($inserUser)) {
-              echo $inserUser;
+              echo e($inserUser);
               
           }
 

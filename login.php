@@ -158,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
                   <form action="" method="post" id="login-user">
                      <div class="form-group mt-md">
                         <?php if (isset( $chkUserLogin)) {
-                               echo  $chkUserLogin;
+                               echo e($chkUserLogin);
                            } ?>
 
                      </div>

@@ -60,13 +60,13 @@ if(isset($_GET['enid'])){
 
           <?php 
             if (isset($deUserByid)) {
-                echo $deUserByid;
+                echo e($deUserByid);
             }
             if (isset($enableId)) {
-                echo $enableId;
+                echo e($enableId);
             }
             if (isset($disableId)) {
-                echo $disableId;
+                echo e($disableId);
             }
            ?>
           <!--  main-content -->   

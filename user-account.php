@@ -45,7 +45,7 @@ $myid = isset($_GET['myid']) ? $_GET['myid'] : '';
                      profile</a></li>
                <?php } ?>
 
-               <li class="breadcrumb-item active" aria-current="page"><?php echo $result['name']; ?></li>
+               <li class="breadcrumb-item active" aria-current="page"><?php echo e($result['name']); ?></li>
             </ol>
          </nav>
          <div class="create-item">
@@ -73,14 +73,14 @@ $myid = isset($_GET['myid']) ? $_GET['myid'] : '';
                   <div class="col-md-6">
                      <div class="form-group row">
                         <div class="user-thumb d-mobile">
-                           <img id="profile-photo" align='middle' src="app/uploads/userAvatar/User.png" alt="your image"
-                              title='' />
+                           <!-- <img id="profile-photo" align='middle' src="app/uploads/userAvatar/User.png" alt="your image"
+                              title='' /> -->
                         </div>
                      </div>
                      <div class="form-group row">
                         <div class="col-md-4">Name</div>
                         <div class="col-md-8">
-                           <?php echo $result['name']; ?>
+                           <?php echo e($result['name']); ?>
 
                         </div>
                      </div>
@@ -90,7 +90,7 @@ $myid = isset($_GET['myid']) ? $_GET['myid'] : '';
                      <div class="form-group row">
                         <div class="col-md-4">E-Mail Address</div>
                         <div class="col-md-8">
-                           <?php echo $result['email']; ?>
+                           <?php echo e($result['email']); ?>
 
                         </div>
                      </div>
@@ -99,7 +99,7 @@ $myid = isset($_GET['myid']) ? $_GET['myid'] : '';
                         <div class="col-md-4">Role</div>
                         <div class="col-md-8">
                            <span
-                              class="badge badge-lg text-bg-secondary"><?php echo $result['rolename']; ?></span>
+                              class="badge badge-lg text-bg-secondary"><?php echo e($result['rolename']); ?></span>
                         </div>
                      </div>
                       
@@ -118,14 +118,14 @@ $myid = isset($_GET['myid']) ? $_GET['myid'] : '';
                         <div class="col-md-8">
 
                            <span
-                              class="badge badge-lg text-bg-dark"><?php echo $fm->formatDate($result['create_date']); ?></span>
+                              class="badge badge-lg text-bg-dark"><?php echo e($fm->formatDate($result['create_date'])); ?></span>
                         </div>
                      </div>
                   </div>
                   <div class="col-md-6 d-desktop">
                      <div class="user-thumb">
-                        <img id="profile-photo" align='middle' src="app/uploads/userAvatar/User.png" alt="your image"
-                           title='' />
+                        <!-- <img id="profile-photo" align='middle' src="app/uploads/userAvatar/User.png" alt="your image"
+                           title='' /> -->
                      </div>
 
                   </div>

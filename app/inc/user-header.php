@@ -213,7 +213,7 @@ $rolename =  Session::get("rolename");
                   <strong id="greeting"><?php echo $userName = Session::get('userName'); ?> </strong>
                </a>
                <div class="dropdown-menu dropdown-menu-right">
-                  <a href="account.php?myid=<?php echo Session::get("userid")?>" class="dropdown-item">
+                  <a href="user-account.php?myid=<?php echo Session::get("userid")?>" class="dropdown-item">
                      <i class="bi bi-person-circle"></i>
                      Account Settings</a>
                   <div class="menu-dropdown-divider"></div>

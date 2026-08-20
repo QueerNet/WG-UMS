@@ -2,6 +2,13 @@
 /**
 * Format Class
 */
+
+// Escape strings
+function e($str) {
+   return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8');
+}
+
+
   class Format{
 
     // Date formate Method 

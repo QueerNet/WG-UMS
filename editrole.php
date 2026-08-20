@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
       <!--  Header BreadCrumb -->
       <!-- Flash Message -->
       <?php if (isset($updateRole)) {
-              echo $updateRole;
+              echo e($updateRole);
           } ?>
       <!-- Flash Message -->
       <!-- Create New User -->
@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
                         <div class="col-md-2">Role Name</div>
                         <div class="col-md-8">
                            <input id="rolename" type="text" class="form-control" readonly="readonly"
-                              value="<?php echo $result['rolename']; ?>" autofocus="">
+                              value="<?php echo e($result['rolename']); ?>" autofocus="">
 
                         </div>
                      </div>
@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
                         <div class="col-md-2">Display Name</div>
                         <div class="col-md-8">
                            <input id="roledname" type="text" class="form-control" name="roledname"
-                              value="<?php echo $result['roledname']; ?>" autofocus="">
+                              value="<?php echo e($result['roledname']); ?>" autofocus="">
 
                         </div>
                      </div>
@@ -110,11 +110,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
                                               $item;
 
 
-                                          echo '<option value="'.$item.'"';
+                                          echo e('<option value="'.$item.'"');
 
                                             if (in_array($item,$allow)) {
                                               echo 'selected';
-                                              echo '>'.$item.'</option>';
+                                              echo e('>'.$item.'</option>');
 
                                             }
 

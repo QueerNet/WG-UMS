@@ -4,12 +4,8 @@ When call list-devices, prune inactive?
 
 When deleting user, delete all their devices
 
-
-!!! Fix account dropdown on mobile dashboard !!!
-
-
 Scheduled cron check to diff wireguard clients with SQL database
-- if extra peer, remove and alert sysadmin
+- if extra peer, remove peer, ban IP and alert sysadmin
 
 Look at ajax-classes/email-allow.php
 
@@ -17,10 +13,10 @@ Fix add devices (add back in (dupe check name in wg_add_peer inside Wg.php))
 
 Make device adding errors verbose and output them into modal
 
-Add a cryptographic token to invite emails (obvi with verification)
-
-Run testing on the NGINX configurations
+Run more testing on the NGINX configurations
 
 Run penetration testing
 
 Make a new image backup
+
+Fix email formatting
