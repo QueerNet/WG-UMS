@@ -16,3 +16,11 @@ Look at ajax-classes/email-allow.php
 Fix add devices (add back in (dupe check name in wg_add_peer inside Wg.php))
 
 Make device adding errors verbose and output them into modal
+
+Add a cryptographic token to invite emails (obvi with verification)
+
+Run testing on the NGINX configurations
+
+Run penetration testing
+
+Make a new image backup

@@ -183,13 +183,13 @@ $rolename =  Session::get("rolename");
                </div>
             </div>
             <!-- Account dropdown -->
-            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <!-- <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
-            </button>
+            </button> -->
                
             <!-- Account dropdown -->
-            <div class="ms-auto pr-3 collapse navbar-collapse" id="navbarNavDarkDropdown">
-               <ul class="navbar-nav user-info ms-auto mt-2 mt-lg-0">
+            <div class="ms-auto pr-3">
+               <ul class="user-info ms-auto mt-2 mt-lg-0">
                   <li class="nav-item dropdown" style="padding-right:1vw;">
                      <a href="#" class="navbar-nav-link dropdown-toggle text-light account" data-bs-toggle="dropdown"
                         aria-expanded="false">

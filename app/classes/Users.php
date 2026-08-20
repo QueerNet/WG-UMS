@@ -96,6 +96,8 @@ class Users{
 						}
 					}
 					else {
+						# Log the authentication failure in syslog (defined in php.ini) for Fail2ban to flag
+						error_log("Failed login: user=".$value['userid']." ip=$_SERVER[REMOTE_ADDR]");
 						$msg = '<div class="alert alert-danger" id="flash-msg"><strong>Error!</strong>  Your password did not Match!</div>';
 						return $msg;
 					}

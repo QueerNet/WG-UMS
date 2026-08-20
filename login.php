@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
    } elseif ($data['success']===TRUE) {
       $chkUserLogin = $usr->userLoginAuthentication($_POST);
    } else {
-      $msg = '<div class="alert alert-danger" id="flash-msg"><strong>Unknown captcha error! Please report to ".sysadmin_email."</strong></div>';
+      $msg = '<div class="alert alert-danger" id="flash-msg"><strong>Unknown captcha error! Please report to '.sysadmin_email.'</strong></div>';
    }
 }
 ?>
@@ -189,8 +189,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
                      <div class="form-group text-center">
                         <a href="reset-password.php">Forgot password?</a>
                         <hr />
-                        <span>Don't have an account?</span>
-                        <a href="register.php" class="  mt-sm">Register</a>
+                        <!-- <span>Don't have an account?</span>
+                        <a href="register.php" class="  mt-sm">Register</a> -->
                      </div>
                   </form>
                </div>

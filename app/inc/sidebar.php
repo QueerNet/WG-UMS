@@ -1,7 +1,7 @@
 <?php Session::requireAdmin($access); ?>
 <!--   Left Sidebar  -->
       <aside>
-        <div class="collapse collapse-horizontal show sidebar" id="wrapper-sidebar" style="--bs-collapse-horizontal-width: 250px;">
+        <div class="collapse collapse-horizontal d-lg-blocks" id="wrapper-sidebar" style="--bs-offcanvas-width: 400px">
           <ul>
               <?php if (  $access  ) { ?>
             <li><a
