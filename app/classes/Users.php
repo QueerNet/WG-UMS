@@ -15,7 +15,7 @@ use sendEmail\sendEmail;
  */
 class Users{
 
-	private $apptable       = "APP_AUTH";
+	private $apptable   = "APP_AUTH";
 	private $table 		= "USERS";
 	private $table_session 	= "ONLINE";
 	private $db;
@@ -604,9 +604,9 @@ class Users{
 
 	// Edit User By Id Method 
 	public function editUserById($edituser, $rolename){
-		//if ($rolename=='user') {
-			//exit();
-		//}
+		if ($rolename !== 'sysadmin') {
+			exit();
+		}
 		$editpro = preg_replace('/[^a-zA-Z0-9-]/', '', $edituser);
 		$query = "SELECT * FROM $this->table WHERE userid = '$edituser' LIMIT 1";
 		$result = $this->db->select($query);

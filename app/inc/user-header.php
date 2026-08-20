@@ -164,13 +164,8 @@ $rolename =  Session::get("rolename");
             ?>
             <!--====== App Name ======-->
             <span>
-               <?php if (isset($result['logo'])) { ?>
                <img align='middle' src="assets/images/icons/favicon.png" alt="your image"
                   title='' />
-               <?php }else{ ?>
-               <img align='middle' src="assets/images/icons/favicon.png" alt="your image" title=''>
-               <?php } ?>
-
                <?php  if (isset($result['app_name'])) {
                   echo $result['app_name'];
                } else{?>
@@ -183,6 +178,7 @@ $rolename =  Session::get("rolename");
 
       <!-- Sidebar hamburger -->
        <button class="flex-shrink-0 rounded-0 navbar-toggler" type="button" data-bs-toggle="offcanvas"
+            id="sidebar-hamburger"
             style="width: 50px;"
             data-bs-target="#wrapper-sidebar" aria-controls="wrapper-sidebar"
             aria-label="Toggle sidebar">

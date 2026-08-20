@@ -79,6 +79,10 @@ a {
   --bs-navbar-padding-y: 0px;
 }
 
+#sidebar-hamburger {
+  display: block!important;
+}
+
 /* ==================== Sidebar toggle icon ==================== */
 
 #nav-toggle {

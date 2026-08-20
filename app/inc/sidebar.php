@@ -1,10 +1,19 @@
 <?php Session::requireAdmin($access); ?>
 <!--   Left Sidebar  -->
       <aside>
-        <div class="collapse collapse-horizontal d-lg-blocks" id="wrapper-sidebar" style="--bs-offcanvas-width: 400px">
+        <!-- Wrapper -->
+        <div class="offcanvas-lg offcanvas-start sidebar" tabindex="-1" id="wrapper-sidebar"
+          style="--bs-offcanvas-width: 250px;" aria-labelledby="sidebarLabel">
+          <!-- Toggle -->
+          <div class="offcanvas-header">
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                  data-bs-target="#wrapper-sidebar" aria-label="Close"></button>
+          </div>
+          <!-- Actual sidebar -->
+        <div class="offcanvas-body p-0 sidebar">
           <ul>
               <?php if (  $access  ) { ?>
-            <li><a
+            <li><a 
               <?php 
 
                 $path = $_SERVER['SCRIPT_FILENAME'];
@@ -15,7 +24,7 @@
 
                ?>
              href="dashboard.php"><i class="bi bi-grid-1x2-fill"></i><span>Dashboard</span></a></li>
-            <li><a
+            <li><a 
               <?php 
 
                 $path = $_SERVER['SCRIPT_FILENAME'];
@@ -40,7 +49,7 @@
              href="users.php"><i class="bi bi-people"></i><span>Users</span></a></li>
            
 
-            <li><a
+            <li><a 
               <?php 
 
                 $path = $_SERVER['SCRIPT_FILENAME'];
@@ -61,7 +70,7 @@
              <span>Roles</span></a></li>
 
 
-            <li><a
+            <li><a 
               <?php 
 
                 $path = $_SERVER['SCRIPT_FILENAME'];
@@ -72,7 +81,7 @@
 
                ?>
              href="permissions.php"><i class="bi bi-person-fill-lock"></i><span>Permissions</span></a></li>
-            <li><a
+            <li><a 
               <?php 
 
                 $path = $_SERVER['SCRIPT_FILENAME'];
@@ -88,7 +97,7 @@
 
              
            <?php }else{ ?>
-            <li><a
+            <li><a 
               <?php 
 
                 $path = $_SERVER['SCRIPT_FILENAME'];
@@ -105,7 +114,7 @@
 
                ?>
              href="dashboard.php"><i class="bi bi-grid-1x2-fill"></i><span>Dashboard</span></a></li>
-            <li><a
+            <li><a 
               <?php 
 
                 $path = $_SERVER['SCRIPT_FILENAME'];
@@ -128,7 +137,7 @@
 
                ?>
              href="users.php"><i class="bi bi-people"></i><span>Users</span></a></li>
-            <li><a
+            <li><a 
               <?php 
 
                 $path = $_SERVER['SCRIPT_FILENAME'];
@@ -141,6 +150,6 @@
              href="permissions.php"><i class="bi bi-person-fill-lock"></i><span>Permissions</span></a></li>
               <?php } ?>
             </ul>
-        </div>  
+        </div>
       </aside>
   <!--   Left Sidebar  -->
