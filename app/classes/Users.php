@@ -338,21 +338,23 @@ class Users{
 
 
 	// User Inserted Method BY Id 
-	public function updateUserById($data, $file, $id){
+	public function updateUserById($data, $file, $id, $_currentRole){
 		$id = preg_replace('/[^a-zA-Z0-9-]/', '', $id);
 		$name_ 				= $this->fm->validation($data['name']);
-		$email_ 				= $this->fm->validation($data['email']);
+		$email_ 			= $this->fm->validation($data['email']);
 		$rolename_ 			= $this->fm->validation($data['rolename']);
 		$status_ 			= $this->fm->validation($data['status']);
 		$create_date_ 		= $this->fm->validation($data['create_date']);
-
-
 
 		$name 				= mysqli_real_escape_string($this->db->link, $name_);
 		$email 				= mysqli_real_escape_string($this->db->link, $email_);
 		$rolename 			= mysqli_real_escape_string($this->db->link, $rolename_);
 		$status 			= mysqli_real_escape_string($this->db->link, $status_);
 		$create_date 		= mysqli_real_escape_string($this->db->link, $create_date_);
+
+		if ($rolename !== $_currentRole && $_currentRole !== 'sysadmin') {
+    		exit();
+		}
 
 	
 
@@ -878,11 +880,6 @@ class Users{
 			}
 
 		}
-
-
-
-
-
 	}
 
 
@@ -934,16 +931,4 @@ class Users{
 		return $update_row;
 	 	
 	}
-
-
-
-
-
-
-
-
-
-
-
-
 }

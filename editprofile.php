@@ -62,7 +62,7 @@
       <?php 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
-    $updateUser = $usr->updateUserById($_POST, $_FILES, $edituser);
+    $updateUser = $usr->updateUserById($_POST, $_FILES, $edituser, $ROLE['ROLENAME']);
 
 
 }

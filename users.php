@@ -1,4 +1,5 @@
 <?php include 'app/inc/header.php'; ?>
+<?php Session::requireAdmin($access); ?>
 
 
 

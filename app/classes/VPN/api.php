@@ -57,4 +57,4 @@ if (isset($result['success']) && !$result['success']) {
 }
 
 // Return result
-echo e(json_encode($result));
+echo json_encode($result);

@@ -1,26 +1,36 @@
-TODO:
+# ======= TODO ======== #
 
-When call list-devices, prune inactive?
+# Security:
 
-When deleting user, delete all their devices
+- Migrate Database.php from raw SQL to PDO
 
-Scheduled cron check to diff wireguard clients with SQL database
-- if extra peer, remove peer, ban IP and alert sysadmin
+- Run penetration testing
 
-Look at ajax-classes/email-allow.php
+- Run more testing on the NGINX configurations
 
-Fix add devices (add back in (dupe check name in wg_add_peer inside Wg.php))
+- Scheduled cron check to diff wireguard clients with SQL database
+    - if extra peer, remove peer, ban IP and alert sysadmin
 
-Make device adding errors verbose and output them into modal
 
-Run more testing on the NGINX configurations
+# Logistics:
 
-Run penetration testing
+- When call list-devices, prune inactive?
 
-Make a new image backup
+- When deleting user, delete all their devices
 
-Fix email formatting
+- Make a new image backup
 
-Fix sidebar
 
-Finish header formatting
+# Cosmetic:
+
+- Fix email formatting
+
+- Fix sidebar
+
+- Finish header formatting
+
+- Write add device instructions
+
+- Output device add reponse in modal
+
+
